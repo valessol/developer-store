@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <NavBar brand="DeveloperStore" icon="bi bi-bag"/>
-      <ItemListContainer greeting="Estos son nuestros productos"/>
+      <ItemListContainer />
     </>
   );
 }

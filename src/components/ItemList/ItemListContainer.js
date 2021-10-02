@@ -1,10 +1,30 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import { getData } from '../../helpers/getData'
+import ItemList from './ItemList'
 import './ItemList.css'
 
-export const ItemListContainer = ({greeting}) => {
+export const ItemListContainer = () => {
+
+    const [products, setProducts] = useState([])
+    const [loader, setLoader] = useState(false)
+
+
+    useEffect(() => {
+        setLoader(true)
+
+        getData()
+            .then((response) => setProducts(response))
+            .finally(() => setLoader(false))
+    }, []) 
+
     return (
-        <main>
-            <h2>{greeting}</h2>
-        </main>
+        <>
+            {
+                loader 
+                    ? <h3>Loading...</h3>
+                    : <ItemList products={products} />
+            }
+            
+        </>
     )
 }
