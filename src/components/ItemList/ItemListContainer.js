@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import { getData } from '../../helpers/getData'
 import ItemList from './ItemList'
+import { Spin } from 'antd';
 import './ItemList.css'
+
 
 export const ItemListContainer = () => {
 
@@ -21,7 +23,7 @@ export const ItemListContainer = () => {
         <>
             {
                 loader 
-                    ? <h3>Loading...</h3>
+                    ? <Spin size="large" className="spin"/>
                     : <ItemList products={products} />
             }
             

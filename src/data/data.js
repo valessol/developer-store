@@ -62,5 +62,26 @@ export const data = [
         category: 'design',
         gender: 'male'
     },
+    {
+        id: 4,
+        name: "Remera Figma",
+        description: "Figma",
+        img: '../assets/img/figma.jpg',
+        color: [
+            'negro',
+            'gris topo',
+            'gris claro',
+            'blanco',
+            'otro'
+        ],
+        size: [
+            'S',
+            'M',
+            'L'
+        ],
+        price: 600,
+        category: 'design',
+        gender: 'male'
+    },
     
 ]
