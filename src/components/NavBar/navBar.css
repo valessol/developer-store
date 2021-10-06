@@ -14,7 +14,7 @@ header {
 nav {
     justify-content: center;
 }
-p {
+nav p {
     margin: 1rem;
     padding: 0.5rem;
     background-color: black;

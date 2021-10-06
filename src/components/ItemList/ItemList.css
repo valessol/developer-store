@@ -13,15 +13,50 @@ h2 {
     text-align: center;
     font-size: 1.8rem;
 }
+
+.ant-card-body {
+    text-align: center;
+}
+.ant-card-meta-title {
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+.category {
+    margin: 1rem 0 0.5rem 0;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.category span, .price span {
+    color: var(--primary-color);
+}
+.price {
+    font-weight: 600;
+}
+.price span {
+    font-weight: 800;
+}
+
+.favorite-icon {
+    height: 3rem;
+    width: 3rem;
+}
+.favorite-icon:hover {
+    fill: var(--primary-hover-color);
+}
+.buttons-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .color {
     width: 100px;
     height: 100px;
 }
 
-.magenta-6 {
+.button {
     background-color: var(--primary-color);
     border: none;
-    margin: 1rem;
+    margin-left: 1rem;
 }
 .magenta-6:hover {
     background-color: var(--primary-hover-color);

@@ -2,13 +2,13 @@ import React from 'react'
 import 'antd/dist/antd.css';
 import './ItemList.css'
 import { Card, Button } from 'antd';
+import { MdFavoriteBorder } from "react-icons/md";
 
 
 const { Meta } = Card;
 
-const Item = ({id, name, img, description, color, price}) => {
+const Item = ({id, name, img, description, category, gender, price}) => {
     
-    const content = '¿Sos fan de '+ description +'? ¡Elegí tu remera personalizada!'
 
 
     return (
@@ -16,10 +16,16 @@ const Item = ({id, name, img, description, color, price}) => {
             <Card
                 hoverable
                 style={{ width: 240 }}
-                cover={<img alt={description} src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+                cover={<img alt={description} src={img} />}
             >
-                <Meta title={name} description={content} />
-                <Button type="primary" shape="round" className="magenta-6">Agregar al carrito</Button>
+                <Meta title={name}/>
+                <p className="category">Categoría: <span>{category}</span></p>
+                <p className="price">Precio: <span>${price}</span></p>
+                <div className="buttons-card">
+                    <MdFavoriteBorder className="favorite-icon"/>
+                    <Button type="primary" shape="round" className="button">Agregar al carrito</Button> 
+                </div>
+                
             </Card>
 
             {/* <h3>{name}</h3>
