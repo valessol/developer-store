@@ -11,9 +11,9 @@ const ItemList = ({products}) => {
                 {[
                     products.map((item) => {
                     return (
-                        <Col className="gutter-row" span={6}  key={item.id}>
+                        //<Col className="gutter-row" span={6}  key={item.id}>
                             <Item {...item} />
-                        </Col>
+                        //</Col>
                     )   
                     })
                 ]}

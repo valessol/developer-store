@@ -13,7 +13,12 @@ h2 {
     text-align: center;
     font-size: 1.8rem;
 }
-
+.ant-card {
+    margin: 1rem;
+}
+.ant-row {
+    justify-content: center;
+}
 .ant-card-body {
     text-align: center;
 }
