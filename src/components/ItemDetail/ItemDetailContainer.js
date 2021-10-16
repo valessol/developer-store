@@ -5,18 +5,20 @@ import { Spin } from 'antd'
 import ItemDetail from './ItemDetail'
 
 
-const ItemDetailContainer = () => {
+const ItemDetailContainer = ({cart, setCart}) => {
     const [product, setProduct] = useState({})
     const [loader, setLoader] = useState(false)
     const { id } = useParams()
 
     useEffect(()=>{
         setLoader(true)
+        
         getData()
             .then((response) => {
-                setProduct(response.find(item=>Number(item.id) === Number(id)))
+                const idProd = response.find(item=>Number(item.id) === Number(id))
+                setProduct(idProd)
             })
-            .catch(err=> console.log(err))
+            .catch(err=> console.log(err))//pagina 404
             .finally(setLoader(false))
         
     }, [id])
@@ -29,7 +31,12 @@ const ItemDetailContainer = () => {
                
                 loader 
                     ? <Spin size="large" className="spin"/>
-                    : <ItemDetail {...product} /> 
+                    : <ItemDetail 
+                        product={product} 
+                        cart={cart}
+                        setCart={setCart}
+                        {...product} 
+                    /> 
             }
             
         </>

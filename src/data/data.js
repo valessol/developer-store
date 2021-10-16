@@ -18,7 +18,7 @@ export const data = [
             'L'
         ],
         price: 600,
-        category: 'diseño',
+        category: 'design',
         gender: 'Hombre'
     },
     {
@@ -27,11 +27,10 @@ export const data = [
         description: "Adobe Photoshop",
         img: manImages[1],
         color: [
-            'black',
-            'gris topo',
-            'gris claro',
-            'blanco',
-            'otro'
+            '#000',
+            '#313030',
+            '#707070',
+            '#fff'
         ],
         size: [
             'S',
@@ -39,7 +38,7 @@ export const data = [
             'L'
         ],
         price: 600,
-        category: 'diseño',
+        category: 'design',
         gender: 'Hombre'
     },
     {
@@ -48,11 +47,10 @@ export const data = [
         description: "Figma",
         img: manImages[2],
         color: [
-            'negro',
-            'gris topo',
-            'gris claro',
-            'blanco',
-            'otro'
+            '#000',
+            '#313030',
+            '#707070',
+            '#fff'
         ],
         size: [
             'S',
@@ -60,7 +58,7 @@ export const data = [
             'L'
         ],
         price: 600,
-        category: 'diseño',
+        category: 'design',
         gender: 'Hombre'
     },
     {
@@ -69,11 +67,10 @@ export const data = [
         description: "Angular",
         img: manImages[3],
         color: [
-            'negro',
-            'gris topo',
-            'gris claro',
-            'blanco',
-            'otro'
+            '#000',
+            '#313030',
+            '#707070',
+            '#fff'
         ],
         size: [
             'S',
@@ -90,11 +87,10 @@ export const data = [
         description: "Bootstrap",
         img: manImages[4],
         color: [
-            'negro',
-            'gris topo',
-            'gris claro',
-            'blanco',
-            'otro'
+            '#000',
+            '#313030',
+            '#707070',
+            '#fff'
         ],
         size: [
             'S',
@@ -111,11 +107,10 @@ export const data = [
         description: "Bulma",
         img: manImages[5],
         color: [
-            'negro',
-            'gris topo',
-            'gris claro',
-            'blanco',
-            'otro'
+            '#000',
+            '#313030',
+            '#707070',
+            '#fff'
         ],
         size: [
             'S',
@@ -132,11 +127,10 @@ export const data = [
         description: "NodeJs",
         img: manImages[6],
         color: [
-            'negro',
-            'gris topo',
-            'gris claro',
-            'blanco',
-            'otro'
+            '#000',
+            '#313030',
+            '#707070',
+            '#fff'
         ],
         size: [
             'S',
@@ -153,11 +147,10 @@ export const data = [
         description: "GraphQL",
         img: manImages[7],
         color: [
-            'negro',
-            'gris topo',
-            'gris claro',
-            'blanco',
-            'otro'
+            '#000',
+            '#313030',
+            '#707070',
+            '#fff'
         ],
         size: [
             'S',
@@ -174,11 +167,10 @@ export const data = [
         description: "React JS",
         img: womanImages[0],
         color: [
-            'negro',
-            'gris topo',
-            'gris claro',
-            'blanco',
-            'otro'
+            '#000',
+            '#313030',
+            '#707070',
+            '#fff'
         ],
         size: [
             'S',
@@ -195,11 +187,10 @@ export const data = [
         description: "GitHub",
         img: womanImages[1],
         color: [
-            'negro',
-            'gris topo',
-            'gris claro',
-            'blanco',
-            'otro'
+            '#000',
+            '#313030',
+            '#707070',
+            '#fff'
         ],
         size: [
             'S',
@@ -207,7 +198,7 @@ export const data = [
             'L'
         ],
         price: 550,
-        category: '',
+        category: 'frontend',
         gender: 'Mujer'
     },
     {
@@ -216,11 +207,10 @@ export const data = [
         description: "Redux",
         img: womanImages[2],
         color: [
-            'negro',
-            'gris topo',
-            'gris claro',
-            'blanco',
-            'otro'
+            '#000',
+            '#313030',
+            '#707070',
+            '#fff'
         ],
         size: [
             'S',
@@ -237,11 +227,10 @@ export const data = [
         description: "Vue JS",
         img: womanImages[3],
         color: [
-            'negro',
-            'gris topo',
-            'gris claro',
-            'blanco',
-            'otro'
+            '#000',
+            '#313030',
+            '#707070',
+            '#fff'
         ],
         size: [
             'S',
@@ -258,11 +247,10 @@ export const data = [
         description: "Drupal",
         img: womanImages[4],
         color: [
-            'negro',
-            'gris topo',
-            'gris claro',
-            'blanco',
-            'otro'
+            '#000',
+            '#313030',
+            '#707070',
+            '#fff'
         ],
         size: [
             'S',
@@ -279,11 +267,10 @@ export const data = [
         description: "Adobe Ilustrator",
         img: accImages[0],
         color: [
-            'negro',
-            'gris topo',
-            'gris claro',
-            'blanco',
-            'otro'
+            '#000',
+            '#313030',
+            '#707070',
+            '#fff'
         ],
         price: 800,
         category: 'design',
@@ -295,11 +282,10 @@ export const data = [
         description: "GraphQL",
         img: accImages[1],
         color: [
-            'negro',
-            'gris topo',
-            'gris claro',
-            'blanco',
-            'otro'
+            '#000',
+            '#313030',
+            '#707070',
+            '#fff'
         ],
         price: 800,
         category: 'frontend',

@@ -6,12 +6,10 @@ import './ItemList.css'
 import { useParams } from 'react-router';
 
 
-export const ItemListContainer = ({path}) => {
+export const ItemListContainer = () => {
 
     const [products, setProducts] = useState([])
     const [loader, setLoader] = useState(false)
-    // const { gender } = useParams()
-    // const { category } = useParams()
     const { product } = useParams()
 
 

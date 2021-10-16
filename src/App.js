@@ -4,13 +4,17 @@ import ItemDetailContainer from "./components/ItemDetail/ItemDetailContainer";
 import { ItemListContainer } from "./components/ItemList/ItemListContainer";
 import { NavBar } from "./components/NavBar/NavBar";
 import './App.css'
+import { useState } from "react";
+import CartContainer from "./components/Cart/CartContainer";
 
 
 function App() {
+  const [cart, setCart] = useState([])
+
   return (
     <>
     <BrowserRouter>
-      <NavBar brand="DeveloperStore" icon="bi bi-bag"/>
+      <NavBar brand="DeveloperStore" icon="bi bi-bag" cart={cart} />
       <Switch>
         <Route exact path="/">
           <ItemListContainer />
@@ -18,13 +22,12 @@ function App() {
         <Route exact path="/:product">
           <ItemListContainer />
         </Route>
-        {/* <Route exact path="/:category">
-          <ItemListContainer />
-        </Route> */}
         <Route exact path="/products/:id">
-          <ItemDetailContainer />
+          <ItemDetailContainer cart={cart} setCart={setCart} />
         </Route>
-        {/* Ruta a carrito */}
+        <Route exact path="/cart">
+          <CartContainer cart={cart} />
+        </Route>
       </Switch>
     </BrowserRouter>
     </>
