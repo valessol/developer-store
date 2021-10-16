@@ -1,6 +1,6 @@
 import React from 'react'
 import Item from './Item'
-import { Row, Col } from 'antd';
+import { Row } from 'antd';
 import './ItemList.css'
 
 const ItemList = ({products}) => {
@@ -11,9 +11,9 @@ const ItemList = ({products}) => {
                 {[
                     products.map((item) => {
                     return (
-                        //<Col className="gutter-row" span={6}  key={item.id}>
-                            <Item {...item} />
-                        //</Col>
+                        
+                        <Item {...item} />
+                        
                     )   
                     })
                 ]}

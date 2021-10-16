@@ -4,6 +4,6 @@ export const getData = () => {
     return new Promise((resolve, reject)=> {
         setTimeout(()=> {
             resolve(data);
-        }, 3000)
+        }, 1000)
     })
 }

@@ -5,7 +5,7 @@ import { Spin } from 'antd';
 import './ItemList.css'
 
 
-export const ItemListContainer = () => {
+export const ItemListContainer = ({path}) => {
 
     const [products, setProducts] = useState([])
     const [loader, setLoader] = useState(false)
@@ -15,9 +15,29 @@ export const ItemListContainer = () => {
         setLoader(true)
 
         getData()
-            .then((response) => setProducts(response))
+            .then((response) => {
+                switch (path) {
+                    case 'hombre': 
+                        setProducts(response.filter((item)=>
+                            item.gender.toLowerCase() === 'hombre'
+                        ))
+                        break;
+                    case 'mujer': 
+                        setProducts(response.filter((item)=>
+                            item.gender.toLowerCase() === 'mujer'
+                        ))
+                        break;
+                    case 'accesorios': 
+                        setProducts(response.filter((item)=>
+                            item.gender.toLowerCase() === 'accesorios'
+                        ))
+                        break;
+                    default: setProducts(response)
+                        break;
+                }
+            })
             .finally(() => setLoader(false))
-    }, []) 
+    }, [path]) 
 
     return (
         <>

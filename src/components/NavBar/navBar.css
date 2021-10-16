@@ -1,6 +1,6 @@
 header {
-    width: 1000px;
-    max-width: 95%;
+    width: 95%;
+    max-width: 1000px;
     margin: 0 auto;
 }
 .title, nav {
@@ -9,16 +9,37 @@ header {
     align-items: center;
 }
 .bs-icon {
-    font-size: 2rem;
+    font-size: 3rem;
+    cursor: pointer;
 }
 nav {
     justify-content: center;
+    flex-wrap: wrap;
 }
-nav p {
+nav a {
+    display: block;
+    width: 10rem;
+    text-align: center;
     margin: 1rem;
     padding: 0.5rem;
-    background-color: black;
-    color: blanchedalmond;
-    border-radius: 0.5rem;
+    border: 1px solid var(--primary-color);
+    font-weight: 700;
+    color: var(--primary-color);
+    border-radius: 3rem;
     cursor: pointer;
+}
+
+nav a:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+nav .active {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+@media (min-width: 480px) {
+    nav {
+        flex-wrap: nowrap;
+    }
 }

@@ -1,13 +1,35 @@
 
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import ItemDetailContainer from "./components/ItemDetail/ItemDetailContainer";
 import { ItemListContainer } from "./components/ItemList/ItemListContainer";
 import { NavBar } from "./components/NavBar/NavBar";
+import './App.css'
 
 
 function App() {
   return (
     <>
+    <BrowserRouter>
       <NavBar brand="DeveloperStore" icon="bi bi-bag"/>
-      <ItemListContainer />
+      <Switch>
+        <Route exact path="/">
+          <ItemListContainer />
+        </Route>
+        <Route exact path="/hombre">
+          <ItemListContainer path='hombre' />
+        </Route>
+        <Route exact path="/mujer">
+          <ItemListContainer path='mujer' />
+        </Route>
+        <Route exact path="/accesorios">
+          <ItemListContainer path='accesorios' />
+        </Route>
+        <Route exact path="/products/:id">
+          <ItemDetailContainer />
+        </Route>
+        {/* Ruta a carrito */}
+      </Switch>
+    </BrowserRouter>
     </>
   );
 }
