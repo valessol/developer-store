@@ -10,27 +10,32 @@ export const ItemListContainer = ({path}) => {
 
     const [products, setProducts] = useState([])
     const [loader, setLoader] = useState(false)
-    const { gender } = useParams()
-    const { category } = useParams()
+    // const { gender } = useParams()
+    // const { category } = useParams()
+    const { product } = useParams()
 
 
     useEffect(() => {
         setLoader(true)
-
+        console.log(product)
         getData()
             .then((response) => {
-                if (gender) {
-                    setProducts(response.filter((item)=>
-                        item.gender.toLowerCase() === gender))
-                } else if (category) {
-                    setProducts(response.filter((item)=>
-                        item.category.toLowerCase() === category))
+                if (product) {
+                    const genderProds = response.filter((item)=> item.gender.toLowerCase() === product.toLowerCase())
+                    const categoryProds = response.filter((item)=> item.category.toLowerCase() === product.toLowerCase())
+                    console.log(genderProds, categoryProds)
+                    if (genderProds.length !== 0) {
+                        setProducts(genderProds)
+                    } else if (categoryProds.length !== 0) {
+                        setProducts(categoryProds)
+                    } 
                 } else {
                     setProducts(response)
                 }
+                
             })
             .finally(() => setLoader(false))
-    }, [gender, category]) 
+    }, [product]) 
 
     return (
         <>
