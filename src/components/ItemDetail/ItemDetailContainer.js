@@ -19,7 +19,7 @@ const ItemDetailContainer = () => {
             .catch(err=> console.log(err))
             .finally(setLoader(false))
         
-    }, [])
+    }, [id])
 
 
     return (

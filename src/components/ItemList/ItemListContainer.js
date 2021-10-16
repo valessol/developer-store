@@ -3,12 +3,15 @@ import { getData } from '../../helpers/getData'
 import ItemList from './ItemList'
 import { Spin } from 'antd';
 import './ItemList.css'
+import { useParams } from 'react-router';
 
 
 export const ItemListContainer = ({path}) => {
 
     const [products, setProducts] = useState([])
     const [loader, setLoader] = useState(false)
+    const { gender } = useParams()
+    const { category } = useParams()
 
 
     useEffect(() => {
@@ -16,28 +19,18 @@ export const ItemListContainer = ({path}) => {
 
         getData()
             .then((response) => {
-                switch (path) {
-                    case 'hombre': 
-                        setProducts(response.filter((item)=>
-                            item.gender.toLowerCase() === 'hombre'
-                        ))
-                        break;
-                    case 'mujer': 
-                        setProducts(response.filter((item)=>
-                            item.gender.toLowerCase() === 'mujer'
-                        ))
-                        break;
-                    case 'accesorios': 
-                        setProducts(response.filter((item)=>
-                            item.gender.toLowerCase() === 'accesorios'
-                        ))
-                        break;
-                    default: setProducts(response)
-                        break;
+                if (gender) {
+                    setProducts(response.filter((item)=>
+                        item.gender.toLowerCase() === gender))
+                } else if (category) {
+                    setProducts(response.filter((item)=>
+                        item.category.toLowerCase() === category))
+                } else {
+                    setProducts(response)
                 }
             })
             .finally(() => setLoader(false))
-    }, [path]) 
+    }, [gender, category]) 
 
     return (
         <>

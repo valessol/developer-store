@@ -15,14 +15,11 @@ function App() {
         <Route exact path="/">
           <ItemListContainer />
         </Route>
-        <Route exact path="/hombre">
-          <ItemListContainer path='hombre' />
+        <Route exact path="/:gender">
+          <ItemListContainer />
         </Route>
-        <Route exact path="/mujer">
-          <ItemListContainer path='mujer' />
-        </Route>
-        <Route exact path="/accesorios">
-          <ItemListContainer path='accesorios' />
+        <Route exact path="/products/:category">
+          <ItemListContainer />
         </Route>
         <Route exact path="/products/:id">
           <ItemDetailContainer />

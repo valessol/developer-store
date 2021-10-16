@@ -15,7 +15,16 @@ const ItemDetail = ({id, name, img, description, category, gender, price, color,
         <div className="detail" key= {id} >
             <Image className="detail__image" src={img} />
             <div className="detail__content">
-                <h4 className="category">Categoría: <span>{gender} > {category}</span></h4>
+                <h4 className="category">Categoría:  
+                    <span> 
+                        <Link exact to={`/${gender}`}> 
+                            {gender} 
+                        </Link> / 
+                        <Link exact to={`/${category}`}> 
+                            {category}
+                        </Link>
+                    </span>
+                </h4>
                 <h2>{name}</h2>
                 <h3>ARS {price}</h3>
                 <p>¿Sos fan de {description}? Elegí color y talle y llevate tu remera personalizada.</p>

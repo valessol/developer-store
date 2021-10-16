@@ -44,14 +44,15 @@
     border: 1px solid var(--primary-color);
 }
 .favorite-icon {
-    height: 2rem;
-    width: 2rem;
+    height: 3rem;
+    width: 3rem;
 }
 .favorite-icon:hover {
     fill: var(--primary-hover-color);
 }
 .buttons-card {
     justify-content: start;
+    margin: 2rem;
 }
 @media (min-width: 768px) {
     .detail {
