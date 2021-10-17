@@ -1,0 +1,40 @@
+.title,
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.bs-icon {
+  font-size: 3rem;
+  cursor: pointer;
+}
+nav {
+  justify-content: center;
+  flex-wrap: wrap;
+  a {
+    display: block;
+    width: 10rem;
+    text-align: center;
+    margin: 1rem;
+    padding: 0.5rem;
+    border: 1px solid $primary-color;
+    font-weight: 700;
+    color: $primary-color;
+    border-radius: 3rem;
+    cursor: pointer;
+    &:hover {
+      background-color: $primary-color;
+      color: #fff;
+    }
+  }
+  .active {
+    background-color: $primary-color;
+    color: #fff;
+  }
+}
+
+@media (min-width: 480px) {
+  nav {
+    flex-wrap: nowrap;
+  }
+}

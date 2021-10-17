@@ -1,0 +1,86 @@
+//--------------------Variables
+$primary-color: #eb2f96;
+$primary-hover-color: #9e1068;
+
+
+//-------------------Globales
+*, *::after, *::before {
+box-sizing: inherit;
+}
+
+html{
+font-size: 62.5%;
+box-sizing: border-box;
+}
+
+body {
+font-size: 16px;
+}
+
+.container {
+width: 95%;
+max-width: 1000px;
+margin: 0 auto;
+}
+
+h2 {
+text-align: center;
+font-size: 3rem;
+}
+
+// Cards - Ant Design
+.ant-card {
+    margin: 1rem;
+}
+
+.ant-row {
+    justify-content: center;
+}
+
+.ant-card-body {
+    text-align: center;
+}
+
+.ant-card-meta-title {
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+
+.magenta-6:hover {
+    background-color: $primary-hover-color;
+}
+
+//Spinner
+.spin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    span > i {
+        background-color: $primary-color;
+    }
+}
+
+
+//Icono favoritos
+.favorite-icon {
+    height: 3rem;
+    width: 3rem;
+    &:hover {
+        fill: $primary-hover-color;
+    }
+}
+
+//Botones
+.button {
+    background-color: $primary-color;
+    border: none;
+    margin-left: 1rem;
+}
+
+
+//-------------------Componentes
+@import './components/NavBar/navBar';
+@import './components/ItemList/item';
+@import './components/ItemDetail/itemDetail';
+@import './components/Cart/cart';

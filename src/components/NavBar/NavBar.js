@@ -1,11 +1,10 @@
 import React from "react";
 import { BsBag } from "react-icons/bs";
 import { Link, NavLink } from "react-router-dom";
-import "./navBar.css";
 
 export const NavBar = ({ brand }) => {
   return (
-    <header>
+    <header className="container">
       <div className="title">
         <Link exact to="/">
           <h1>{brand}</h1>

@@ -3,9 +3,9 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import ItemDetailContainer from "./components/ItemDetail/ItemDetailContainer";
 import { ItemListContainer } from "./components/ItemList/ItemListContainer";
 import { NavBar } from "./components/NavBar/NavBar";
-import './App.css'
 import { useState } from "react";
 import CartContainer from "./components/Cart/CartContainer";
+import './app.scss'
 
 
 function App() {

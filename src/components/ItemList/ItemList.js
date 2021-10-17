@@ -1,7 +1,6 @@
 import React from 'react'
 import Item from './Item'
 import { Row } from 'antd';
-import './ItemList.css'
 
 const ItemList = ({products}) => {
     return (

@@ -3,7 +3,6 @@ import { Button, Image } from 'antd'
 import { MdFavoriteBorder } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import 'antd/dist/antd.css';
-import './itemDetail.css';
 
 const ItemDetail = ({product, cart, setCart, id, name, img, description, category, gender, price, color, size}) => {
     const [counter, setCounter] = useState(0)
@@ -47,9 +46,9 @@ const ItemDetail = ({product, cart, setCart, id, name, img, description, categor
                 }
                 
                 <div className="detail__quantity">
-                    <button className="detail__button" onClick={() => handleRemoveItems()}>-</button>
+                    <button className="button detail__button" onClick={() => handleRemoveItems()}>-</button>
                     <div className="detail__counter">{counter}</div>
-                    <button className="detail__button" onClick={() => handleAddItems()}>+</button>
+                    <button className="button detail__button" onClick={() => handleAddItems()}>+</button>
                 </div>
                 <div className="style">Color:
                     {
@@ -74,7 +73,7 @@ const ItemDetail = ({product, cart, setCart, id, name, img, description, categor
                     ) 
                 }
                 
-                <div className="buttons-card">
+                <div className="button detail__button">
                     <MdFavoriteBorder className="favorite-icon"/>
                     <Button type="primary" shape="round" className="button" onClick={() => handleAddToCart()} >Agregar al carrito</Button> 
                 </div>

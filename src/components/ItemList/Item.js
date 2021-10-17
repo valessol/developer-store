@@ -3,7 +3,6 @@ import { Card, Button } from 'antd';
 import { MdFavoriteBorder } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import 'antd/dist/antd.css';
-import './ItemList.css'
 
 
 const { Meta } = Card;
@@ -22,7 +21,7 @@ const Item = ({id, name, img, description, category, gender, price}) => {
                 <Meta title={name}/>
                 <p className="category">Categoría: <span>{category}</span></p>
                 <p className="price">Precio: <span>${price}</span></p>
-                <div className="buttons-card">
+                <div className="item-button">
                     <MdFavoriteBorder className="favorite-icon"/>
                     <Link exact to={`/products/${id}`}>
                         <Button type="primary" shape="round" className="button" >Ver detalle</Button> 

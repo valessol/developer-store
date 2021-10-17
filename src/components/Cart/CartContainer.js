@@ -1,6 +1,5 @@
 import React from 'react'
 import Cart from './Cart'
-import './cart.css'
 
 const CartContainer = ({cart}) => {
    

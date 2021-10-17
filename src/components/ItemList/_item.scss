@@ -1,0 +1,24 @@
+
+.category {
+    margin: 1rem 0 0.5rem 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    span {
+        color: $primary-color;
+    }
+}
+
+.price {
+    font-weight: 600;
+    span {
+        font-weight: 800;
+        color: $primary-color;
+    }
+}
+
+
+.item-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

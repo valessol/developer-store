@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import { getData } from '../../helpers/getData'
 import ItemList from './ItemList'
 import { Spin } from 'antd';
-import './ItemList.css'
 import { useParams } from 'react-router';
 
 

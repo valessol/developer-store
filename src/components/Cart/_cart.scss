@@ -9,11 +9,11 @@
     border-radius: 2px;
     box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.164);
     align-items: center;
-}
-.cart__layout {
-    display: grid;
-    grid-template-columns: 3fr 1fr 1fr;
-}
-.cart__image {
-    width: 2rem;
+    &__layout {
+        display: grid;
+        grid-template-columns: 3fr 1fr 1fr;
+    }
+    &__image {
+        width: 2rem;
+    }
 }
