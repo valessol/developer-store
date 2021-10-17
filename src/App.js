@@ -19,14 +19,14 @@ function App() {
         <Route exact path="/">
           <ItemListContainer />
         </Route>
+        <Route exact path="/cart">
+          <CartContainer cart={cart} />
+        </Route>
         <Route exact path="/:product">
           <ItemListContainer />
         </Route>
         <Route exact path="/products/:id">
           <ItemDetailContainer cart={cart} setCart={setCart} />
-        </Route>
-        <Route exact path="/cart">
-          <CartContainer cart={cart} />
         </Route>
       </Switch>
     </BrowserRouter>

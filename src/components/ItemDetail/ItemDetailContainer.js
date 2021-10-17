@@ -6,7 +6,7 @@ import ItemDetail from './ItemDetail'
 
 
 const ItemDetailContainer = ({cart, setCart}) => {
-    const [product, setProduct] = useState({})
+    const [product, setProduct] = useState([])
     const [loader, setLoader] = useState(false)
     const { id } = useParams()
 
@@ -29,7 +29,7 @@ const ItemDetailContainer = ({cart, setCart}) => {
         <>
             {
                
-                loader 
+                product.length === 0 
                     ? <Spin size="large" className="spin"/>
                     : <ItemDetail 
                         product={product} 

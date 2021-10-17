@@ -52,31 +52,23 @@ const ItemDetail = ({product, cart, setCart, id, name, img, description, categor
                     <button className="detail__button" onClick={() => handleAddItems()}>+</button>
                 </div>
                 <div className="style">Color:
-                    {/* {[
+                    {
                         color.map((item)=> {
                             return (
                                 <div className="style__color" style={{backgroundColor: item}}></div> 
                             )
                         })
-                    ]} */}
-                    <div className="style__color" style={{backgroundColor: '#000'}}></div>
-                    <div className="style__color" style={{backgroundColor: '#313030'}} ></div>
-                    <div className="style__color" style={{backgroundColor: '#707070'}}></div>
-                    <div className="style__color" style={{backgroundColor: '#fff'}}></div>
-                    
+                    }
                 </div>
                 {
                     (gender !== 'accesorios') &&
                     (
                         <div className="style">Talle:
-                            {/* {
+                            {
                                 size.map((item)=> (
                                 <div className="style__color" >{item}</div> 
                                 ))
-                            } */}
-                            <div className="style__color">S</div>
-                            <div className="style__color">M</div>
-                            <div className="style__color">L</div>
+                            }
                             
                         </div>
                     ) 
