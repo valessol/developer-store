@@ -18,9 +18,10 @@ export const ItemListContainer = () => {
         getData()
             .then((response) => {
                 if (product) {
+                    
                     const genderProds = response.filter((item)=> item.gender.toLowerCase() === product.toLowerCase())
                     const categoryProds = response.filter((item)=> item.category.toLowerCase() === product.toLowerCase())
-                    console.log(genderProds, categoryProds)
+                    
                     if (genderProds.length !== 0) {
                         setProducts(genderProds)
                     } else if (categoryProds.length !== 0) {

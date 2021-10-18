@@ -22,19 +22,30 @@
     }
     &__quantity {
       width: 12rem;
-      margin-bottom: 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 1rem;
     }
     &__button {
       width: 3rem;
       font-weight: bold;
       text-align: center;
-      color: #fff;
       border-radius: 0.5rem;
       &:hover {
         background-color: $primary-hover-color;
+      }
+      &--quantity {
+        color: #fff;
+        margin: 0;
+      }
+      &--cart {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        
+        background-color: white;
+        
       }
     }
     &__counter {
@@ -42,10 +53,6 @@
       text-align: center;
       border: 1px solid $primary-color;
       border-radius: 0.5rem;
-    }
-    &__button {
-      justify-content: start;
-      margin: 2rem;
     }
 }
 

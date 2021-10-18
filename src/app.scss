@@ -62,14 +62,6 @@ font-size: 3rem;
 }
 
 
-//Icono favoritos
-.favorite-icon {
-    height: 3rem;
-    width: 3rem;
-    &:hover {
-        fill: $primary-hover-color;
-    }
-}
 
 //Botones
 .button {
@@ -78,9 +70,18 @@ font-size: 3rem;
     margin-left: 1rem;
 }
 
-
 //-------------------Componentes
 @import './components/NavBar/navBar';
 @import './components/ItemList/item';
 @import './components/ItemDetail/itemDetail';
 @import './components/Cart/cart';
+
+
+//Icono favoritos
+.favorite-icon {
+    height: 3rem;
+    width: 3rem;
+    &:hover {
+        fill: $primary-hover-color;
+    }
+}

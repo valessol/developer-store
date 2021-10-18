@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { CartContext } from '../Context/CartContext'
 import Cart from './Cart'
 
-const CartContainer = ({cart}) => {
+const CartContainer = () => {
    
-    console.log(cart.length)
-
-    
+    const { cart } = useContext(CartContext)
 
     return (
         <>
@@ -14,7 +13,7 @@ const CartContainer = ({cart}) => {
                     ? (
                         <div className="cart" >
                             <h2>Carrito de compras</h2>
-                            <Cart cart={cart} />
+                            <Cart />
                         </div>
                     ) : (
                         <h2>El carrito está vacío</h2>

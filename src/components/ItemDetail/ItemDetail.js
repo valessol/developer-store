@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react'
 import { Button, Image } from 'antd'
 import { MdFavoriteBorder } from 'react-icons/md';
-import { Link } from 'react-router-dom';
-import 'antd/dist/antd.css';
 import { CartContext } from '../Context/CartContext';
 import Category from './Category/Category';
+import { Description } from './Description/Description';
+import Quantity from './Quantity/Quantity';
+import Color from './Color/Color';
+import Size from './Size/Size';
+import 'antd/dist/antd.css';
 
 const ItemDetail = ({ id, name, img, description, category, gender, price, color, size}) => {
     const [selectedQuantity, setSelectedQuantity] = useState(1);
@@ -22,118 +25,80 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
         selectedSize,
         selectedQuantity
     }
-
-    //Modificar cantidad
-    const handleAddItems = () => {
-        setSelectedQuantity (selectedQuantity + 1);
-    }
-    
-    const handleRemoveItems = () => {
-        (selectedQuantity > 0) && setSelectedQuantity( selectedQuantity - 1)
-    }
-
-    //Elegir color
-    const handleSelectedColor = (colorCode, index) => {
-
-        setSelectedColor(colorCode)
-
-        const colors = document.querySelectorAll('.colors')
-
-        colors.forEach((item)=>{
-            if (item.id === `color-${index}`) {
-                item.classList.add('style--active')
-            } else {
-                item.classList.remove('style--active')
-            }
-        })
-    }
-
-    //Elegir talle
-    const handleSelectedSize = (itemSize, index) => {
-
-        setSelectedSize(itemSize)
-
-        const sizes = document.querySelectorAll('.sizes')
-
-        sizes.forEach((item)=>{
-            if (item.id === `size-${index}`) {
-                item.classList.add('style--active')
-            } else {
-                item.classList.remove('style--active')
-            }
-        })
-    }
     
     //Agregar al carrito
     const handleAddToCart = () => {
         
-        if ( (selectedQuantity > 0) && (selectedColor === '' || selectedSize === '')) {
-            const alert = document.createElement('P');
-            alert.textContent = '¡Elige color y talle antes de agregar al carrito!';
-            alert.classList.add('alert-msg')
+        if ( (selectedQuantity > 0) && (selectedColor === '' || (selectedSize === '' && gender !== 'accesories'))) {
             
-            const addToCartSection = document.querySelector('#alert');
-            addToCartSection.appendChild(alert)
 
-            setTimeout(()=> {
-                addToCartSection.removeChild(alert)
-            }, 3000)
+                const alert = document.createElement('P');
+                alert.textContent = '¡Elige color y talle antes de agregar al carrito!';
+                alert.classList.add('alert-msg')
+                
+                const addToCartSection = document.querySelector('#alert');
+                addToCartSection.appendChild(alert)
+    
+                setTimeout(()=> {
+                    addToCartSection.removeChild(alert)
+                }, 3000)
+            
         }
 
         addToCart(newItem);
     }
 
-   
 
     return (
         <div className="detail" key= {id} >
-            <Image className="detail__image" src={img} alt={name}/>
+
+            <Image 
+                className="detail__image" 
+                src={img} alt={name} />
+
             <div className="detail__content">
 
-                <Category gender={gender} category={category} />
+                <Category 
+                    gender={gender} 
+                    category={category} />
 
                 <h2>{name}</h2>
 
                 <h3>ARS {price}</h3>
+
+                <Description 
+                    gender={gender} 
+                    description={description} />
                 
-                {
-                    gender !== 'accesorios'
-                    ? <p>¿Sos fan de {description}? Elegí color y talle y llevate tu remera personalizada.</p>
-                    : <p>¿Sos fan de {description}? Elegí color que más te guste y llevate tu accesorio personalizado.</p>
-                }
+                <Quantity 
+                    selectedQuantity={selectedQuantity} 
+                    setSelectedQuantity={setSelectedQuantity} />
+
+                <Color 
+                    color={color} 
+                    setSelectedColor={setSelectedColor} />
+
+                <Size 
+                    gender={gender} 
+                    size={size} 
+                    setSelectedSize={setSelectedSize} />
                 
-                <div className="detail__quantity">
-                    <button className="button detail__button" onClick={() => handleRemoveItems()}>-</button>
-                    <div className="detail__counter">{selectedQuantity}</div>
-                    <button className="button detail__button" onClick={() => handleAddItems()}>+</button>
-                </div>
-                <div className="style">Color:
-                    {
-                        color.map((item, index)=> {
-                            return (
-                                <div className="style__color colors" id={`color-${index}`} style={{backgroundColor: item}} onClick={()=>handleSelectedColor(item, index)}></div> 
-                            )
-                        })
-                    }
-                </div>
-                {
-                    (gender !== 'accesorios') &&
-                    (
-                        <div className="style">Talle:
-                            {
-                                size.map((item, index)=> (
-                                <div className="style__color sizes" id={`size-${index}`} onClick={()=>handleSelectedSize(item, index)}>{item}</div> 
-                                ))
-                            }
-                            
-                        </div>
-                    ) 
-                }
-                
-                <div className="button detail__button">
+                <div className="button detail__button detail__button--cart">
+
                     <MdFavoriteBorder className="favorite-icon"/>
-                    <Button type="primary" shape="round" className="button" onClick={() => handleAddToCart()} >Agregar al carrito</Button> 
+
+                    <Button 
+                        type="primary" 
+                        shape="round" 
+                        className="button" 
+                        onClick={() => handleAddToCart()} 
+                    >
+                        Agregar al carrito
+
+                    </Button> 
+
                 </div>
+
                 <div id="alert" />
             </div>
         </div>
