@@ -1,44 +1,101 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, Image } from 'antd'
 import { MdFavoriteBorder } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import 'antd/dist/antd.css';
+import { CartContext } from '../Context/CartContext';
+import Category from './Category/Category';
 
-const ItemDetail = ({product, cart, setCart, id, name, img, description, category, gender, price, color, size}) => {
-    const [counter, setCounter] = useState(0)
+const ItemDetail = ({ id, name, img, description, category, gender, price, color, size}) => {
+    const [selectedQuantity, setSelectedQuantity] = useState(1);
+    const [ selectedColor, setSelectedColor ] = useState('');
+    const [ selectedSize, setSelectedSize] = useState('');
 
-    //console.log(color)
+    const { addToCart } = useContext(CartContext);
+    
+    const newItem = {
+        id,
+        name,
+        img,
+        price,
+        selectedColor,
+        selectedSize,
+        selectedQuantity
+    }
 
+    //Modificar cantidad
     const handleAddItems = () => {
-        setCounter (counter + 1);
+        setSelectedQuantity (selectedQuantity + 1);
     }
-
+    
     const handleRemoveItems = () => {
-        (counter > 0) && setCounter( counter - 1)
+        (selectedQuantity > 0) && setSelectedQuantity( selectedQuantity - 1)
     }
 
-    const handleAddToCart = () => {
-        (counter > 0) && setCart([product, ...cart])
-        console.log(product, cart)
+    //Elegir color
+    const handleSelectedColor = (colorCode, index) => {
+
+        setSelectedColor(colorCode)
+
+        const colors = document.querySelectorAll('.colors')
+
+        colors.forEach((item)=>{
+            if (item.id === `color-${index}`) {
+                item.classList.add('style--active')
+            } else {
+                item.classList.remove('style--active')
+            }
+        })
     }
+
+    //Elegir talle
+    const handleSelectedSize = (itemSize, index) => {
+
+        setSelectedSize(itemSize)
+
+        const sizes = document.querySelectorAll('.sizes')
+
+        sizes.forEach((item)=>{
+            if (item.id === `size-${index}`) {
+                item.classList.add('style--active')
+            } else {
+                item.classList.remove('style--active')
+            }
+        })
+    }
+    
+    //Agregar al carrito
+    const handleAddToCart = () => {
+        
+        if ( (selectedQuantity > 0) && (selectedColor === '' || selectedSize === '')) {
+            const alert = document.createElement('P');
+            alert.textContent = '¡Elige color y talle antes de agregar al carrito!';
+            alert.classList.add('alert-msg')
+            
+            const addToCartSection = document.querySelector('#alert');
+            addToCartSection.appendChild(alert)
+
+            setTimeout(()=> {
+                addToCartSection.removeChild(alert)
+            }, 3000)
+        }
+
+        addToCart(newItem);
+    }
+
+   
 
     return (
         <div className="detail" key= {id} >
             <Image className="detail__image" src={img} alt={name}/>
             <div className="detail__content">
-                <h4 className="category">Categoría:  
-                    <span> 
-                        <Link exact to={`/${gender}`}> 
-                            {gender} 
-                        </Link> 
-                        <span> / </span>
-                        <Link exact to={`/${category}`}> 
-                            {category}
-                        </Link>
-                    </span>
-                </h4>
+
+                <Category gender={gender} category={category} />
+
                 <h2>{name}</h2>
+
                 <h3>ARS {price}</h3>
+                
                 {
                     gender !== 'accesorios'
                     ? <p>¿Sos fan de {description}? Elegí color y talle y llevate tu remera personalizada.</p>
@@ -47,14 +104,14 @@ const ItemDetail = ({product, cart, setCart, id, name, img, description, categor
                 
                 <div className="detail__quantity">
                     <button className="button detail__button" onClick={() => handleRemoveItems()}>-</button>
-                    <div className="detail__counter">{counter}</div>
+                    <div className="detail__counter">{selectedQuantity}</div>
                     <button className="button detail__button" onClick={() => handleAddItems()}>+</button>
                 </div>
                 <div className="style">Color:
                     {
-                        color.map((item)=> {
+                        color.map((item, index)=> {
                             return (
-                                <div className="style__color" style={{backgroundColor: item}}></div> 
+                                <div className="style__color colors" id={`color-${index}`} style={{backgroundColor: item}} onClick={()=>handleSelectedColor(item, index)}></div> 
                             )
                         })
                     }
@@ -64,8 +121,8 @@ const ItemDetail = ({product, cart, setCart, id, name, img, description, categor
                     (
                         <div className="style">Talle:
                             {
-                                size.map((item)=> (
-                                <div className="style__color" >{item}</div> 
+                                size.map((item, index)=> (
+                                <div className="style__color sizes" id={`size-${index}`} onClick={()=>handleSelectedSize(item, index)}>{item}</div> 
                                 ))
                             }
                             
@@ -77,6 +134,7 @@ const ItemDetail = ({product, cart, setCart, id, name, img, description, categor
                     <MdFavoriteBorder className="favorite-icon"/>
                     <Button type="primary" shape="round" className="button" onClick={() => handleAddToCart()} >Agregar al carrito</Button> 
                 </div>
+                <div id="alert" />
             </div>
         </div>
     )

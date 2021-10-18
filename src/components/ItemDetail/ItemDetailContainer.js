@@ -32,9 +32,6 @@ const ItemDetailContainer = ({cart, setCart}) => {
                 product.length === 0 
                     ? <Spin size="large" className="spin"/>
                     : <ItemDetail 
-                        product={product} 
-                        cart={cart}
-                        setCart={setCart}
                         {...product} 
                     /> 
             }
