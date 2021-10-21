@@ -2,79 +2,79 @@ import React, { useContext } from 'react'
 import { Button } from 'antd'
 import { CartContext } from '../Context/CartContext'
 import Quantity from '../ItemDetail/Quantity/Quantity'
+import { RiDeleteBin6Line } from 'react-icons/ri'
+
 
 const Cart = () => {
 
     const { cart, totalPrice } = useContext(CartContext)
     
-
+    
     return (
         <>
+            <table className="first-table">
+                <tr>
+                    <th className="left">Producto</th>
+                    <th className="center">Cantidad</th>
+                    <th className="center">Precio</th>
+                    <th className="center"></th>
+                </tr>
+                {
+                    cart.map((item) => {
+                        return (
+                            <tr>
+                                <td>
+                                    <table className="second-table">
+                                        <tr>
+                                            <td>
+                                                <img 
+                                                    className="cart__image" 
+                                                    src={item.img} 
+                                                    alt={item.name}/>
+                                            </td>
+                                            <td>
+                                                <div className="cart__text">
+                                                    <h4>{item.name}</h4>
 
-            <div className="cart__layout">
+                                                    <div className="cart__props">
+                                                        <div>
+                                                            Color: 
+                                                        </div>
+                                                        <div className="style__color cart__style" style={{backgroundColor: item.selectedColor}} ></div>
+                                                    </div>
 
-                <div>
-                    <h3>Producto</h3>
-                    {
-                        cart.map((item)=>{
-                            return (
-                                <div key={item.id} className="cart__description">
+                                                    {
+                                                        !item.name.includes('Mochila') &&
+                                                            <div className="cart__props">
+                                                                <div>
+                                                                    Talle: 
+                                                                </div>
+                                                                <div className="cart__style" >{item.selectedSize}</div>
+                                                            </div>
+                                                    }
 
-                                    <img 
-                                        className="cart__image" 
-                                        src={item.img} 
-                                        alt={item.name}/>
-                                    
-                                    <div className="cart__text">
-                                        <h4>{item.name}</h4>
-                                        <div className="cart__props">
-                                            <div>
-                                                Color: 
-                                            </div>
-                                            <div className="style__color cart__style" style={{backgroundColor: item.selectedColor}} ></div>
-                                        </div>
-                                        <div className="cart__props">
-                                            <div>
-                                                Talle: 
-                                            </div>
-                                            <div className="cart__style" >{item.selectedSize}</div>
-                                        </div>
-                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
 
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-
-                <div>
-                    <h3>Cantidad</h3>
-                 
-                    {
-                        cart.map((item)=>{
-                            return (
-                                <div key={item.id}>
-
+                                <td className="center">
                                     <Quantity>{item.selectedQuantity}</Quantity>
-                                    
-                                </div>
-                            )
-                        })
-                    }
-                </div>
+                                </td>
 
-                <div>
-                    <h3>Precio</h3>
-                    {[
-                        cart.map((item)=>{
-                            return (
-                                <p>{item.price * item.selectedQuantity}</p>
-                            )
-                        })
-                    ]}
-                </div> 
+                                <td className="center">
+                                    {item.price * item.selectedQuantity}
+                                </td>
 
-            </div> 
+                                <td className="center">
+                                    <RiDeleteBin6Line />
+                                </td>
+                            </tr>
+                        )
+                    })
+                }
+            </table>
 
             <div className="cart__resume">
 
@@ -89,19 +89,16 @@ const Cart = () => {
                 </div>
 
                 <hr />
-
                 <div className="resume-item">
                     <h3>TOTAL</h3>
                     <p>{totalPrice() * 1.21}</p>
                 </div>
-                
+
             </div>
-                
-            
-            
-                <div className="buttons-card">
-                    <Button type="primary" shape="round" className="button" >Finalizar compra</Button> 
-                </div>
+
+            <div className="buttons-card">
+                <Button type="primary" shape="round" className="button" >Finalizar compra</Button> 
+            </div>
         </>
     )
 }

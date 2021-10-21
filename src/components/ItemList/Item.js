@@ -13,22 +13,22 @@ const Item = ({id, name, img, description, category, gender, price}) => {
 
     return (
         <div key={id}>
-            <Card
-                hoverable
-                style={{ width: 240 }}
-                cover={<img alt={description} src={img} />}
-            >
-                <Meta title={name}/>
-                <p className="category">Categoría: <span>{category}</span></p>
-                <p className="price">Precio: <span>${price}</span></p>
-                <div className="item-button">
-                    <MdFavoriteBorder className="favorite-icon"/>
-                    <Link exact to={`/products/${id}`}>
-                        <Button type="primary" shape="round" className="button" >Ver detalle</Button> 
-                    </Link>
-                </div>
-                
-            </Card>
+            <Link exact to={`/products/${id}`}>
+                <Card
+                    hoverable
+                    style={{ width: 240 }}
+                    cover={<img alt={description} src={img} />}
+                >
+                    <Meta title={name}/>
+                    <p className="category">Categoría: <span>{category}</span></p>
+                    <p className="price">Precio: <span>${price}</span></p>
+                    <div className="item-button">
+                        <MdFavoriteBorder className="favorite-icon"/>
+                            <Button type="primary" shape="round" className="button" >Ver detalle</Button> 
+                    </div>
+                    
+                </Card>
+            </Link>
 
            
         </div>
