@@ -8,6 +8,17 @@ import { RiDeleteBin6Line } from 'react-icons/ri'
 const Cart = () => {
 
     const { cart, totalPrice } = useContext(CartContext)
+
+    const handleAddItems = (itemId) => {
+        const product = cart.findIndex(item => item.id === itemId)
+        cart[product].selectedQuantity += 1
+        console.log(cart)
+    }
+
+    const handleRemoveItems = (itemId) => {
+        (cart[cart.findIndex(item => item.id === itemId)].selectedQuantity > 1) &&  (cart[cart.findIndex(item => item.id === itemId)].selectedQuantity = cart[cart.findIndex(item => item.id === itemId)].selectedQuantity - 1)
+        console.log(cart)
+    }
     
     
     return (
@@ -22,7 +33,7 @@ const Cart = () => {
                 {
                     cart.map((item) => {
                         return (
-                            <tr>
+                            <tr key={item.id}>
                                 <td>
                                     <table className="second-table">
                                         <tr>
@@ -60,7 +71,29 @@ const Cart = () => {
                                 </td>
 
                                 <td className="center">
-                                    <Quantity>{item.selectedQuantity}</Quantity>
+                                    <div className="detail__quantity">
+
+                                        <button 
+                                            className="button detail__button detail__button--quantity" 
+                                            onClick={() => handleRemoveItems(item.id)}
+                                        >
+                                            -
+                                        </button>
+
+                                        <div 
+                                            className="detail__counter"
+                                        >
+                                            {item.selectedQuantity}
+                                        </div>
+
+                                        <button 
+                                            className="button detail__button detail__button--quantity" 
+                                            onClick={() => handleAddItems(item.id)}
+                                        >
+                                            +
+                                        </button>
+
+                                    </div>
                                 </td>
 
                                 <td className="center">
@@ -104,3 +137,5 @@ const Cart = () => {
 }
 
 export default Cart
+
+//Boton Actualizar carrito

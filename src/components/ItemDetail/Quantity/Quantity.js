@@ -1,9 +1,8 @@
 import React, { useContext } from 'react'
 import { CartContext } from '../../Context/CartContext';
 
-const Quantity = () => {
+const Quantity = ({ selectedQuantity, setSelectedQuantity }) => {
 
-    const { selectedQuantity, setSelectedQuantity } = useContext(CartContext)
 
     //Modificar cantidad
     const handleAddItems = () => {
