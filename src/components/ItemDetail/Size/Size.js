@@ -26,7 +26,7 @@ const Size = ({gender, size, setSelectedSize}) => {
                         <div className="style">Talle:
                             {
                                 size.map((item, index)=> (
-                                <div className="style__color sizes" id={`size-${index}`} onClick={()=>handleSelectedSize(item, index)}>{item}</div> 
+                                <div key={index} className="style__color sizes" id={`size-${index}`} onClick={()=>handleSelectedSize(item, index)}>{item}</div> 
                                 ))
                             }
                             

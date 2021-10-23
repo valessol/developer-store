@@ -14,7 +14,7 @@ export const ItemListContainer = () => {
 
     useEffect(() => {
         setLoader(true)
-        console.log(product)
+       
         getData()
             .then((response) => {
                 if (product) {

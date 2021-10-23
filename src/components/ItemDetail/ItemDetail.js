@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, Image } from 'antd'
 import { MdFavoriteBorder } from 'react-icons/md';
 import { CartContext } from '../Context/CartContext';
@@ -8,13 +8,14 @@ import Quantity from './Quantity/Quantity';
 import Color from './Color/Color';
 import Size from './Size/Size';
 import 'antd/dist/antd.css';
+import { Link } from 'react-router-dom';
 
 const ItemDetail = ({ id, name, img, description, category, gender, price, color, size}) => {
-    const [selectedQuantity, setSelectedQuantity] = useState(1);
+    
     const [ selectedColor, setSelectedColor ] = useState('');
     const [ selectedSize, setSelectedSize] = useState('');
-
-    const { addToCart } = useContext(CartContext);
+    const [selectedQuantity, setSelectedQuantity] = useState(1);
+    const { isInCart, addToCart } = useContext(CartContext);
     
     const newItem = {
         id,
@@ -26,10 +27,31 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
         selectedQuantity
     }
     
+    //Modificar la cantidad a agregar
+    const handleAddItems = () => {
+        // const itemIndex = findItem(id)
+        // itemIndex
+        //      setSelectedQuantity(cart[itemIndex].selectedQuantity += 1)
+        //     : setSelectedQuantity (selectedQuantity + 1)
+        setSelectedQuantity (selectedQuantity + 1)
+    }
+
+    const handleRemoveItems = () => {
+        // const itemRemove = findItem(id)
+        // if (selectedQuantity > 1 && itemRemove) {
+        //     setSelectedQuantity(cart[itemRemove].selectedQuantity -= 1)
+        // } else if (selectedQuantity > 1) {
+        //     setSelectedQuantity (selectedQuantity - 1)
+        // }
+        selectedQuantity > 1 &&
+        setSelectedQuantity (selectedQuantity - 1)
+    }
+
+
     //Agregar al carrito
     const handleAddToCart = () => {
         
-        if ( (selectedQuantity > 0) && (selectedColor === '' || (selectedSize === '' && gender !== 'accesories'))) {
+        if ( selectedColor === '' || (selectedSize === '' && gender !== 'accesories')) {
             
 
                 const alert = document.createElement('P');
@@ -47,6 +69,7 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
 
         addToCart(newItem);
     }
+
 
 
     return (
@@ -71,8 +94,11 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
                     description={description} />
                 
                 <Quantity 
-                    selectedQuantity={selectedQuantity} 
-                    setSelectedQuantity={setSelectedQuantity} />
+                    id={id} 
+                    handleAdd={handleAddItems} 
+                    handleRemove={handleRemoveItems}
+                    quantity={selectedQuantity}
+                />
 
                 <Color 
                     color={color} 
@@ -87,15 +113,24 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
 
                     <MdFavoriteBorder className="favorite-icon"/>
 
-                    <Button 
-                        type="primary" 
-                        shape="round" 
-                        className="button" 
-                        onClick={() => handleAddToCart()} 
-                    >
-                        Agregar al carrito
+                    {
+                        isInCart(id)
+                            ? 
+                                <Link to="/cart" className="button">
+                                    Ver Carrito
+                                </Link>
+                            : 
+                                <Button 
+                                    type="primary" 
+                                    shape="round" 
+                                    className="button" 
+                                    onClick={() => handleAddToCart()} 
+                                >
+                                    Agregar al carrito
 
-                    </Button> 
+                                </Button> 
+                    }
+                    
 
                 </div>
 

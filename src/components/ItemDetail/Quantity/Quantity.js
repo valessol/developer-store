@@ -1,24 +1,17 @@
 import React, { useContext } from 'react'
 import { CartContext } from '../../Context/CartContext';
 
-const Quantity = ({ selectedQuantity, setSelectedQuantity }) => {
+const Quantity = ({id, handleAdd, handleRemove, quantity}) => {
+    
 
-
-    //Modificar cantidad
-    const handleAddItems = () => {
-        setSelectedQuantity (selectedQuantity + 1);
-    }
-
-    const handleRemoveItems = () => {
-        (selectedQuantity > 1) && setSelectedQuantity( selectedQuantity - 1)
-    }
-
+    
+    //No le tengo que pasar el id a los handle, sino que el id lo riene que pasar el boton que va a actualizar el carrito, para que setee las nuevas cantidades
     return (
         <div className="detail__quantity">
 
             <button 
                 className="button detail__button detail__button--quantity" 
-                onClick={() => handleRemoveItems()}
+                onClick={() => handleRemove()}
             >
                 -
             </button>
@@ -26,12 +19,17 @@ const Quantity = ({ selectedQuantity, setSelectedQuantity }) => {
             <div 
                 className="detail__counter"
             >
-                {selectedQuantity}
+                    {quantity}
+                {
+                    {/* item 
+                    ? item.selectedQuantity
+                    : quantity */}
+                }
             </div>
 
             <button 
                 className="button detail__button detail__button--quantity" 
-                onClick={() => handleAddItems()}
+                onClick={() => handleAdd()}
             >
                 +
             </button>
