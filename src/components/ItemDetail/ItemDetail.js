@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react'
 import { Button, Image } from 'antd'
-import { MdFavoriteBorder } from 'react-icons/md';
 import { CartContext } from '../Context/CartContext';
 import Category from './Category/Category';
 import { Description } from './Description/Description';
@@ -8,13 +7,14 @@ import Quantity from './Quantity/Quantity';
 import Color from './Color/Color';
 import Size from './Size/Size';
 import 'antd/dist/antd.css';
+import { Link } from 'react-router-dom';
 
 const ItemDetail = ({ id, name, img, description, category, gender, price, color, size}) => {
     const [selectedQuantity, setSelectedQuantity] = useState(1);
     const [ selectedColor, setSelectedColor ] = useState('');
     const [ selectedSize, setSelectedSize] = useState('');
 
-    const { addToCart } = useContext(CartContext);
+    const { findItem, addToCart } = useContext(CartContext);
     
     const newItem = {
         id,
@@ -29,12 +29,14 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
     //Agregar al carrito
     const handleAddToCart = () => {
         
-        if ( (selectedQuantity > 0) && (selectedColor === '' || (selectedSize === '' && gender !== 'accesories'))) {
+        if ( (selectedQuantity > 0) && (selectedColor === '' || (selectedSize === '' && gender !== 'accesorios'))) {
             
 
                 const alert = document.createElement('P');
-                alert.textContent = '¡Elige color y talle antes de agregar al carrito!';
                 alert.classList.add('alert-msg')
+                gender !== 'accesorios'
+                    ? alert.textContent = '¡Elige color y talle antes de agregar al carrito!'
+                    : alert.textContent = '¡Elige color antes de agregar al carrito!'
                 
                 const addToCartSection = document.querySelector('#alert');
                 addToCartSection.appendChild(alert)
@@ -86,17 +88,39 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
                 
                 <div className="button detail__button detail__button--cart">
 
-                    <MdFavoriteBorder className="favorite-icon"/>
+                    {
+                        findItem(id)
+                            ? <>
+                                <Link to="/">
+                                    <Button 
+                                        type="primary" 
+                                        shape="round" 
+                                        className="button" 
+                                    >
+                                        Continuar comprando
+                                    </Button> 
+                                </Link>
+                                <Link to="/cart">
+                                    <Button  
+                                        shape="round" 
+                                        className="button button--secondary" 
+                                    >
+                                        Ver carrito
+                                    </Button> 
+                                </Link>
+                            </>
+                            :  <Button 
+                                type="primary" 
+                                shape="round" 
+                                className="button" 
+                                onClick={() => handleAddToCart()} 
+                            >
+                                Agregar al carrito
 
-                    <Button 
-                        type="primary" 
-                        shape="round" 
-                        className="button" 
-                        onClick={() => handleAddToCart()} 
-                    >
-                        Agregar al carrito
+                            </Button> 
+                    }
 
-                    </Button> 
+                   
 
                 </div>
 

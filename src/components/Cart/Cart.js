@@ -1,24 +1,12 @@
 import React, { useContext } from 'react'
 import { Button } from 'antd'
 import { CartContext } from '../Context/CartContext'
-import Quantity from '../ItemDetail/Quantity/Quantity'
 import { RiDeleteBin6Line } from 'react-icons/ri'
 
 
 const Cart = () => {
 
-    const { cart, totalPrice, cleanCart } = useContext(CartContext)
-
-    const handleAddItems = (itemId) => {
-        const product = cart.findIndex(item => item.id === itemId)
-        cart[product].selectedQuantity += 1
-        console.log(cart)
-    }
-
-    const handleRemoveItems = (itemId) => {
-        (cart[cart.findIndex(item => item.id === itemId)].selectedQuantity > 1) &&  (cart[cart.findIndex(item => item.id === itemId)].selectedQuantity = cart[cart.findIndex(item => item.id === itemId)].selectedQuantity - 1)
-        console.log(cart)
-    }
+    const { cart, totalPrice, cleanCart, deleteItem } = useContext(CartContext)
     
     
     return (
@@ -26,7 +14,6 @@ const Cart = () => {
             <table className="first-table">
                 <tr>
                     <th className="left">Producto</th>
-                    <th className="center">Cantidad</th>
                     <th className="center">Precio</th>
                     <th className="center"></th>
                 </tr>
@@ -64,6 +51,10 @@ const Cart = () => {
                                                             </div>
                                                     }
 
+                                                    <div className="cart__props">
+                                                            Cantidad: {item.selectedQuantity}
+                                                    </div>
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -71,37 +62,11 @@ const Cart = () => {
                                 </td>
 
                                 <td className="center">
-                                    <div className="detail__quantity">
-
-                                        <button 
-                                            className="button detail__button detail__button--quantity" 
-                                            onClick={() => handleRemoveItems(item.id)}
-                                        >
-                                            -
-                                        </button>
-
-                                        <div 
-                                            className="detail__counter"
-                                        >
-                                            {item.selectedQuantity}
-                                        </div>
-
-                                        <button 
-                                            className="button detail__button detail__button--quantity" 
-                                            onClick={() => handleAddItems(item.id)}
-                                        >
-                                            +
-                                        </button>
-
-                                    </div>
-                                </td>
-
-                                <td className="center">
                                     {item.price * item.selectedQuantity}
                                 </td>
 
                                 <td className="center">
-                                    <RiDeleteBin6Line />
+                                    <RiDeleteBin6Line className="delete-btn" onClick={()=> deleteItem(item.id)} />
                                 </td>
                             </tr>
                         )
@@ -112,26 +77,26 @@ const Cart = () => {
             <div className="cart__resume">
 
                 <div className="resume-item">
-                    <h4>Subtotal</h4>
-                    <p>{totalPrice()}</p>
+                    <h4>Subtotal: </h4>
+                    <p> ${totalPrice()}</p>
                 </div>
 
                 <div className="resume-item">
-                    <h4>IVA</h4>
-                    <p>{totalPrice() * 0.21}</p>
+                    <h4>IVA:</h4>
+                    <p>${totalPrice() * 0.21}</p>
                 </div>
 
                 <hr />
                 <div className="resume-item">
-                    <h3>TOTAL</h3>
-                    <p>{totalPrice() * 1.21}</p>
+                    <h3>TOTAL:</h3>
+                    <p>${totalPrice() * 1.21}</p>
                 </div>
 
             </div>
 
             <div className="buttons-card">
                 <Button type="primary" shape="round" className="button" >Finalizar compra</Button> 
-                <Button type="primary" shape="round" className="button" onClick={cleanCart}>Vaciar Carrito</Button> 
+                <Button shape="round" className="button button--secondary" onClick={cleanCart}>Vaciar Carrito</Button> 
             </div>
         </>
     )

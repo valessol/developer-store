@@ -68,6 +68,15 @@ font-size: 3rem;
     background-color: $primary-color;
     border: none;
     margin-left: 1rem;
+    &--secondary {
+        background-color: #fff;
+        border: 1px solid $primary-color;
+        color: $primary-color;
+        font-weight: 700;
+        &:hover {
+            color: $primary-hover-color
+        }
+    }
 }
 
 //-------------------Componentes

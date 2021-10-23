@@ -3,6 +3,7 @@ import { BsBag } from "react-icons/bs";
 import { Link, NavLink } from "react-router-dom";
 
 export const NavBar = ({ brand }) => {
+  
   return (
     <header className="container">
       <div className="title">
