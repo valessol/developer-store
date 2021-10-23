@@ -42,7 +42,8 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
                 setTimeout(()=> {
                     addToCartSection.removeChild(alert)
                 }, 3000)
-            
+
+                return
         }
 
         addToCart(newItem);
