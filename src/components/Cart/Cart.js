@@ -7,7 +7,7 @@ import { RiDeleteBin6Line } from 'react-icons/ri'
 
 const Cart = () => {
 
-    const { cart, totalPrice } = useContext(CartContext)
+    const { cart, totalPrice, cleanCart } = useContext(CartContext)
 
     const handleAddItems = (itemId) => {
         const product = cart.findIndex(item => item.id === itemId)
@@ -131,6 +131,7 @@ const Cart = () => {
 
             <div className="buttons-card">
                 <Button type="primary" shape="round" className="button" >Finalizar compra</Button> 
+                <Button type="primary" shape="round" className="button" onClick={cleanCart}>Vaciar Carrito</Button> 
             </div>
         </>
     )
