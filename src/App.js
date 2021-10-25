@@ -13,7 +13,7 @@ function App() {
   return (
     <CartProvider>
       <BrowserRouter>
-        <NavBar brand="DeveloperStore" icon="bi bi-bag" />
+        <NavBar brand="DeveloperStore" />
         <Switch>
           <Route exact path="/">
             <ItemListContainer />

@@ -28,7 +28,7 @@ export const CartProvider = ({children}) => {
 
     //Total de pruductos en carrito
     const totalItems = () => {
-        return cart.reduce((ac, items) => ac + items, 0)
+        return cart.reduce((ac, items) => ac + items.selectedQuantity, 0)
     }
 
     //Monto total del carrito
@@ -43,7 +43,7 @@ export const CartProvider = ({children}) => {
 
     useEffect(()=>{
         localStorage.setItem('cart', JSON.stringify(cart))
-        console.log(cart)
+        totalItems()
     }, [cart])
 
 

@@ -4,9 +4,18 @@ nav {
   justify-content: space-between;
   align-items: center;
 }
-.bs-icon {
-  font-size: 3rem;
+.cartWidget {
+  display: flex;
+  align-items: center;
   cursor: pointer;
+  column-gap: 0.5rem;
+  span {
+    font-size: 2.4rem;
+    font-weight: 600;
+  }
+  .bs-icon {
+    font-size: 3rem;
+  }
 }
 nav {
   justify-content: center;
