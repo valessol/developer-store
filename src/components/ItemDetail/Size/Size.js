@@ -1,3 +1,4 @@
+import { Spin } from 'antd'
 import React from 'react'
 
 const Size = ({gender, size, setSelectedSize}) => {
@@ -21,16 +22,19 @@ const Size = ({gender, size, setSelectedSize}) => {
     return (
         <>
              {
-                    (gender !== 'accesorios') &&
-                    (
-                        <div className="style">Talle:
-                            {
-                                size.map((item, index)=> (
-                                <div className="style__color sizes" id={`size-${index}`} onClick={()=>handleSelectedSize(item, index)}>{item}</div> 
-                                ))
-                            }
-                            
-                        </div>
+                size && size.length === 0 
+                    ? <Spin size="large" className="spin"/>
+                    : ((gender !== 'accesorios') &&
+                        (
+                            <div className="style">Talle:
+                                {
+                                    size.map((item, index)=> (
+                                    <div className="style__color sizes" id={`size-${index}`} onClick={()=>handleSelectedSize(item, index)}>{item}</div> 
+                                    ))
+                                }
+                                
+                            </div>
+                        )
                     ) 
                 }
         </>

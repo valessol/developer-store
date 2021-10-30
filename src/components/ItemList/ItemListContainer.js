@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import { getData } from '../../helpers/getData'
 import ItemList from './ItemList'
 import { Spin } from 'antd';
 import { useParams } from 'react-router';
+import { getFirestore } from '../../firebase/config';
 
 
 export const ItemListContainer = () => {
@@ -12,27 +12,39 @@ export const ItemListContainer = () => {
     const { product } = useParams()
 
 
-    useEffect(() => {
-        setLoader(true)
-        console.log(product)
-        getData()
-            .then((response) => {
-                if (product) {
-                    
-                    const genderProds = response.filter((item)=> item.gender.toLowerCase() === product.toLowerCase())
-                    const categoryProds = response.filter((item)=> item.category.toLowerCase() === product.toLowerCase())
-                    
-                    if (genderProds.length !== 0) {
-                        setProducts(genderProds)
-                    } else if (categoryProds.length !== 0) {
-                        setProducts(categoryProds)
-                    } 
-                } else {
-                    setProducts(response)
-                }
-                
+    const getData = (data) => {
+        data.get()
+            .then(res=>{
+                const newItems = res.docs.map((doc)=>{
+                    return {id: doc.id, ...doc.data()};
+                })
+                setProducts(newItems)
             })
-            .finally(() => setLoader(false))
+            .catch(err=>console.log(err))
+            .finally(()=> setLoader(false))
+    }
+
+
+    useEffect(() => {
+        setLoader(true);
+
+        const db = getFirestore();
+        const itemCollection = db.collection('productos');
+
+        if (product) {
+
+            const filterGenderProds = itemCollection.where('gender', '==', product.toLowerCase())
+            const filterCategoryProds = itemCollection.where('category', '==', product.toLowerCase())
+            
+            if (filterGenderProds.length !== 0) {
+                getData(filterGenderProds)
+            } else if (filterCategoryProds.length !== 0) {
+                getData(filterCategoryProds)
+            } 
+        } else {
+            getData(itemCollection)
+        }
+
     }, [product]) 
 
     return (

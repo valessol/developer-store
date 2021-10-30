@@ -1,4 +1,6 @@
+import { Spin } from 'antd'
 import React from 'react'
+
 
 const Color = ({color, setSelectedColor}) => {
 
@@ -22,11 +24,13 @@ const Color = ({color, setSelectedColor}) => {
     return (
         <div className="style">Color:
             {
-                color.map((item, index)=> {
-                    return (
-                        <div className="style__color colors" id={`color-${index}`} style={{backgroundColor: item}} onClick={()=>handleSelectedColor(item, index)}></div> 
-                    )
-                })
+                color.length === 0
+                    ? <Spin size="large" className="spin"/>
+                    : color.map((item, index)=> {
+                        return (
+                            <div className="style__color colors" id={`color-${index}`} style={{backgroundColor: item}} onClick={()=>handleSelectedColor(item, index)}></div> 
+                        )
+                    })
             }
         </div>
     )
