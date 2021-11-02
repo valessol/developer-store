@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Button } from 'antd'
 import { CartContext } from '../Context/CartContext'
 import { RiDeleteBin6Line } from 'react-icons/ri'
+import { Link } from 'react-router-dom'
 
 
 const Cart = () => {
@@ -95,7 +96,9 @@ const Cart = () => {
             </div>
 
             <div className="buttons-card">
-                <Button type="primary" shape="round" className="button" >Finalizar compra</Button> 
+                <Link exact to="/checkout" >
+                    <Button type="primary" shape="round" className="button" >Finalizar compra</Button> 
+                </Link>
                 <Button shape="round" className="button button--secondary" onClick={cleanCart}>Vaciar Carrito</Button> 
             </div>
         </>

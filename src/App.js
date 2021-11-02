@@ -7,6 +7,7 @@ import CartContainer from "./components/Cart/CartContainer";
 import { CartProvider } from "./components/Context/CartContext";
 import './app.scss'
 import { UIProvider } from "./components/Context/UIContext";
+import Checkout from "./components/Checkout/Checkout";
 
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
             </Route>
             <Route exact path="/cart">
               <CartContainer />
+            </Route>
+            <Route exact path="/checkout">
+              <Checkout />
             </Route>
             <Route exact path="/:product">
               <ItemListContainer />
