@@ -7,7 +7,7 @@ import 'antd/dist/antd.css';
 
 const { Meta } = Card;
 
-const Item = ({id, name, img, description, category, gender, price}) => {
+const Item = ({id, name, img, description, category, price, stock}) => {
     
 
 
@@ -24,7 +24,14 @@ const Item = ({id, name, img, description, category, gender, price}) => {
                     <p className="price">Precio: <span>${price}</span></p>
                     <div className="item-button">
                         <MdFavoriteBorder className="favorite-icon"/>
-                            <Button type="primary" shape="round" className="button" >Ver detalle</Button> 
+                            <Button 
+                                type="primary" 
+                                shape="round" 
+                                className="button" 
+                                disabled={stock === 0}
+                            >
+                                Ver detalle
+                            </Button> 
                     </div>
                     
                 </Card>

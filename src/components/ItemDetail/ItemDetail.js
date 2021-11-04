@@ -9,7 +9,9 @@ import Size from './Size/Size';
 import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom';
 
-const ItemDetail = ({ id, name, img, description, category, gender, price, color, size}) => {
+//NOTE: permitir hacer compras de un mismo producto en otros colores o talles
+
+const ItemDetail = ({ id, name, img, description, category, gender, price, color, size, stock}) => {
     const [selectedQuantity, setSelectedQuantity] = useState(1);
     const [ selectedColor, setSelectedColor ] = useState('');
     const [ selectedSize, setSelectedSize] = useState('');
@@ -75,7 +77,9 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
                 
                 <Quantity 
                     selectedQuantity={selectedQuantity} 
-                    setSelectedQuantity={setSelectedQuantity} />
+                    setSelectedQuantity={setSelectedQuantity} 
+                    stock={stock}
+                    />
 
                 <Color 
                     color={color} 
@@ -113,6 +117,7 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
                                 type="primary" 
                                 shape="round" 
                                 className="button" 
+                                disabled={selectedQuantity > stock}
                                 onClick={() => handleAddToCart()} 
                             >
                                 Agregar al carrito

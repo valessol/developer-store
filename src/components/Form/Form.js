@@ -8,14 +8,20 @@ import {
 } from 'antd';
 import { formItemLayout, tailFormItemLayout } from './Form.Style';
 import { CartContext } from '../Context/CartContext';
+import { getFirestore } from '../../firebase/config';
+import firebase from 'firebase';
+import 'firebase/firestore';
+import Swal from 'sweetalert2';
+
 
 const { Option } = Select;
 
 //Formulario de Ant Design
 
-export const DataForm = () => {
+export const DataForm = ({loader, setLoader}) => {
+    
     const [form] = Form.useForm();
-    const { cart, totalPrice } = useContext(CartContext)
+    const { cart, totalPrice, cleanCart } = useContext(CartContext)
     const initialValues = {
         email: '',
         password: '',
@@ -26,11 +32,12 @@ export const DataForm = () => {
     }
 
     //handleSubmit adaptada para Ant Design
-    const onFinish = (formValues) => {
+    const onFinish = async (formValues) => {
         console.log('Received values of form: ', formValues);
         
         const register = {...formValues}
         
+        //Generar orden
         const order = {
             buyer: {
                 email: register.email,
@@ -47,8 +54,100 @@ export const DataForm = () => {
                 size: item.selectedSize ? item.selectedSize : '',
                 price: item.price
             })), 
-            total: totalPrice()
+            total: totalPrice(),
+            date: firebase.firestore.Timestamp.fromDate(new Date())
         }
+        
+        //Consulta a la base de datos
+        const db = getFirestore()
+
+        //Creación de colección para las órdenes de compra
+        const orders = db.collection('orders')
+
+        //Batch de actualización
+        const itemsToUpdate = db.collection('productos')
+          .where(firebase.firestore.FieldPath.documentId(), 'in', cart.map(e => e.id))
+        
+        const query = await itemsToUpdate.get()
+        const batch = db.batch()
+        const outOfStock = [];
+
+        query.docs.forEach((doc)=>{
+          const itemInCart = cart.find(e=>e.id === doc.id)
+          if (doc.data().stock >= itemInCart.selectedQuantity) {
+            batch.update(doc.ref, {
+              stock: doc.data().stock - itemInCart.selectedQuantity
+            })
+          }else {
+            outOfStock.push({
+              ...doc.data(), 
+              id: doc.id
+            })
+          }
+        })
+
+        if (outOfStock.length === 0) {
+          setLoader(true)
+
+          //Enviar orden a firestore
+          orders.add(order)
+            .then((res)=>{
+              batch.commit()
+
+              Swal.fire({
+                icon: 'success',
+                title: '¡Su orden se ha registrado con éxito!',
+                text: `El código de orden es ${res.id}`,
+                buttonsStyling: false,
+  
+                //Vaciar carrito al cerrar el modal
+                willClose: () => {
+                  cleanCart();
+                }
+              })
+            })
+            .catch((err)=>{
+              Swal.fire({
+                icon: 'error',
+                title: 'Lo sentimos, ha ocurrido un error inesperado',
+                text: `Por favor, intente nuevamente.(Cód. de error: ${err})`,
+                buttonsStyling: false
+              })
+            })
+            .finally(()=>{
+              setLoader(false)
+            })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Los siguientes items ya no están en stock:',
+            text: outOfStock.map(e=>e.name).join(', '),
+            confirmButtonText: 'Modificar Carrito',
+            willClose: () => {
+              //NOTE: agregar redireccion al cart
+            },
+            buttonsStyling: false
+          })
+        }
+
+
+      // cart.foreach((item)=>{
+      //   const docRef = db.collection('productos').doc(item.id);
+      //   docRef.get()
+      //     .then((doc)=> {
+      //       if (doc.data().stock >= item.selectedQuantity) {
+
+      //         docRef.update({
+      //           stock: doc.data().stock - item.selectedQuantity
+      //         })
+      //       }else {
+      //         //NOTE: hacer sweet alert para modificar carrito
+      //         alert('no hay stock de ' + doc.data().name)
+      //       }
+      //     })
+        
+      // })
+
         console.log(order)
     };
 
@@ -210,6 +309,7 @@ export const DataForm = () => {
         <Button 
             type="primary" 
             htmlType="submit"
+            disabled={loader}
         >
           Finalizar
         </Button>

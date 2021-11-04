@@ -1,11 +1,13 @@
 import React from 'react'
 
-const Quantity = ({ selectedQuantity, setSelectedQuantity }) => {
+const Quantity = ({ selectedQuantity, setSelectedQuantity, stock }) => {
+
+//NOTE: hacer estilos para cuando esta desabilitados los botones o no hay stock. Agregar la frase son stock
 
 
     //Modificar cantidad
     const handleAddItems = () => {
-        setSelectedQuantity (selectedQuantity + 1);
+        (selectedQuantity < stock) && setSelectedQuantity (selectedQuantity + 1);
     }
 
     const handleRemoveItems = () => {
@@ -17,6 +19,7 @@ const Quantity = ({ selectedQuantity, setSelectedQuantity }) => {
 
             <button 
                 className="button detail__button detail__button--quantity" 
+                disabled={selectedQuantity = 1 || selectedQuantity > stock}
                 onClick={() => handleRemoveItems()}
             >
                 -
@@ -30,6 +33,7 @@ const Quantity = ({ selectedQuantity, setSelectedQuantity }) => {
 
             <button 
                 className="button detail__button detail__button--quantity" 
+                disabled={selectedQuantity > stock}
                 onClick={() => handleAddItems()}
             >
                 +
