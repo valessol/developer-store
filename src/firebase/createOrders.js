@@ -1,15 +1,15 @@
-import React from 'react'
+import firebase from 'firebase';
+import 'firebase/firestore';
+import { getFirestore } from './config';
+import Swal from 'sweetalert2';
 
-export const createOrders = async () => {
-     //Generar orden
-     const order = {
-        buyer: {
-            email: register.email,
-            password: register.password,
-            fullName: register.fullName,
-            phone: register.phone,
-            message: register.message ? register.message : ''
-        },
+export const createOrders = (values, cart, total) => {
+
+  return new Promise (async ( resolve, reject ) => {
+
+    //Generar orden
+    const order = {
+        buyer: values,
         items: cart.map((item)=>({
             id: item.id,
             name: item.name,
@@ -18,16 +18,16 @@ export const createOrders = async () => {
             size: item.selectedSize ? item.selectedSize : '',
             price: item.price
         })), 
-        total: totalPrice(),
+        total: total,
         date: firebase.firestore.Timestamp.fromDate(new Date())
     }
-    
+
     //Consulta a la base de datos
     const db = getFirestore()
-
+  
     //Creación de colección para las órdenes de compra
     const orders = db.collection('orders')
-
+  
     //Batch de actualización
     const itemsToUpdate = db.collection('productos')
       .where(firebase.firestore.FieldPath.documentId(), 'in', cart.map(e => e.id))
@@ -49,49 +49,27 @@ export const createOrders = async () => {
         })
       }
     })
-
+  
     if (outOfStock.length === 0) {
-      setLoader(true)
-
+  
       //Enviar orden a firestore
       orders.add(order)
         .then((res)=>{
           batch.commit()
-
-          Swal.fire({
-            icon: 'success',
-            title: '¡Su orden se ha registrado con éxito!',
-            text: `El código de orden es ${res.id}`,
-            buttonsStyling: false,
-
-            //Vaciar carrito al cerrar el modal
-            willClose: () => {
-              cleanCart();
-            }
-          })
+          resolve(res.id)
         })
-        .catch((err)=>{
+        .catch((err) => {
           Swal.fire({
             icon: 'error',
             title: 'Lo sentimos, ha ocurrido un error inesperado',
-            text: `Por favor, intente nuevamente.(Cód. de error: ${err})`,
-            buttonsStyling: false
+            text: `Por favor, intente nuevamente.(Cód. de error: ${err})`
           })
         })
-        .finally(()=>{
-          setLoader(false)
-        })
     } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Los siguientes items ya no están en stock:',
-        text: outOfStock.map(e=>e.name).join(', '),
-        confirmButtonText: 'Modificar Carrito',
-        willClose: () => {
-          //NOTE: agregar redireccion al cart
-        },
-        buttonsStyling: false
-      })
+        reject(outOfStock)
     }
+  })
+    
+
 }
 

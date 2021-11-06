@@ -15,31 +15,35 @@ const Quantity = ({ selectedQuantity, setSelectedQuantity, stock }) => {
     }
 
     return (
-        <div className="detail__quantity">
+        <>
+            <div className="detail__quantity">
 
-            <button 
-                className="button detail__button detail__button--quantity" 
-                disabled={selectedQuantity = 1 || selectedQuantity > stock}
-                onClick={() => handleRemoveItems()}
-            >
-                -
-            </button>
+                <button 
+                    className="button detail__button detail__button--quantity" 
+                    disabled={selectedQuantity = 1 || selectedQuantity > stock}
+                    onClick={() => handleRemoveItems()}
+                >
+                    -
+                </button>
 
-            <div 
-                className="detail__counter"
-            >
-                {selectedQuantity}
+                <div 
+                    className="detail__counter"
+                >
+                    {selectedQuantity}
+                </div>
+
+                <button 
+                    className="button detail__button detail__button--quantity" 
+                    disabled={selectedQuantity > stock}
+                    onClick={() => handleAddItems()}
+                >
+                    +
+                </button>
+
             </div>
 
-            <button 
-                className="button detail__button detail__button--quantity" 
-                disabled={selectedQuantity > stock}
-                onClick={() => handleAddItems()}
-            >
-                +
-            </button>
-
-        </div>
+            <span className="detail__noStock">{stock === 0 && 'Sin Stock!'}</span>
+        </>
     )
 }
 
