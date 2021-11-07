@@ -13,7 +13,6 @@ export const NavBar = ({ brand }) => {
           <h1>{brand}</h1>
         </Link>
         <Logout />
-          
         <Link exact to="/cart">
           <CartWidget />
         </Link>

@@ -6,7 +6,7 @@ import { LoginForm } from './LoginFom'
 export const Login = () => {
     const { loader, setLoader } = useContext(UIContext)
     const [ isRegister, setIsRegister] = useState(true)
-
+//NOTE: enviar loader y set loader directo al registerform?
 
     const handleRegister = () => {
         return setIsRegister(!isRegister)

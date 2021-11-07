@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { getAuth, provider } from '../../firebase/config'
+import firebase from 'firebase/app'
 
 export const AuthContext = createContext();
 
@@ -28,6 +29,19 @@ export const AuthProvider = ({children}) => {
         return auth.createUserWithEmailAndPassword(email, password, fullname, phone)
     }
 
+    //Obtener los datos del usuario
+    const currentClient = () => {
+        const user = firebase.auth().currentUser;
+        if (user !==null) {
+            const client = {
+                email: user.email,
+                name: user.displayName,
+                phone: (user.phoneNumber !== null && user.phoneNumber !== undefined) ? user.phoneNumber : ''
+            }
+            return client
+        }
+    }
+
     useEffect (()=> {
         currentUser
             ? setIsAuth(true)
@@ -51,7 +65,8 @@ export const AuthProvider = ({children}) => {
             login,
             logout, 
             googleLogin, 
-            register
+            register,
+            currentClient
         }}>
             {children}
         </AuthContext.Provider>

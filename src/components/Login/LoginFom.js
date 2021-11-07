@@ -3,6 +3,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useContext } from 'react';
 import { AuthContext } from '../Context/AuthContext';
 import { useHistory } from 'react-router';
+import Swal from 'sweetalert2';
 
 export const LoginForm = ({handleRegister}) => {
   const { login, googleLogin } = useContext(AuthContext)
@@ -14,15 +15,22 @@ export const LoginForm = ({handleRegister}) => {
   }
 
   const { push } = useHistory();
-
+//NOTE: probar el redireccionamiento 
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
 
     const { email, password } = values;
-
+//NOTE: ver errores de logueo
     login(email, password)
       .then((res)=>push('/checkout'))
-      .catch((err)=> console.log(err))
+      .catch((err)=> {
+        console.log(err)
+        Swal.fire({
+          icon: 'error',
+          title: 'Ha ocurrido un error',
+          text: err.code.includes('password') ? 'La contraseña es incorrecta' : 'El email ingresado es incorrecto o no existe',
+        })
+      })
   };
 
   const handleGoogle = (e) => {
@@ -86,7 +94,7 @@ export const LoginForm = ({handleRegister}) => {
             LogIn
         </Button>
         <Button 
-            htmlType="submit" 
+            
             shape="round"
             className="button button--secondary login__btn"
             onClick={handleGoogle}

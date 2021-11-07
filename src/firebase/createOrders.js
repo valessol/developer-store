@@ -3,13 +3,13 @@ import 'firebase/firestore';
 import { getFirestore } from './config';
 import Swal from 'sweetalert2';
 
-export const createOrders = (values, cart, total) => {
+export const createOrders = (client, cart, total) => {
 
   return new Promise (async ( resolve, reject ) => {
 
     //Generar orden
     const order = {
-        buyer: values,
+        buyer: client,
         items: cart.map((item)=>({
             id: item.id,
             name: item.name,
