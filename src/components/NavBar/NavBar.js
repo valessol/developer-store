@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, NavLink, Redirect } from "react-router-dom";
 import CartWidget from "./CartWidget";
-import Logout from "./Logout";
+import Log from "./Log";
 
 export const NavBar = ({ brand }) => {
   
@@ -12,7 +12,7 @@ export const NavBar = ({ brand }) => {
         <Link exact to="/">
           <h1>{brand}</h1>
         </Link>
-        <Logout />
+        <Log />
         <Link exact to="/cart">
           <CartWidget />
         </Link>

@@ -3,9 +3,14 @@ import { useContext } from 'react'
 import { useHistory } from 'react-router'
 import { AuthContext } from '../Context/AuthContext'
 
-const Logout = () => {
+const Log = () => {
     const { isAuth, logout } = useContext(AuthContext)
     const { push } = useHistory()
+
+    const handleLogin = () => {
+        !isAuth &&
+        push('/login')       
+    }
 
     const handleLogout = () => {
         isAuth && logout()
@@ -15,10 +20,12 @@ const Logout = () => {
     return (
         <>
             {
-                isAuth && <span onClick={handleLogout}>Log Out</span>
+                isAuth 
+                    ? <span onClick={handleLogout}>Log Out</span>
+                    : <span onClick={handleLogin}>Log In</span>
             }
         </>
     )
 }
 
-export default Logout
+export default Log

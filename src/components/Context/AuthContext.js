@@ -25,8 +25,8 @@ export const AuthProvider = ({children}) => {
     }
 
     //Registrarse
-    const register = (email, password, fullname, phone) => {
-        return auth.createUserWithEmailAndPassword(email, password, fullname, phone)
+    const register = (email, password, name, phone) => {
+        return auth.createUserWithEmailAndPassword(email, password, name, phone)
     }
 
     //Obtener los datos del usuario

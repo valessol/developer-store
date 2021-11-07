@@ -4,8 +4,9 @@ import { useContext } from 'react';
 import { AuthContext } from '../Context/AuthContext';
 import { useHistory } from 'react-router';
 import Swal from 'sweetalert2';
+import { UIContext } from '../Context/UIContext';
 
-export const LoginForm = ({handleRegister}) => {
+export const LoginForm = ({handleRegister, handleRedirect}) => {
   const { login, googleLogin } = useContext(AuthContext)
 
   const initialValues = {
@@ -14,15 +15,13 @@ export const LoginForm = ({handleRegister}) => {
     remember: true
   }
 
-  const { push } = useHistory();
-//NOTE: probar el redireccionamiento 
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
 
     const { email, password } = values;
-//NOTE: ver errores de logueo
+
     login(email, password)
-      .then((res)=>push('/checkout'))
+      .then((res)=>handleRedirect())
       .catch((err)=> {
         console.log(err)
         Swal.fire({
@@ -35,8 +34,10 @@ export const LoginForm = ({handleRegister}) => {
 
   const handleGoogle = (e) => {
     e.preventDefault();
-    googleLogin();
-    push('/checkout');
+    googleLogin()
+      .then(()=>{
+        handleRedirect()
+      });
 
   }
 

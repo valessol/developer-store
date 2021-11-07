@@ -13,7 +13,7 @@ import { AuthContext } from '../Context/AuthContext';
 //Formulario de Ant Design
 
 const { Option } = Select;
-export const RegisterForm = ({loader, handleRegister}) => {
+export const RegisterForm = ({loader, handleRegister, handleRedirect}) => {
     
     const [form] = Form.useForm();
     const { register } = useContext(AuthContext)
@@ -30,6 +30,9 @@ export const RegisterForm = ({loader, handleRegister}) => {
         console.log('Received values of form: ', formValues);
         const values = {...formValues}
 
+        register(values.email, values.password, values.name, values.phone);
+        //NOTE: hacer redireccionamiento a check o home
+        handleRedirect();
     };
 
 
@@ -121,7 +124,7 @@ export const RegisterForm = ({loader, handleRegister}) => {
           </Form.Item>
 
           <Form.Item
-              name="fullName"
+              name="name"
               label="Nombre"
               rules={[
                   {
@@ -149,15 +152,15 @@ export const RegisterForm = ({loader, handleRegister}) => {
                   style={{width: '100%',}}
             />
           </Form.Item>
-
+{/* 
           <Form.Item
               name="message"
               label="Mensaje"
           >
               <Input.TextArea showCount maxLength={100} />
-          </Form.Item>
+          </Form.Item> */}
 
-          <Form.Item
+          {/* <Form.Item
               name="gender"
               label="Género"
           >
@@ -166,7 +169,7 @@ export const RegisterForm = ({loader, handleRegister}) => {
                   <Option value="female">Masculino</Option>
                   <Option value="other">Otro</Option>
               </Select>
-          </Form.Item>
+          </Form.Item> */}
 
           <Form.Item
               name="legal"

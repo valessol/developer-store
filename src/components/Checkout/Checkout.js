@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Redirect } from 'react-router';
 import { CartContext } from '../Context/CartContext';
 import { UIContext } from '../Context/UIContext';
@@ -58,7 +58,7 @@ const Checkout = () => {
         { loader && <Spin />}
         {
             !isAuth
-                ? <Login />
+                ? <Login fromCheckout={true}/>
                 :
                     <div className="cart">
                         <h2>Resumen de compra</h2>
