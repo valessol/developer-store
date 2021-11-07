@@ -28,7 +28,23 @@ text-align: center;
 font-size: 3rem;
 }
 
-// Cards - Ant Design
+.cardContainer {
+    max-width: 900px;
+    width: 95%;
+    margin: 2rem auto;
+    padding: 1rem;
+    padding-bottom: 3rem;
+    border: 1px solid #f0f0f0;
+    border-radius: 2px;
+    box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.164);
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+
+// ----Ant Design
+//Cards
 .ant-card {
     margin: 1rem;
 }
@@ -50,6 +66,7 @@ font-size: 3rem;
     background-color: $primary-hover-color;
 }
 
+
 //Spinner
 .spin {
     position: absolute;
@@ -67,7 +84,6 @@ font-size: 3rem;
 .button {
     background-color: $primary-color;
     border: none;
-    margin-left: 1rem;
     &--secondary {
         background-color: #fff;
         border: 1px solid $primary-color;
@@ -78,6 +94,12 @@ font-size: 3rem;
             color: $primary-hover-color
         }
     }
+    &:hover {
+        color: $primary-hover-color
+    }
+    @media (max-width: 480px) {
+        width: 90%;
+    }
 }
 
 //-------------------Componentes
@@ -86,6 +108,7 @@ font-size: 3rem;
 @import './components/ItemDetail/itemDetail';
 @import './components/Cart/cart';
 @import './components/Checkout/checkout';
+@import './components/Login//login';
 
 
 //Icono favoritos

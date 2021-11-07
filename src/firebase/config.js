@@ -19,7 +19,10 @@ export const getFirestore = () => {
     return firebase.firestore(app)
 }
 
-//Login
+//Login con email y contraseña
 export const getAuth = () => { 
   return firebase.auth(app)
 }
+
+//Login con Google
+export const provider = new firebase.auth.GoogleAuthProvider();

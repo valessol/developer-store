@@ -10,15 +10,17 @@ import { formItemLayout, tailFormItemLayout } from './Form.Style';
 import { CartContext } from '../Context/CartContext';
 import Swal from 'sweetalert2';
 import { createOrders } from '../../firebase/createOrders';
+import { AuthContext } from '../Context/AuthContext';
 
 
 //Formulario de Ant Design
 
 const { Option } = Select;
-export const DataForm = ({loader, setLoader}) => {
+export const RegisterForm = ({loader, setLoader, handleRegister}) => {
     
     const [form] = Form.useForm();
     const { cart, totalPrice, cleanCart } = useContext(CartContext)
+    const { register } = useContext(AuthContext)
     const initialValues = {
         email: '',
         password: '',
@@ -93,6 +95,7 @@ export const DataForm = ({loader, setLoader}) => {
       {...formItemLayout}
       form={form}
       name="register"
+      className="register"
       onFinish={onFinish}
       initialValues={{
         ...initialValues
@@ -219,14 +222,17 @@ export const DataForm = ({loader, setLoader}) => {
           Acepto los términos y condiciones
         </Checkbox>
       </Form.Item>
-      <Form.Item {...tailFormItemLayout}>
+      <Form.Item className="login__buttons">
         <Button 
             type="primary" 
             htmlType="submit"
+            shape="round"
+            className="button login__btn"
             disabled={loader}
         >
           Finalizar
         </Button>
+        <span className="login__link" onClick={handleRegister}>Ya tengo cuenta</span>
       </Form.Item>
     </Form>
   );
