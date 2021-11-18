@@ -4,13 +4,18 @@
         flex-direction: column;
         width: 90%;
         justify-content: center;
+        gap: 1rem;
         @media (min-width: 768px) {
             flex-direction: row;
             justify-content: space-between;
           }
     }
-    
+    //margin-bottom: 1rem;
     &__checklist {
+        border: 1px solid $primary-color;
+        border-radius: 2rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
         flex: 1;
         h3 {
             text-align: left;

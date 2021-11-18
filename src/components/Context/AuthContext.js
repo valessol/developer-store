@@ -1,13 +1,14 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { getAuth, provider } from '../../firebase/config'
 import firebase from 'firebase/app'
+import { useHistory } from 'react-router';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
     const [ isAuth, setIsAuth ] = useState(false);
     const [ currentUser, setCurrentUser ] = useState(null);
-
+    
     const auth = getAuth();
 
     //Iniciar sesión
@@ -25,20 +26,17 @@ export const AuthProvider = ({children}) => {
     }
 
     //Registrarse
-    const register = (email, password, name, phone) => {
-        return auth.createUserWithEmailAndPassword(email, password, name, phone)
+    const register = (email, password) => {
+        return auth.createUserWithEmailAndPassword(email, password)
     }
+
 
     //Obtener los datos del usuario
     const currentClient = () => {
         const user = firebase.auth().currentUser;
         if (user !==null) {
-            const client = {
-                email: user.email,
-                name: user.displayName,
-                phone: (user.phoneNumber !== null && user.phoneNumber !== undefined) ? user.phoneNumber : ''
-            }
-            return client
+            //console.log('currentClient', user)
+            return {email: user.email, uid: user.uid}//ok
         }
     }
 

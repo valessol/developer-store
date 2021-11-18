@@ -3,12 +3,12 @@ import { UIContext } from '../Context/UIContext'
 import { RegisterForm } from './RegisterForm'
 import { LoginForm } from './LoginFom'
 import { useHistory } from 'react-router'
+import { AuthContext } from '../Context/AuthContext'
 
 export const Login = ({fromCheckout}) => {
-    const { loader, setLoader } = useContext(UIContext)
-    const [ isRegister, setIsRegister] = useState(true)
+    const [ isRegister, setIsRegister] = useState(true);
     const { goBack, push } = useHistory()
-//NOTE: enviar loader y set loader directo al registerform?
+
 
     const handleRegister = () => {
         return setIsRegister(!isRegister)
@@ -21,7 +21,6 @@ export const Login = ({fromCheckout}) => {
             goBack()
         }
     }
-
 
 
     return (
@@ -39,7 +38,10 @@ export const Login = ({fromCheckout}) => {
                     :
                         <>
                             <h2>Crear cuenta</h2>
-                            <RegisterForm setLoader = {setLoader} loader={loader} handleRegister={handleRegister} handleRedirect={handleRedirect}/>
+                            <RegisterForm 
+                                handleRegister={handleRegister}
+                                handleRedirect={handleRedirect}
+                            />
                         </>
             }
         </div>

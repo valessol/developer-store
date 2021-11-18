@@ -2,21 +2,22 @@ import React, { useContext } from 'react';
 import {
   Form,
   Input,
-  Select,
   Checkbox,
   Button
 } from 'antd';
 import { formItemLayout, tailFormItemLayout } from './Form.Style';
 import { AuthContext } from '../Context/AuthContext';
+import { UIContext } from '../Context/UIContext';
+import createUser from '../../firebase/createUser';
+import Swal from 'sweetalert2';
 
 
 //Formulario de Ant Design
 
-const { Option } = Select;
-export const RegisterForm = ({loader, handleRegister, handleRedirect}) => {
-    
+export const RegisterForm = ({handleRedirect, handleRegister}) => {
+    const { loader, setLoader } = useContext(UIContext)
     const [form] = Form.useForm();
-    const { register } = useContext(AuthContext)
+    const { register, currentClient } = useContext(AuthContext)
     const initialValues = {
         email: '',
         password: '',
@@ -25,38 +26,51 @@ export const RegisterForm = ({loader, handleRegister, handleRedirect}) => {
         
     }
 
+
+
+    //NOTE: si displayNone => no tengo que registrar al usuario, porque ya se registro cuando se logueo. Lo que tengo que hacer es añadirlo a la base de datos de users
+
+
     //handleSubmit adaptada para Ant Design
     const onFinish = async (formValues) => {
         console.log('Received values of form: ', formValues);
-        const values = {...formValues}
+        const {email, name, phone, password} = formValues;
+        
+        setLoader(true)
 
-        register(values.email, values.password, values.name, values.phone);
-        //NOTE: hacer redireccionamiento a check o home
-        handleRedirect();
+        // //Manejo del registro si el usuario viene del Checkout previamente logueado con Google
+        // if (displayNone){
+        //     createUser(currentClient().email, name, phone)
+        //         .then((res)=>console.log('datos de registro completados con éxito'))
+        //         //NOTE: añadir un texto que diga lo del clg
+        //         .catch((err)=>console.log(err))
+        //         .finally(()=>{
+        //             setLoader(false)
+
+        //         })
+
+        //     return
+        // }
+
+        register(email, password)//ok
+            .then(()=> {
+                createUser(email, name, phone)
+                    .then((res)=>console.log('createUser ok', res))//ok
+            })
+            .catch((err)=> {
+                console.log(err)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ha ocurrido un error inesperado',
+                    text: err.message,
+                })
+            })
+            .finally(()=> {
+                setLoader(false)
+                handleRedirect();
+            })
+
     };
-
-
-    const prefixSelector = (
-        <Form.Item 
-            name="prefix" 
-            noStyle
-            rules={[
-                {
-                  required: true,
-                  message: 'Selecciona la característica de tu país',
-                },
-            ]}
-        >
-            <Select
-              style={{
-                width: 70,
-              }}
-            >
-                <Option value="0054">+54</Option>
-                <Option value="0059">+59</Option>
-            </Select>
-        </Form.Item>
-    );
 
     return (
         <Form
@@ -68,64 +82,66 @@ export const RegisterForm = ({loader, handleRegister, handleRedirect}) => {
             initialValues={{...initialValues}}
             scrollToFirstError
         >
-          <Form.Item
-              name="email"
-              label="E-mail"
-              rules={[
-                  {
-                      type: 'email',
-                      message: 'El formato no es válido',
-                  },
-                  {
-                      required: true,
-                      message: 'Este campo es obligatorio',
-                  },
-              ]}
-          >
-              <Input />
-          </Form.Item>
 
-          <Form.Item
-              name="password"
-              label="Password"
-              rules={[
-                  {
-                      required: true,
-                      message: 'Ingresa una contraseña',
-                  },
-              ]}
-              hasFeedback
-          >
-              <Input.Password />
-          </Form.Item>
+            <Form.Item
+                name="email"
+                label="E-mail"
+                rules={[
+                    {
+                        type: 'email',
+                        message: 'El formato no es válido',
+                    },
+                    {
+                        required: true,
+                        message: 'Este campo es obligatorio',
+                    },
+                ]}
+            >
+                <Input />
+            </Form.Item>
+                   
+            <Form.Item
+                name="password"
+                label="Password"
+                rules={[
+                    {
+                        required: true,
+                        message: 'La contraseña debe contener al menos 6 caracteres',
+                        min: 6
+                    },
+                ]}
+                hasFeedback
+            >
+                <Input.Password />
+            </Form.Item>
 
-          <Form.Item
-              name="confirm"
-              label="Confirm Password"
-              dependencies={['password']}
-              hasFeedback
-              rules={[
-                  {
-                      required: true,
-                      message: 'Confirma tu contraseña',
-                  },
-                  ({ getFieldValue }) => ({
-                      validator(_, value) {
-                          if (!value || getFieldValue('password') === value) {
-                              return Promise.resolve();
-                          }
+            <Form.Item
+                name="confirm"
+                label="Confirm Password"
+                dependencies={['password']}
+                hasFeedback
+                rules={[
+                    {
+                        required: true,
+                        message: 'Confirma tu contraseña',
+                    },
+                    ({ getFieldValue }) => ({
+                        validator(_, value) {
+                            if (!value || getFieldValue('password') === value) {
+                                return Promise.resolve();
+                            }
 
-                          return Promise.reject(new Error('Las contraseñas ingresadas no coinciden'));
-                      },
-                  }),
-              ]}
-          >
-              <Input.Password />
-          </Form.Item>
-
+                            return Promise.reject(new Error('Las contraseñas ingresadas no coinciden'));
+                        },
+                    }),
+                ]}
+            >
+                <Input.Password />
+            </Form.Item>
+                
           <Form.Item
               name="name"
-              label="Nombre"
+              label="Nombre Completo"
               rules={[
                   {
                       required: true,
@@ -148,28 +164,9 @@ export const RegisterForm = ({loader, handleRegister, handleRedirect}) => {
               ]}
           >
               <Input
-                  addonBefore={prefixSelector}
                   style={{width: '100%',}}
             />
           </Form.Item>
-{/* 
-          <Form.Item
-              name="message"
-              label="Mensaje"
-          >
-              <Input.TextArea showCount maxLength={100} />
-          </Form.Item> */}
-
-          {/* <Form.Item
-              name="gender"
-              label="Género"
-          >
-              <Select placeholder="select your gender">
-                  <Option value="male">Femenino</Option>
-                  <Option value="female">Masculino</Option>
-                  <Option value="other">Otro</Option>
-              </Select>
-          </Form.Item> */}
 
           <Form.Item
               name="legal"

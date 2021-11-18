@@ -22,13 +22,10 @@ export const createOrders = (client, cart, total) => {
         date: firebase.firestore.Timestamp.fromDate(new Date())
     }
 
-    //Consulta a la base de datos
+    //Batch de actualización
     const db = getFirestore()
-  
-    //Creación de colección para las órdenes de compra
     const orders = db.collection('orders')
   
-    //Batch de actualización
     const itemsToUpdate = db.collection('productos')
       .where(firebase.firestore.FieldPath.documentId(), 'in', cart.map(e => e.id))
     

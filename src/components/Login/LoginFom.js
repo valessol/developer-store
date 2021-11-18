@@ -2,11 +2,9 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useContext } from 'react';
 import { AuthContext } from '../Context/AuthContext';
-import { useHistory } from 'react-router';
 import Swal from 'sweetalert2';
-import { UIContext } from '../Context/UIContext';
 
-export const LoginForm = ({handleRegister, handleRedirect}) => {
+export const LoginForm = ({ handleRedirect, handleRegister }) => {
   const { login, googleLogin } = useContext(AuthContext)
 
   const initialValues = {
@@ -14,7 +12,7 @@ export const LoginForm = ({handleRegister, handleRedirect}) => {
     password:'', 
     remember: true
   }
-
+//NOTE: si recordarme es true, entonces guardar al usuario en el localStorage
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
 
@@ -34,11 +32,11 @@ export const LoginForm = ({handleRegister, handleRedirect}) => {
 
   const handleGoogle = (e) => {
     e.preventDefault();
-    googleLogin()
-      .then(()=>{
-        handleRedirect()
-      });
 
+    googleLogin()
+        .then(()=>{
+            handleRedirect()
+        })
   }
 
   return (
@@ -60,6 +58,7 @@ export const LoginForm = ({handleRegister, handleRedirect}) => {
       >
         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
       </Form.Item>
+
       <Form.Item
         name="password"
         rules={[
@@ -75,14 +74,11 @@ export const LoginForm = ({handleRegister, handleRedirect}) => {
           placeholder="Password"
         />
       </Form.Item>
+
       <Form.Item>
         <Form.Item name="remember" valuePropName="checked" noStyle>
           <Checkbox>Recordarme</Checkbox>
         </Form.Item>
-
-        {/* <a className="login-form-forgot" href="">
-          Forgot password
-        </a> */}
       </Form.Item>
 
       <Form.Item className="login__buttons">
@@ -94,14 +90,15 @@ export const LoginForm = ({handleRegister, handleRedirect}) => {
         >
             LogIn
         </Button>
+
         <Button 
-            
             shape="round"
             className="button button--secondary login__btn"
             onClick={handleGoogle}
         >
             LogIn with Google
         </Button>
+
         <span className="login__link" onClick={handleRegister}> No tengo cuenta</span>
       </Form.Item>
     </Form>

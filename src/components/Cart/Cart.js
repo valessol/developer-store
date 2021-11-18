@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 const Cart = () => {
 
     const { cart, totalPrice, cleanCart, deleteItem } = useContext(CartContext)
-    
+    //NOTE: cambiar tabla, incluir thead y tbody
     
     return (
         <>
@@ -97,9 +97,21 @@ const Cart = () => {
 
             <div className="buttons-card">
                 <Link exact to="/checkout" >
-                    <Button type="primary" shape="round" className="button" >Finalizar compra</Button> 
+                    <Button 
+                        type="primary" 
+                        shape="round" 
+                        className="button login__btn" 
+                    >
+                        Finalizar compra
+                    </Button> 
                 </Link>
-                <Button shape="round" className="button button--secondary" onClick={cleanCart}>Vaciar Carrito</Button> 
+                <Button 
+                    shape="round" 
+                    className="button button--secondary" 
+                    onClick={cleanCart}
+                >
+                    Vaciar Carrito
+                </Button> 
             </div>
         </>
     )

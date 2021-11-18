@@ -24,7 +24,8 @@
     &__resume {
         margin: 2rem;
         padding: 1rem;
-        width: 300px;
+        width: 90%;
+        max-width: 300px;
         border: 1px solid $primary-color;
         border-radius: 3rem;
         align-self: flex-end;
