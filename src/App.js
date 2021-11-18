@@ -10,6 +10,7 @@ import { UIProvider } from "./components/Context/UIContext";
 import Checkout from "./components/Checkout/Checkout";
 import { AuthProvider } from "./components/Context/AuthContext";
 import { Login } from "./components/Login/Login";
+import Footer from "./components/Footer/Footer";
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
                                 <ItemDetailContainer />
                             </Route>
                         </Switch>
+                        <Footer/>
                         {/* footer, pagina 404 */}
                     </BrowserRouter>
                 </CartProvider>
