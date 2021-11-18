@@ -18,7 +18,7 @@ export const createOrders = (client, cart, total) => {
             size: item.selectedSize ? item.selectedSize : '',
             price: item.price
         })), 
-        total: total,
+        total: total*1.21,
         date: firebase.firestore.Timestamp.fromDate(new Date())
     }
 

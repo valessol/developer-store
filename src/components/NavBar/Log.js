@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { useHistory } from 'react-router'
 import { AuthContext } from '../Context/AuthContext'
 
-const Log = () => {
+const Log = ({className}) => {
     const { isAuth, logout } = useContext(AuthContext)
     const { push } = useHistory()
 
@@ -21,8 +21,8 @@ const Log = () => {
         <>
             {
                 isAuth 
-                    ? <span onClick={handleLogout}>Log Out</span>
-                    : <span onClick={handleLogin}>Log In</span>
+                    ? <span className={className} onClick={handleLogout}>Log Out</span>
+                    : <span className={className} onClick={handleLogin}>Log In</span>
             }
         </>
     )

@@ -14,7 +14,7 @@ const OrderResume = ({cart, total}) => {
                     })
                 }
             </ul>
-            <h3>Total: ${total}</h3>
+            <h3>Total: ${total*1.21}</h3>
         </div>
     )
 }
