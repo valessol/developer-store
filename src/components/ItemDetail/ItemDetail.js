@@ -90,11 +90,11 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
                     size={size} 
                     setSelectedSize={setSelectedSize} />
                 
-                <div className="button detail__button detail__button--cart">
+                
 
                     {
                         findItem(id)
-                            ? <>
+                            ? <div className="button detail__button detail__button--cart">
                                 <Link to="/">
                                     <Button 
                                         type="primary" 
@@ -112,7 +112,7 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
                                         Ver carrito
                                     </Button> 
                                 </Link>
-                            </>
+                            </div>
                             :  <Button 
                                 type="primary" 
                                 shape="round" 
@@ -127,7 +127,7 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
 
                    
 
-                </div>
+              
 
                 <div id="alert" />
             </div>

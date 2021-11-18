@@ -95,9 +95,11 @@ font-size: 3rem;
         }
     }
     &:hover {
-        color: $primary-hover-color
+        background-color: $primary-hover-color
     }
     @media (max-width: 480px) {
+        display: block;
+        margin: 0 auto;
         width: 90%;
     }
 }

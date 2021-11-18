@@ -4,14 +4,14 @@ import CartWidget from "./CartWidget";
 import Log from "./Log";
 import {Toggler} from "./Toggler";
 
-
+//NOTE: cambiar los className condicionales por operadores ternarios
 export const NavBar = ({ brand }) => {
     const [ collapsed, setCollapsed ] = useState(false)
   
     return (
         <header className="container">
             <div className="title">
-                <Link exact to="/" className={collapsed && 'display-none'}>
+                <Link exact to="/" className={collapsed ? 'display-none' : ''}>
                     <h1>{brand}</h1>
                 </Link>
                 <Log className='log' />

@@ -20,7 +20,7 @@ const Item = ({id, name, img, description, category, price, stock}) => {
                     cover={<img alt={description} src={img} />}
                 >
                     <Meta title={name}/>
-                    <p className="category">Categoría: <span>{category}</span></p>
+                    <p className="category">Categoría: <span><Link exact to={`/${category}`}>{category}</Link></span></p>
                     <p className="price">Precio: <span>${price}</span></p>
                     <div className="item-button">
                         <MdFavoriteBorder className="favorite-icon"/>

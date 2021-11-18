@@ -14,37 +14,38 @@ import { Login } from "./components/Login/Login";
 
 function App() {
 
-  return (
-    <AuthProvider>
-        <UIProvider>
-            <CartProvider>
-                <BrowserRouter>
-                    <NavBar brand="DeveloperStore" />
-                    <Switch>
-                        <Route exact path="/">
-                            <ItemListContainer />
-                        </Route>
-                        <Route exact path="/cart">
-                            <CartContainer />
-                        </Route>
-                        <Route exact path="/checkout">
-                            <Checkout />
-                        </Route>
-                        <Route exact path="/login">
-                            <Login />
-                        </Route>
-                        <Route exact path="/:product">
-                            <ItemListContainer />
-                        </Route>
-                        <Route exact path="/products/:itemId">
-                            <ItemDetailContainer />
-                        </Route>
-                    </Switch>
-                </BrowserRouter>
-            </CartProvider>
-        </UIProvider>
-    </AuthProvider>
-  );
+    return (
+        <AuthProvider>
+            <UIProvider>
+                <CartProvider>
+                    <BrowserRouter>
+                        <NavBar brand="DeveloperStore" />
+                        <Switch>
+                            <Route exact path="/">
+                                <ItemListContainer />
+                            </Route>
+                            <Route exact path="/cart">
+                                <CartContainer />
+                            </Route>
+                            <Route exact path="/checkout">
+                                <Checkout />
+                            </Route>
+                            <Route exact path="/login">
+                                <Login />
+                            </Route>
+                            <Route exact path="/:product">
+                                <ItemListContainer />
+                            </Route>
+                            <Route exact path="/products/:itemId">
+                                <ItemDetailContainer />
+                            </Route>
+                        </Switch>
+                        {/* footer, pagina 404 */}
+                    </BrowserRouter>
+                </CartProvider>
+            </UIProvider>
+        </AuthProvider>
+    );
 }
 
 export default App;

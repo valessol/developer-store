@@ -9,20 +9,9 @@ export const ItemListContainer = () => {
 
     const [products, setProducts] = useState([])
     const [loader, setLoader] = useState(false)
+
+    //product funciona como categoria, filtrando los productos por 'category' y 'gender'
     const { product } = useParams()
-
-
-    const getData = (data) => {
-        data.get()
-            .then(res=>{
-                const newItems = res.docs.map((doc)=>{
-                    return {id: doc.id, ...doc.data()};
-                })
-                setProducts(newItems)
-            })
-            .catch(err=>console.log(err))
-            .finally(()=> setLoader(false))
-    }
 
 
     useEffect(() => {
@@ -31,19 +20,29 @@ export const ItemListContainer = () => {
         const db = getFirestore();
         const itemCollection = db.collection('productos');
 
-        if (product) {
+             itemCollection.get()
+                .then(res => {
+                    const newItems = res.docs.map((doc)=>{
+                        return {id: doc.id, ...doc.data()};
+                    })
+                    
+                    console.log('respuesta de la base', newItems)
+                
 
-            const filterGenderProds = itemCollection.where('gender', '==', product.toLowerCase())
-            const filterCategoryProds = itemCollection.where('category', '==', product.toLowerCase())
-            
-            if (filterGenderProds.length !== 0) {
-                getData(filterGenderProds)
-            } else if (filterCategoryProds.length !== 0) {
-                getData(filterCategoryProds)
-            } 
-        } else {
-            getData(itemCollection)
-        }
+                    const productsForCategory = newItems.filter((item)=>item.category === product)
+                    console.log('respuesta a category', productsForCategory)
+
+                    const productsForGender = newItems.filter((item) => item.gender === product)
+                    console.log('respuesta a gender', productsForGender)
+
+                    if (productsForCategory.length !== 0){
+                        setProducts(productsForCategory)
+                    } else if (productsForGender.length !== 0) {
+                        setProducts(productsForGender)
+                    } else { setProducts(newItems)}
+                })
+                .finally(()=> setLoader(false))
+        // }
 
     }, [product]) 
 
