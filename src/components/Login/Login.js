@@ -1,9 +1,7 @@
-import React, { useContext, useState } from 'react'
-import { UIContext } from '../Context/UIContext'
+import React, { useState } from 'react'
 import { RegisterForm } from './RegisterForm'
 import { LoginForm } from './LoginFom'
 import { useHistory } from 'react-router'
-import { AuthContext } from '../Context/AuthContext'
 
 export const Login = ({fromCheckout}) => {
     const [ isRegister, setIsRegister] = useState(true);

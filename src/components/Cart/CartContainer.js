@@ -1,6 +1,6 @@
-import { Button } from 'antd'
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { Button } from 'antd'
 import { CartContext } from '../Context/CartContext'
 import Cart from './Cart'
 
@@ -9,7 +9,7 @@ const CartContainer = () => {
     const { cart } = useContext(CartContext)
 
     return (
-        <>
+        <div className="mmin-height">
             {
                 cart.length !== 0 
                     ? (
@@ -33,7 +33,7 @@ const CartContainer = () => {
                     )
             }
             
-        </>
+        </div>
     )
 }
 

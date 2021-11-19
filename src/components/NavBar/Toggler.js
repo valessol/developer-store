@@ -2,6 +2,7 @@ import React from 'react'
 import { AiOutlineMenu} from 'react-icons/ai'
 import Log from './Log';
 import { Link } from 'react-router-dom';
+import { Switch } from '../Switch/Switch';
 
 
 export const Toggler = ({ collapsed, setCollapsed }) => {
@@ -68,7 +69,12 @@ export const Toggler = ({ collapsed, setCollapsed }) => {
                 >
                     Accesorios
                 </Link>
-                
+                <div className="line"></div>
+                <Switch 
+                    className="switch-btn-collapsed"
+                    title="Tema"
+                    onClick={toggleCollapsed}
+                />
             </div>
         </nav>
     );

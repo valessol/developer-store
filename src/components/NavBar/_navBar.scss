@@ -21,12 +21,13 @@ nav {
     cursor: pointer;
     &:hover {
       background-color: $primary-color;
-      color: #fff;
+      color: $white;
     }
   }
   .active {
     background-color: $primary-color;
-    color: #fff;
+    color: $white;
+    border: none;
   }
 }
 
@@ -57,32 +58,55 @@ nav {
   display: none;
   @media (min-width: 768px) {
     display: block;
+    margin: 0;
   }
 }
 
-.log {
-  display: none;
-  @media (min-width: 768px) {
-    display: block;
-    color: $primary-color;
-    font-weight: 700;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
+.nav-buttons {
+    display: none;
+    @media (min-width: 768px) {
+        display: flex;
+        align-items: center;
+
+    }
+    .log {
+      @media (min-width: 768px) {
+        color: $primary-color;
+        margin-right: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+      &:hover {
+        color: $secondary-color;
+      }
+    }
+    .switch-btn {
+      display: none;
+      @media (min-width: 768px) {
+        display: block;
+      }
+    }
 }
 
 /*------- Responsive Nav*/
 .log-collapsed {
-    display: block;
-    color: #fff;
-    font-weight: 700;
-    margin: 1rem;
-    padding: 0.5rem;
-    text-transform: uppercase;
-    cursor: pointer;
-    &:hover {
-      background-color: $primary-hover-color;
-    }
+  display: block;
+  color: $white;
+  font-weight: 700;
+  margin: 1rem;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  &:hover {
+    color: $secondary-color;
+  }
+}
+.switch-btn-collapsed {
+  margin: 1rem;
+  .switch--checked {
+    border: 1px solid $white;
+  }
 }
 header {
   position: relative;
@@ -99,7 +123,7 @@ header {
   }
   .nav-toggler {
     padding: 1rem;
-    
+
     .toggler {
       color: $primary-color;
       font-size: 3rem;
@@ -121,13 +145,13 @@ header {
     width: 100%;
     background-color: $primary-color;
     .nav-link {
-      color: #fff;
+      color: $white;
       font-weight: 700;
       text-transform: uppercase;
       width: auto;
       display: block;
       &:hover {
-        background-color: $primary-hover-color;
+        background-color: $secondary-color;
       }
     }
   }
@@ -135,8 +159,8 @@ header {
 .display-none {
   display: none;
 }
-.line{
+.line {
   width: 100%;
   height: 0.5px;
-  border: 0.5px solid #fff;
+  border: 0.5px solid $white;
 }

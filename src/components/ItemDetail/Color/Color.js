@@ -28,7 +28,14 @@ const Color = ({color, setSelectedColor}) => {
                     ? <Spin size="large" className="spin"/>
                     : color.map((item, index)=> {
                         return (
-                            <div className="style__color colors" id={`color-${index}`} style={{backgroundColor: item}} onClick={()=>handleSelectedColor(item, index)}></div> 
+                            <div 
+                                key={index}
+                                className="style__color colors" 
+                                id={`color-${index}`} 
+                                style={{backgroundColor: item}} 
+                                onClick={()=>handleSelectedColor(item, index)}
+                            >
+                            </div> 
                         )
                     })
             }

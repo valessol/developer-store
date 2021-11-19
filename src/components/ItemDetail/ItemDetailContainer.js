@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router'
 import { Spin } from 'antd'
 import ItemDetail from './ItemDetail'
 import { getFirestore } from '../../firebase/config'
-
+import { UIContext } from '../Context/UIContext'
+//NOTE: realizar respuesta de la vista cuando la url del item no exista, porque por defecto no va a entrar al catch sino que va a renderizar el componente vacio
 
 const ItemDetailContainer = () => {
     const [product, setProduct] = useState([])
-    const [loader, setLoader] = useState(false)
+    const { setLoader } = useContext(UIContext)
     const { itemId } = useParams()
    
 
@@ -30,20 +31,16 @@ const ItemDetailContainer = () => {
         
     }, [itemId])
 
-//NOTE: realizar respuesta de la vista cuando la url del item no exista, porque por defecto no va a entrar al catch sino que va a renderizar el componente vacio
 
     return (
-        
         <>
             {
-               
                 product.length === 0 
                     ? <Spin size="large" className="spin"/>
                     : <ItemDetail 
                         {...product} 
                     /> 
             }
-            
         </>
     )
 }

@@ -1,124 +1,166 @@
 //--------------------Variables
 $primary-color: #eb2f96;
-$primary-hover-color: #9e1068;
-
+$secondary-color: rgb(31, 30, 30);
+$white: #fff;
 
 //-------------------Globales
-*, *::after, *::before {
-box-sizing: inherit;
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
 }
 
-html{
-font-size: 62.5%;
-box-sizing: border-box;
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
 }
 
 body {
-font-size: 16px;
+  font-size: 16px;
+  min-height: 100vh;
+}
+
+.min-height {
+  min-height: 100vh;
 }
 
 .container {
-width: 95%;
-max-width: 1000px;
-margin: 0 auto;
+  width: 95%;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 h2 {
-text-align: center;
-font-size: 3rem;
+  text-align: center;
+  font-size: 3rem;
 }
 
 .cardContainer {
-    max-width: 900px;
-    width: 95%;
-    margin: 2rem auto;
-    padding: 1rem;
-    padding-bottom: 3rem;
-    border: 1px solid #f0f0f0;
-    border-radius: 2px;
-    box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.164);
-    align-items: center;
-    display: flex;
-    flex-direction: column;
+  max-width: 900px;
+  width: 95%;
+  margin: 2rem auto;
+  padding: 1rem;
+  padding-bottom: 3rem;
+  border: 1px solid #f0f0f0;
+  border-radius: 2px;
+  box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.164);
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
-
 
 // ----Ant Design
 //Cards
 .ant-card {
-    margin: 1rem;
+  margin: 1rem;
 }
 
 .ant-row {
-    justify-content: center;
+  justify-content: center;
 }
 
 .ant-card-body {
-    text-align: center;
+  text-align: center;
 }
 
 .ant-card-meta-title {
-    font-size: 1.7rem;
-    font-weight: 700;
+  font-size: 1.7rem;
+  font-weight: 700;
 }
 
 .magenta-6:hover {
-    background-color: $primary-hover-color;
+  background-color: $secondary-color;
 }
-
 
 //Spinner
 .spin {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    span > i {
-        background-color: $primary-color;
-    }
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  span > i {
+    background-color: $primary-color;
+  }
 }
-
-
 
 //Botones
 .button {
-    background-color: $primary-color;
-    border: none;
-    &--secondary {
-        background-color: #fff;
-        border: 1px solid $primary-color;
-        color: $primary-color;
-        font-weight: 700;
-        margin-left: 1rem;
-        &:hover {
-            color: $primary-hover-color
-        }
-    }
+  background-color: $primary-color;
+  border: none;
+  &--secondary {
+    background-color: $white;
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    font-weight: 700;
+    margin-left: 1rem;
     &:hover {
-        background-color: $primary-hover-color
+      color: $secondary-color;
+      color: $white;
     }
-    @media (max-width: 480px) {
-        display: block;
-        margin: 0 auto;
-        width: 90%;
-    }
+  }
+  &:hover {
+    background-color: $secondary-color;
+    color: $white;
+  }
+  @media (max-width: 480px) {
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+  }
 }
 
 //-------------------Componentes
-@import './components/NavBar/navBar';
-@import './components/ItemList/item';
-@import './components/ItemDetail/itemDetail';
-@import './components/Cart/cart';
-@import './components/Checkout/checkout';
-@import './components/Login//login';
-@import './components/Footer/footer';
-
+@import "./components/NavBar/navBar";
+@import "./components/Switch/switch";
+@import "./components/ItemList/item";
+@import "./components/ItemDetail/itemDetail";
+@import "./components/Cart/cart";
+@import "./components/Checkout/checkout";
+@import "./components/Login//login";
+@import "./components/Footer/footer";
 
 //Icono favoritos
 .favorite-icon {
-    height: 3rem;
-    width: 3rem;
-    &:hover {
-        fill: $primary-hover-color;
+  height: 3rem;
+  width: 3rem;
+  &:hover {
+    fill: $secondary-color;
+  }
+}
+
+//---------------Dark Mode
+.dark {
+    &-text {
+        color: $white;
+    }
+    &-link {
+        border: 1px solid $white;
+        color: $white;
+        &:hover {
+            background-color: $primary-color;
+            color: $primary-color;
+        }
+        .active {
+            color: $white;
+        }
+    }
+    &-body {
+        background-color: $secondary-color;
+        color: $white;
+    }
+    &-button {
+        &:hover {
+            background-color: $white;
+            color: $secondary-color;
+        }
+        &--secondary {
+            background-color: $secondary-color;
+            border: 1px solid $white;
+            color: $white;
+            &:hover {
+                color: $primary-color;
+                color: $white;
+            }
+        }
     }
 }

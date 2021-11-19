@@ -8,57 +8,62 @@ import { Link } from 'react-router-dom'
 const Cart = () => {
 
     const { cart, totalPrice, cleanCart, deleteItem } = useContext(CartContext)
-    //NOTE: cambiar tabla, incluir thead y tbody
     
     return (
         <>
             <table className="first-table">
-                <tr>
-                    <th className="left">Producto</th>
-                    <th className="center">Precio</th>
-                    <th className="center"></th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th className="left">Producto</th>
+                        <th className="center">Precio</th>
+                        <th className="center"></th>
+                    </tr>
+                </thead>
+                <tbody>
                 {
                     cart.map((item) => {
                         return (
+                            
                             <tr key={item.id}>
                                 <td>
                                     <table className="second-table">
-                                        <tr>
-                                            <td>
-                                                <img 
-                                                    className="cart__image" 
-                                                    src={item.img} 
-                                                    alt={item.name}/>
-                                            </td>
-                                            <td>
-                                                <div className="cart__text">
-                                                    <h4>{item.name}</h4>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <img 
+                                                        className="cart__image" 
+                                                        src={item.img} 
+                                                        alt={item.name}/>
+                                                </td>
+                                                <td>
+                                                    <div className="cart__text">
+                                                        <h4>{item.name}</h4>
 
-                                                    <div className="cart__props">
-                                                        <div>
-                                                            Color: 
-                                                        </div>
-                                                        <div className="style__color cart__style" style={{backgroundColor: item.selectedColor}} ></div>
-                                                    </div>
-
-                                                    {
-                                                        !item.name.includes('Mochila') &&
-                                                            <div className="cart__props">
-                                                                <div>
-                                                                    Talle: 
-                                                                </div>
-                                                                <div className="cart__style" >{item.selectedSize}</div>
+                                                        <div className="cart__props">
+                                                            <div>
+                                                                Color: 
                                                             </div>
-                                                    }
+                                                            <div className="style__color cart__style" style={{backgroundColor: item.selectedColor}} ></div>
+                                                        </div>
 
-                                                    <div className="cart__props">
-                                                            Cantidad: {item.selectedQuantity}
+                                                        {
+                                                            !item.name.includes('Mochila') &&
+                                                                <div className="cart__props">
+                                                                    <div>
+                                                                        Talle: 
+                                                                    </div>
+                                                                    <div className="cart__style" >{item.selectedSize}</div>
+                                                                </div>
+                                                        }
+
+                                                        <div className="cart__props">
+                                                                Cantidad: {item.selectedQuantity}
+                                                        </div>
+
                                                     </div>
-
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
+                                        </tbody>
                                     </table>
                                 </td>
 
@@ -70,9 +75,11 @@ const Cart = () => {
                                     <RiDeleteBin6Line className="delete-btn" onClick={()=> deleteItem(item.id)} />
                                 </td>
                             </tr>
+                            
                         )
                     })
                 }
+                </tbody>
             </table>
 
             <div className="cart__resume">
@@ -118,5 +125,3 @@ const Cart = () => {
 }
 
 export default Cart
-
-//Boton Actualizar carrito

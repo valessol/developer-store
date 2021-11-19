@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useContext } from 'react'
+import { UIContext } from '../../Context/UIContext';
 
 const Quantity = ({ selectedQuantity, setSelectedQuantity, stock }) => {
+    const { darkMode } = useContext(UIContext);
 
-
-    //Modificar cantidad
     const handleAddItems = () => {
         (selectedQuantity < stock) && setSelectedQuantity (selectedQuantity + 1);
     }
@@ -12,13 +12,12 @@ const Quantity = ({ selectedQuantity, setSelectedQuantity, stock }) => {
         (selectedQuantity > 1) && setSelectedQuantity( selectedQuantity - 1)
     }
 
-
     return (
         <>
             <div className="detail__quantity">
 
                 <button 
-                    className="button detail__button detail__button--quantity" 
+                    className={darkMode ? "button dark-button detail__button detail__button--quantity": 'button detail__button detail__button--quantity'} 
                     disabled={selectedQuantity < 2}
                     onClick={() => handleRemoveItems()}
                 >

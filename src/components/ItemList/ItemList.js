@@ -1,17 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Item from './Item'
 import { Row } from 'antd';
+import { UIContext } from '../Context/UIContext';
 
-const ItemList = ({products}) => {
+const ItemList = ({products, title}) => {
+    const { darkMode } = useContext(UIContext)
+
     return (
         <section className="container">
-            <h2>Nuestros productos</h2>
+            <h2 
+                className={darkMode ? 'dark-text' : ''} 
+                style={{textTransform: 'capitalize', paddingTop: '1rem'}}
+            >
+                {title}
+            </h2>
+
             <Row gutter={[16, 24]}>
                 {[
-                    products.map((item) => {
+                    products.map((item, index) => {
                     return (
                         
-                        <Item {...item} />
+                        <Item key={index} {...item} />
                         
                     )   
                     })

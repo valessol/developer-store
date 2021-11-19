@@ -1,33 +1,33 @@
 .login {
-    width: 90%;
-    max-width: 600px;
-    margin: 0 auto;
-    &__buttons {
-        text-align: center;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  &__buttons {
+    text-align: center;
+  }
+  &__btn {
+    margin-right: 1rem;
+    margin: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  &__link {
+    cursor: pointer;
+    color: $primary-color;
+    font-weight: 500;
+    font-style: italic;
+    &:hover {
+      color: $secondary-color;
     }
-    &__btn {
-        margin-right: 1rem;
-        margin: 1rem;
-        padding-left: 2rem;
-        padding-right: 2rem;
+    @media (max-width: 480px) {
+      display: block;
+      text-align: center;
+      margin-top: 1rem;
     }
-    &__link {
-        cursor: pointer;
-        color: $primary-color;
-        font-weight: 500;
-        font-style: italic;
-        &:hover {
-            color: $primary-hover-color;
-        }
-        @media (max-width: 480px) {
-            display: block;
-            text-align: center;
-            margin-top: 1rem;
-        }
-    }
+  }
 }
 
 .register {
-    width: 90%;
-    margin: 0 auto;
+  width: 90%;
+  margin: 0 auto;
 }

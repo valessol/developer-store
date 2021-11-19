@@ -1,9 +1,10 @@
 import { Spin } from 'antd'
-import React from 'react'
+import React, { useContext } from 'react'
+import { UIContext } from '../../Context/UIContext'
 
 const Size = ({gender, size, setSelectedSize}) => {
+    const { darkMode } = useContext(UIContext)
 
-    //Elegir talle
     const handleSelectedSize = (itemSize, index) => {
 
         setSelectedSize(itemSize)
@@ -21,7 +22,7 @@ const Size = ({gender, size, setSelectedSize}) => {
 
     return (
         <>
-             {
+            {
                 size && size.length === 0 
                     ? <Spin size="large" className="spin"/>
                     : ((gender !== 'accesorios') &&
@@ -29,14 +30,21 @@ const Size = ({gender, size, setSelectedSize}) => {
                             <div className="style">Talle:
                                 {
                                     size.map((item, index)=> (
-                                    <div className="style__color sizes" id={`size-${index}`} onClick={()=>handleSelectedSize(item, index)}>{item}</div> 
+                                    <div 
+                                        key={index}
+                                        className={darkMode ? 'style__color dark-text sizes' : 'style__color sizes'} 
+                                        id={`size-${index}`} 
+                                        onClick={()=>handleSelectedSize(item, index)}
+                                    >
+                                        {item}
+                                    </div> 
                                     ))
                                 }
                                 
                             </div>
                         )
                     ) 
-                }
+            }
         </>
     )
 }

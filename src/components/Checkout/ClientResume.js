@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { getFirestore } from '../../firebase/config'
-import { NewClientForm } from '../Login/NewClientForm'
+import React from 'react'
 
 const ClientResume = ({actualClient}) => {
 

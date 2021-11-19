@@ -27,10 +27,6 @@ export const RegisterForm = ({handleRedirect, handleRegister}) => {
     }
 
 
-
-    //NOTE: si displayNone => no tengo que registrar al usuario, porque ya se registro cuando se logueo. Lo que tengo que hacer es añadirlo a la base de datos de users
-
-
     //handleSubmit adaptada para Ant Design
     const onFinish = async (formValues) => {
         console.log('Received values of form: ', formValues);
@@ -38,24 +34,10 @@ export const RegisterForm = ({handleRedirect, handleRegister}) => {
         
         setLoader(true)
 
-        // //Manejo del registro si el usuario viene del Checkout previamente logueado con Google
-        // if (displayNone){
-        //     createUser(currentClient().email, name, phone)
-        //         .then((res)=>console.log('datos de registro completados con éxito'))
-        //         //NOTE: añadir un texto que diga lo del clg
-        //         .catch((err)=>console.log(err))
-        //         .finally(()=>{
-        //             setLoader(false)
-
-        //         })
-
-        //     return
-        // }
-
-        register(email, password)//ok
+        register(email, password)
             .then(()=> {
                 createUser(email, name, phone)
-                    .then((res)=>console.log('createUser ok', res))//ok
+                    .then((res)=>console.log('createUser ok', res))
             })
             .catch((err)=> {
                 console.log(err)

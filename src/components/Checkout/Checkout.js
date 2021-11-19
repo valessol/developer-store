@@ -9,7 +9,6 @@ import { createOrders } from '../../firebase/createOrders';
 import Swal from 'sweetalert2';
 import OrderResume from './OrderResume';
 import ClientResume from './ClientResume';
-import createUser from '../../firebase/createUser';
 import { NewClientForm } from '../Login/NewClientForm';
 import { getFirestore } from '../../firebase/config';
 
@@ -63,7 +62,6 @@ const Checkout = () => {
     //Manejo de la inf. del usuario segun se haya logueado con google o haya llenado todos sus datos en el registro
     const handleUser = () => {
 
-        // isAuth porque si no esta lohueado me tira error porque el client no existe
         if (isAuth) {
             setLoader(true);
         

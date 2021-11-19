@@ -6,10 +6,9 @@ import { Description } from './Description/Description';
 import Quantity from './Quantity/Quantity';
 import Color from './Color/Color';
 import Size from './Size/Size';
-import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom';
-
-//NOTE: permitir hacer compras de un mismo producto en otros colores o talles
+import 'antd/dist/antd.css';
+import { UIContext } from '../Context/UIContext';
 
 const ItemDetail = ({ id, name, img, description, category, gender, price, color, size, stock}) => {
     const [selectedQuantity, setSelectedQuantity] = useState(1);
@@ -17,6 +16,7 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
     const [ selectedSize, setSelectedSize] = useState('');
 
     const { findItem, addToCart } = useContext(CartContext);
+    const { darkMode } = useContext(UIContext);
     
     const newItem = {
         id,
@@ -27,8 +27,7 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
         selectedSize,
         selectedQuantity
     }
-    
-    //Agregar al carrito
+
     const handleAddToCart = () => {
         
         if ( (selectedQuantity > 0) && (selectedColor === '' || (selectedSize === '' && gender !== 'accesorios'))) {
@@ -55,7 +54,7 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
 
 
     return (
-        <div className="detail" key= {id} >
+        <div className={darkMode ? 'detail dark-body' : 'detail'} key= {id} >
 
             <Image 
                 className="detail__image" 
@@ -67,9 +66,9 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
                     gender={gender} 
                     category={category} />
 
-                <h2>{name}</h2>
+                <h2 className={darkMode ? 'dark-text' : ''}>{name}</h2>
 
-                <h3>ARS {price}</h3>
+                <h3 className={darkMode ? 'dark-text' : ''}>ARS {price}</h3>
 
                 <Description 
                     gender={gender} 
@@ -90,8 +89,6 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
                     size={size} 
                     setSelectedSize={setSelectedSize} />
                 
-                
-
                     {
                         findItem(id)
                             ? <div className="button detail__button detail__button--cart">
@@ -99,7 +96,7 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
                                     <Button 
                                         type="primary" 
                                         shape="round" 
-                                        className="button" 
+                                        className={darkMode ? 'button dark-button' : 'button'}
                                     >
                                         Continuar comprando
                                     </Button> 
@@ -107,7 +104,7 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
                                 <Link to="/cart">
                                     <Button  
                                         shape="round" 
-                                        className="button button--secondary" 
+                                        className={darkMode ? 'button button--secondary dark-button--secondary' : 'button button--secondary'} 
                                     >
                                         Ver carrito
                                     </Button> 
@@ -116,7 +113,7 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
                             :  <Button 
                                 type="primary" 
                                 shape="round" 
-                                className="button" 
+                                className={darkMode ? 'button dark-button' : 'button'} 
                                 disabled={selectedQuantity > stock}
                                 onClick={() => handleAddToCart()} 
                             >
@@ -124,11 +121,6 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
 
                             </Button> 
                     }
-
-                   
-
-              
-
                 <div id="alert" />
             </div>
         </div>

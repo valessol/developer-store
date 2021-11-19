@@ -9,14 +9,10 @@ import { formItemLayout, tailFormItemLayout } from './Form.Style';
 import { UIContext } from '../Context/UIContext';
 import createUser from '../../firebase/createUser';
 import Swal from 'sweetalert2';
-import { useHistory } from 'react-router';
 
-
-//Formulario de Ant Design
 
 export const NewClientForm = ({email, handleUser}) => {
     const { loader, setLoader } = useContext(UIContext)
-    const { push } = useHistory()
     const [form] = Form.useForm();
     const initialValues = {
         name: '',

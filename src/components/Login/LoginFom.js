@@ -12,7 +12,7 @@ export const LoginForm = ({ handleRedirect, handleRegister }) => {
     password:'', 
     remember: true
   }
-//NOTE: si recordarme es true, entonces guardar al usuario en el localStorage
+  
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
 
