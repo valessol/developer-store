@@ -1,28 +1,24 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import ItemDetailContainer from "./components/ItemDetail/ItemDetailContainer";
-import { ItemListContainer } from "./components/ItemList/ItemListContainer";
 import { NavBar } from "./components/NavBar/NavBar";
-import CartContainer from "./components/Cart/CartContainer";
 import { CartProvider } from "./components/Context/CartContext";
-import { UIContext } from "./components/Context/UIContext";
-import Checkout from "./components/Checkout/Checkout";
 import { AuthProvider } from "./components/Context/AuthContext";
 import { Login } from "./components/Login/Login";
+import { ItemListContainer } from "./components/ItemList/ItemListContainer";
+import Layout from './components/Layout/Layout';
+import Checkout from "./components/Checkout/Checkout";
+import CartContainer from "./components/Cart/CartContainer";
+import ItemDetailContainer from "./components/ItemDetail/ItemDetailContainer";
 import Footer from "./components/Footer/Footer";
-import { useContext } from "react";
 import Error404 from "./components/Error404/Error404";
 import './app.scss'
 
 
 function App() {
-    const { darkMode } = useContext(UIContext)
 
     return (
         <AuthProvider>
                 <CartProvider>
-                    <div 
-                        className={darkMode ? 'dark-body' : ''} 
-                        style={{minHeight: '100vh', display: "flex", flexDirection: "column"}}>
+                    <Layout>
 
                         <BrowserRouter>
 
@@ -64,7 +60,9 @@ function App() {
 
                         </BrowserRouter>
 
-                    </div>
+                    </Layout>
+
+
                 </CartProvider>
         </AuthProvider>
     );
