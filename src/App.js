@@ -16,7 +16,7 @@ import { useContext } from "react";
 
 function App() {
     const { darkMode } = useContext(UIContext)
-//className={darkMode ? 'button dark-button' : 'button'}
+//className={darkMode ? 'button cart-button dark-button' : 'button cart-button'}
     return (
         <AuthProvider>
                 <CartProvider>

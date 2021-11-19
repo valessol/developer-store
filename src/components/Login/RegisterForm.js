@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 //Formulario de Ant Design
 
 export const RegisterForm = ({handleRedirect, handleRegister}) => {
-    const { loader, setLoader } = useContext(UIContext)
+    const { loader, setLoader, darkMode } = useContext(UIContext)
     const [form] = Form.useForm();
     const { register, currentClient } = useContext(AuthContext)
     const initialValues = {
@@ -59,7 +59,7 @@ export const RegisterForm = ({handleRedirect, handleRegister}) => {
             {...formItemLayout}
             form={form}
             name="register"
-            className="register"
+            className={darkMode ? 'register dark-register' : 'register'}
             onFinish={onFinish}
             initialValues={{...initialValues}}
             scrollToFirstError
@@ -166,16 +166,18 @@ export const RegisterForm = ({handleRedirect, handleRegister}) => {
               </Checkbox>
           </Form.Item>
           <Form.Item className="login__buttons">
-              <Button 
-                  type="primary" 
-                  htmlType="submit"
-                  shape="round"
-                  className="button login__btn"
-                  disabled={loader}
-              >
-                  Registrarme
-              </Button>
-              <span className="login__link" onClick={handleRegister}>Ya tengo cuenta</span>
+            <div className="card-buttons">
+                <Button 
+                    type="primary" 
+                    htmlType="submit"
+                    shape="round"
+                    className={darkMode ? 'button login__btn dark-button' : 'button login__btn'}
+                    disabled={loader}
+                >
+                    Registrarme
+                </Button>
+            </div>
+              <span className={darkMode ? 'login__link dark-hover' : 'login__link'} onClick={handleRegister}>Ya tengo cuenta</span>
           </Form.Item>
         </Form>
     );

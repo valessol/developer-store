@@ -3,11 +3,13 @@ import { Button } from 'antd'
 import { CartContext } from '../Context/CartContext'
 import { RiDeleteBin6Line } from 'react-icons/ri'
 import { Link } from 'react-router-dom'
+import { UIContext } from '../Context/UIContext'
 
 
 const Cart = () => {
 
     const { cart, totalPrice, cleanCart, deleteItem } = useContext(CartContext)
+    const { darkMode } = useContext(UIContext)
     
     return (
         <>
@@ -19,7 +21,7 @@ const Cart = () => {
                         <th className="center"></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className={darkMode ? 'borderTable dark-tbody' : 'borderTable '}>
                 {
                     cart.map((item) => {
                         return (
@@ -37,7 +39,7 @@ const Cart = () => {
                                                 </td>
                                                 <td>
                                                     <div className="cart__text">
-                                                        <h4>{item.name}</h4>
+                                                        <h4 className={darkMode ? 'dark-text' : ''}>{item.name}</h4>
 
                                                         <div className="cart__props">
                                                             <div>
@@ -68,7 +70,7 @@ const Cart = () => {
                                 </td>
 
                                 <td className="center">
-                                    {item.price * item.selectedQuantity}
+                                    ${item.price * item.selectedQuantity}
                                 </td>
 
                                 <td className="center">
@@ -85,36 +87,36 @@ const Cart = () => {
             <div className="cart__resume">
 
                 <div className="resume-item">
-                    <h4>Subtotal: </h4>
+                    <h4 className={darkMode ? 'dark-text' : ''}>Subtotal: </h4>
                     <p> ${totalPrice()}</p>
                 </div>
 
                 <div className="resume-item">
-                    <h4>IVA:</h4>
+                    <h4 className={darkMode ? 'dark-text' : ''}>IVA:</h4>
                     <p>${totalPrice() * 0.21}</p>
                 </div>
 
                 <hr />
                 <div className="resume-item">
-                    <h3>TOTAL:</h3>
+                    <h3 className={darkMode ? 'dark-text' : ''}>TOTAL:</h3>
                     <p>${totalPrice() * 1.21}</p>
                 </div>
 
             </div>
 
-            <div className="buttons-card">
+            <div className="card-buttons">
                 <Link exact to="/checkout" >
                     <Button 
                         type="primary" 
                         shape="round" 
-                        className="button login__btn" 
+                        className={darkMode ? 'button dark-button' : 'button'} 
                     >
                         Finalizar compra
                     </Button> 
                 </Link>
                 <Button 
                     shape="round" 
-                    className="button button--secondary" 
+                    className={darkMode ? 'button button--secondary dark-button--secondary' : 'button button--secondary'} 
                     onClick={cleanCart}
                 >
                     Vaciar Carrito

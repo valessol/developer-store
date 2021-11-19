@@ -1,14 +1,4 @@
 .cart {
-    max-width: 900px;
-    width: 95%;
-    margin: 2rem auto;
-    padding: 1rem;
-    padding-bottom: 3rem;
-    border: 1px solid #f0f0f0;
-    border-radius: 2px;
-    box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.164);
-    align-items: center;
-    display: flex;
     flex-direction: column;
     &__image {
         width: 5rem;
@@ -56,14 +46,19 @@ table {
     width: 100%;
 }
 
-.first-table tbody{
-    &>td, &>th {
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
+.first-table {
+    .borderTable {
+        border-bottom: 1px solid $primary-color;
     }
-    &>tr:nth-child(even) {
-      background-color: #ebe7e7;
+    tbody {
+        &>td, &>th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        &>tr:nth-child(even) {
+          background-color: #ebe7e7;
+        }
     }
 }
 .second-table{

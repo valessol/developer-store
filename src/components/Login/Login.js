@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { RegisterForm } from './RegisterForm'
 import { LoginForm } from './LoginFom'
 import { useHistory } from 'react-router'
+import { UIContext } from '../Context/UIContext'
 
 export const Login = ({fromCheckout}) => {
     const [ isRegister, setIsRegister] = useState(true);
+    const { darkMode } = useContext(UIContext)
     const { goBack, push } = useHistory()
 
 
@@ -27,7 +29,7 @@ export const Login = ({fromCheckout}) => {
                 isRegister 
                     ?
                         <>
-                            <h2>Inicia Sesión</h2>
+                            <h2 className={darkMode ? 'dark-text' : ''}>Inicia Sesión</h2>
                             <LoginForm 
                                 handleRegister={handleRegister}
                                 handleRedirect={handleRedirect}
@@ -35,7 +37,7 @@ export const Login = ({fromCheckout}) => {
                         </>
                     :
                         <>
-                            <h2>Crear cuenta</h2>
+                            <h2 className={darkMode ? 'dark-text' : ''}>Crear cuenta</h2>
                             <RegisterForm 
                                 handleRegister={handleRegister}
                                 handleRedirect={handleRedirect}

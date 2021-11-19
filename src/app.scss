@@ -1,6 +1,7 @@
 //--------------------Variables
 $primary-color: #eb2f96;
 $secondary-color: rgb(31, 30, 30);
+$grey: rgb(66, 66, 66);
 $white: #fff;
 
 //-------------------Globales
@@ -39,14 +40,22 @@ h2 {
   max-width: 900px;
   width: 95%;
   margin: 2rem auto;
-  padding: 1rem;
-  padding-bottom: 3rem;
+  padding: 3rem 1rem;
   border: 1px solid #f0f0f0;
   border-radius: 2px;
   box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.164);
-  align-items: center;
-  display: flex;
-  flex-direction: column;
+  &--item {
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      min-width: 25rem;
+      width: 70%;
+      margin: 0 auto;
+      @media (min-width:768px) {
+          flex-direction: row;
+      }
+  }
 }
 
 // ----Ant Design
@@ -71,6 +80,10 @@ h2 {
 .magenta-6:hover {
   background-color: $secondary-color;
 }
+//Form
+.dark-ant-form-item-label > label {
+    color: $white;
+}
 
 //Spinner
 .spin {
@@ -85,28 +98,42 @@ h2 {
 
 //Botones
 .button {
-  background-color: $primary-color;
-  border: none;
-  &--secondary {
-    background-color: $white;
-    border: 1px solid $primary-color;
-    color: $primary-color;
-    font-weight: 700;
-    margin-left: 1rem;
-    &:hover {
-      color: $secondary-color;
-      color: $white;
-    }
-  }
-  &:hover {
-    background-color: $secondary-color;
-    color: $white;
-  }
-  @media (max-width: 480px) {
+    margin: 2rem auto;
     display: block;
-    margin: 0 auto;
-    width: 90%;
-  }
+    background-color: $primary-color;
+    border: none;
+    width: 20rem;
+    &--secondary {
+        background-color: $white;
+        border: 1px solid $primary-color;
+        color: $primary-color;
+        font-weight: 700;
+        @media (min-width: 768px) {
+            margin-left: 1rem;
+        
+        }
+        &:hover {
+        background-color: $secondary-color;
+        color: $white;
+        border: none;
+        }
+    }
+    &:hover {
+        background-color: $secondary-color;
+        color: $white;
+    }
+    @media (max-width: 480px) {
+        
+    }
+}
+.card-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @media (min-width: 768px) {
+        flex-direction: row;
+    }
 }
 
 //-------------------Componentes
@@ -133,12 +160,17 @@ h2 {
     &-text {
         color: $white;
     }
+    &-hover {
+        &:hover {
+            color: $white !important;
+        }
+    }
     &-link {
         border: 1px solid $white;
         color: $white;
         &:hover {
             background-color: $primary-color;
-            color: $primary-color;
+            color: $white;
         }
         .active {
             color: $white;
@@ -158,9 +190,23 @@ h2 {
             border: 1px solid $white;
             color: $white;
             &:hover {
-                color: $primary-color;
-                color: $white;
+                background-color: $white;
+                color: $secondary-color;
+                border: transparent;
             }
+        }
+    }
+    &-cardContainer {
+        background-color: $grey;
+    }
+    &-tbody {
+        &>tr:nth-child(even) {
+            background-color: #555454 !important;
+        }
+    }
+    &-register {
+        & label {
+            color: $white !important;
         }
     }
 }

@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { AiOutlineMenu} from 'react-icons/ai'
 import Log from './Log';
 import { Link } from 'react-router-dom';
 import { Switch } from '../Switch/Switch';
+import { UIContext } from '../Context/UIContext';
 
 
 export const Toggler = ({ collapsed, setCollapsed }) => {
+    const { darkMode } = useContext(UIContext)
 
     const toggleCollapsed = () => {
         setCollapsed(!collapsed)
@@ -72,7 +74,7 @@ export const Toggler = ({ collapsed, setCollapsed }) => {
                 <div className="line"></div>
                 <Switch 
                     className="switch-btn-collapsed"
-                    title="Tema"
+                    title={darkMode ? 'Tema Claro' : 'Tema Oscuro'}
                     onClick={toggleCollapsed}
                 />
             </div>

@@ -54,75 +54,78 @@ const ItemDetail = ({ id, name, img, description, category, gender, price, color
 
 
     return (
-        <div className={darkMode ? 'detail dark-body' : 'detail'} key= {id} >
+        <div className={darkMode ? 'cardContainer dark-body' : 'cardContainer'} key= {id} >
+            <div className="cardContainer--item">
 
-            <Image 
-                className="detail__image" 
-                src={img} alt={name} />
+                <Image 
+                    className="detail__image" 
+                    src={img} alt={name} />
 
-            <div className="detail__content">
+                <div className="detail__content">
 
-                <Category 
-                    gender={gender} 
-                    category={category} />
+                    <Category 
+                        gender={gender} 
+                        category={category} />
 
-                <h2 className={darkMode ? 'dark-text' : ''}>{name}</h2>
+                    <h2 className={darkMode ? 'dark-text' : ''}>{name}</h2>
 
-                <h3 className={darkMode ? 'dark-text' : ''}>ARS {price}</h3>
+                    <h3 className={darkMode ? 'dark-text' : ''}>ARS {price}</h3>
 
-                <Description 
-                    gender={gender} 
-                    description={description} />
-                
-                <Quantity 
-                    selectedQuantity={selectedQuantity} 
-                    setSelectedQuantity={setSelectedQuantity} 
-                    stock={stock}
-                    />
+                    <Description 
+                        gender={gender} 
+                        description={description} />
+                    
+                    <Quantity 
+                        selectedQuantity={selectedQuantity} 
+                        setSelectedQuantity={setSelectedQuantity} 
+                        stock={stock}
+                        />
 
-                <Color 
-                    color={color} 
-                    setSelectedColor={setSelectedColor} />
+                    <Color 
+                        color={color} 
+                        setSelectedColor={setSelectedColor} />
 
-                <Size 
-                    gender={gender} 
-                    size={size} 
-                    setSelectedSize={setSelectedSize} />
-                
-                    {
-                        findItem(id)
-                            ? <div className="button detail__button detail__button--cart">
-                                <Link to="/">
-                                    <Button 
-                                        type="primary" 
-                                        shape="round" 
-                                        className={darkMode ? 'button dark-button' : 'button'}
-                                    >
-                                        Continuar comprando
-                                    </Button> 
-                                </Link>
-                                <Link to="/cart">
-                                    <Button  
-                                        shape="round" 
-                                        className={darkMode ? 'button button--secondary dark-button--secondary' : 'button button--secondary'} 
-                                    >
-                                        Ver carrito
-                                    </Button> 
-                                </Link>
-                            </div>
-                            :  <Button 
-                                type="primary" 
-                                shape="round" 
-                                className={darkMode ? 'button dark-button' : 'button'} 
-                                disabled={selectedQuantity > stock}
-                                onClick={() => handleAddToCart()} 
-                            >
-                                Agregar al carrito
+                    <Size 
+                        gender={gender} 
+                        size={size} 
+                        setSelectedSize={setSelectedSize} />
+                    
+                        {
+                            findItem(id)
+                                ? <div className="button detail__button detail__button--cart">
+                                    <Link to="/">
+                                        <Button 
+                                            type="primary" 
+                                            shape="round" 
+                                            className={darkMode ? 'button dark-button' : 'button'}
+                                        >
+                                            Continuar comprando
+                                        </Button> 
+                                    </Link>
+                                    <Link to="/cart">
+                                        <Button  
+                                            shape="round" 
+                                            className={darkMode ? 'button button--secondary dark-button--secondary' : 'button button--secondary'} 
+                                        >
+                                            Ver carrito
+                                        </Button> 
+                                    </Link>
+                                </div>
+                                :  <Button 
+                                    type="primary" 
+                                    shape="round" 
+                                    className={darkMode ? 'button dark-button' : 'button'} 
+                                    disabled={selectedQuantity > stock}
+                                    onClick={() => handleAddToCart()} 
+                                >
+                                    Agregar al carrito
 
-                            </Button> 
-                    }
-                <div id="alert" />
+                                </Button> 
+                        }
+                    <div id="alert" />
+                </div>
             </div>
+
         </div>
     )
 }

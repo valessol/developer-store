@@ -3,9 +3,11 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useContext } from 'react';
 import { AuthContext } from '../Context/AuthContext';
 import Swal from 'sweetalert2';
+import { UIContext } from '../Context/UIContext';
 
 export const LoginForm = ({ handleRedirect, handleRegister }) => {
   const { login, googleLogin } = useContext(AuthContext)
+  const { darkMode } = useContext(UIContext)
 
   const initialValues = {
     email: '',
@@ -77,29 +79,31 @@ export const LoginForm = ({ handleRedirect, handleRegister }) => {
 
       <Form.Item>
         <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>Recordarme</Checkbox>
+          <Checkbox className={darkMode ? 'dark-text' : ''}>Recordarme</Checkbox>
         </Form.Item>
       </Form.Item>
 
       <Form.Item className="login__buttons">
+      <div className="card-buttons">
         <Button 
             type="primary" 
             htmlType="submit" 
             shape="round"
-            className="button login__btn"
+            className={darkMode ? 'button login__btn dark-button' : 'button login__btn'}
         >
             LogIn
         </Button>
 
         <Button 
             shape="round"
-            className="button button--secondary login__btn"
+            className={darkMode ? 'button button--secondary dark-button--secondary login__btn' : 'button button--secondary login__btn'}
             onClick={handleGoogle}
         >
             LogIn with Google
         </Button>
+      </div>
 
-        <span className="login__link" onClick={handleRegister}> No tengo cuenta</span>
+        <span className={darkMode ? 'login__link dark-hover' : 'login__link'} onClick={handleRegister}> No tengo cuenta</span>
       </Form.Item>
     </Form>
   );

@@ -16,7 +16,7 @@ import { getFirestore } from '../../firebase/config';
 
 const Checkout = () => {
     const { cart, totalPrice, cleanCart } = useContext(CartContext)
-    const { loader, setLoader } = useContext(UIContext)
+    const { loader, setLoader,darkMode } = useContext(UIContext)
     const { isAuth, currentClient } = useContext(AuthContext)
     const [actualClient, setActualClient ] = useState(null)
     const { push } = useHistory()
@@ -97,13 +97,13 @@ const Checkout = () => {
             : !isAuth
                 ? <Login fromCheckout={true}/>
                 :
-                    <div className="cart">
-                        <h2>Resumen de compra</h2>
+                    <div className="cardContainer">
+                        <h2 className={darkMode ? 'dark-text' : ''}>Resumen de compra</h2>
                         {
                             actualClient
                                 ?
                                     <>
-                                        <div className="cart__checkout" >
+                                        <div className="cart__checkout cardContainer--item" >
                                             <OrderResume 
                                                 cart={cart} 
                                                 total={totalPrice()} 
@@ -113,16 +113,18 @@ const Checkout = () => {
                                                 actualClient={actualClient} 
                                             />
                                         </div>
-                                        <Button 
-                                            type="primary" 
-                                            htmlType="submit"
-                                            shape="round"
-                                            className="button login__btn"
-                                            disabled={loader}
-                                            onClick={handleSubmit}
-                                        >
-                                        Finalizar compra
-                                        </Button>
+                                        <div className="card-buttons">
+                                            <Button 
+                                                type="primary" 
+                                                htmlType="submit"
+                                                shape="round"
+                                                className={darkMode ? 'button login__btn dark-button' : 'button login__btn'}
+                                                disabled={loader}
+                                                onClick={handleSubmit}
+                                            >
+                                            Finalizar compra
+                                            </Button>
+                                        </div>
                                     </>
                                 :
                                     <NewClientForm email={client.email} handleUser={handleUser} />      

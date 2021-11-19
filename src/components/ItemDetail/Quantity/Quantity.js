@@ -31,7 +31,7 @@ const Quantity = ({ selectedQuantity, setSelectedQuantity, stock }) => {
                 </div>
 
                 <button 
-                    className="button detail__button detail__button--quantity" 
+                    className={darkMode ? "button dark-button detail__button detail__button--quantity": 'button detail__button detail__button--quantity'} 
                     disabled={selectedQuantity > stock}
                     onClick={() => handleAddItems()}
                 >

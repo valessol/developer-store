@@ -3,26 +3,30 @@ import { Link } from 'react-router-dom'
 import { Button } from 'antd'
 import { CartContext } from '../Context/CartContext'
 import Cart from './Cart'
+import { UIContext } from '../Context/UIContext'
 
 const CartContainer = () => {
    
     const { cart } = useContext(CartContext)
+    const { darkMode } = useContext(UIContext)
 
     return (
-        <div className="mmin-height">
+        <>
             {
                 cart.length !== 0 
                     ? (
-                        <div className="cart" >
-                            <h2>Carrito de compras</h2>
-                            <Cart />
+                        <div className="cardContainer" >
+                            <div className="cardContainer--item cart">
+                                <h2 className={darkMode ? 'dark-text' : ''}>Carrito de compras</h2>
+                                <Cart />
+                            </div>
                         </div>
                     ) : (
                         <>
-                            <h2>El carrito está vacío</h2>
+                            <h2 className={darkMode ? 'dark-text' : ''} style={{paddingTop: '1rem'}}>El carrito está vacío</h2>
                             <Link to="/" >
                                 <Button 
-                                    className="button cart-button"
+                                    className={darkMode ? 'button cart-button dark-button' : 'button cart-button'}
                                     type="primary"
                                     shape="round"
                                 >
@@ -33,7 +37,7 @@ const CartContainer = () => {
                     )
             }
             
-        </div>
+        </>
     )
 }
 
