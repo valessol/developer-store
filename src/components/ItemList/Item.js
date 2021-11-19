@@ -13,14 +13,14 @@ const Item = ({id, name, img, description, category, price, stock}) => {
 
     return (
         <div key={id}>
-            <Link exact to={`/products/${id}`}>
+            <Link exact to={`/product/${id}`}>
                 <Card
                     hoverable
                     style={{ width: 240 }}
                     cover={<img alt={description} src={img} />}
                 >
                     <Meta title={name}/>
-                    <p className="category">Categoría: <span><Link exact to={`/${category}`}>{category}</Link></span></p>
+                    <p className="category">Categoría: <span><Link exact to={`/products/${category}`}>{category}</Link></span></p>
                     <p className="price">Precio: <span>${price}</span></p>
                     <div className="item-button">
                         <MdFavoriteBorder className="favorite-icon"/>

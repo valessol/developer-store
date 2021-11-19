@@ -1,7 +1,7 @@
 //--------------------Variables
 $primary-color: #eb2f96;
 $secondary-color: rgb(31, 30, 30);
-$grey: rgb(66, 66, 66);
+$grey: #424242;
 $white: #fff;
 
 //-------------------Globales
@@ -145,6 +145,7 @@ h2 {
 @import "./components/Checkout/checkout";
 @import "./components/Login//login";
 @import "./components/Footer/footer";
+@import "./components/Error404/error";
 
 //Icono favoritos
 .favorite-icon {

@@ -46,7 +46,7 @@ export const NavBar = ({ brand }) => {
                         </NavLink>
 
                         <NavLink 
-                            exact to="/hombre" 
+                            exact to="/products/hombre" 
                             className={darkMode ? 'dark-link' : ''} 
                             activeClassName="active"
                         >
@@ -54,7 +54,7 @@ export const NavBar = ({ brand }) => {
                         </NavLink>
 
                         <NavLink 
-                            exact to="/mujer" 
+                            exact to="/products/mujer" 
                             className={darkMode ? 'dark-link' : ''} 
                             activeClassName="active"
                         >
@@ -62,7 +62,7 @@ export const NavBar = ({ brand }) => {
                         </NavLink>
 
                         <NavLink 
-                            exact to="/accesorios" 
+                            exact to="/products/accesorios" 
                             className={darkMode ? 'dark-link' : ''}     activeClassName="active"
                         >
                             Accesorios

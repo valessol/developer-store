@@ -8,11 +8,11 @@ const Category = ({gender, category}) => {
     return (
         <h4 className={darkMode ? 'category dark-text' : 'category'}>Categoría:  
             <span> 
-                <Link exact to={`/${gender}`}> 
+                <Link exact to={`/products/${gender}`}> 
                     {gender} 
                 </Link> 
                 <span> / </span>
-                <Link exact to={`/${category}`}> 
+                <Link exact to={`/products/${category}`}> 
                     {category}
                 </Link>
             </span>
