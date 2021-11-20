@@ -15,7 +15,7 @@ Tienda online realizada con React Js, como parte del proyecto final del curso "R
 - Uso de Context para manejar los estados de autenticación de usuarios, user interface, items del carrito y favoritos
 - Widget de favoritos, con indicador de cantidad de items añadidos
 - Dark Mode
-- Renderizado condicional
+- Sitio responsive
 
 ### Dependencias utilizadas
 
