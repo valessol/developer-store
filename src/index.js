@@ -6,9 +6,7 @@ import { UIProvider } from './components/Context/UIContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <UIProvider>
       <App />
-    </UIProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

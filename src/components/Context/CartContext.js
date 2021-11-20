@@ -17,7 +17,6 @@ export const CartProvider = ({children}) => {
     //Agregar producto al carrito
     const addToCart = (item) => {
         setCart([...cart, item])
-        console.log(cart)
     }
 
     //Eliminar producto del carrito

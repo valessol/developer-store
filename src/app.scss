@@ -51,7 +51,7 @@ h2 {
       flex-direction: column;
       min-width: 25rem;
       width: 70%;
-      margin: 0 auto;
+      margin: 1rem auto;
       @media (min-width:768px) {
           flex-direction: row;
       }
@@ -122,6 +122,10 @@ h2 {
         background-color: $secondary-color;
         color: $white;
     }
+    &:focus {
+      background: $primary-color;
+      border-color: inherit;
+    }
     @media (max-width: 480px) {
         
     }
@@ -146,14 +150,15 @@ h2 {
 @import "./components/Checkout/checkout";
 @import "./components/Login//login";
 @import "./components/Footer/footer";
-@import "./components/Error404/error";
+@import "./components/Error/error";
 
 //Icono favoritos
 .favorite-icon {
   height: 3rem;
   width: 3rem;
+  cursor: pointer;
   &:hover {
-    fill: $secondary-color;
+    fill: $primary-color;
   }
 }
 

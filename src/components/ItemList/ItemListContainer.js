@@ -4,18 +4,26 @@ import { Spin } from 'antd';
 import { useParams } from 'react-router';
 import { getFirestore } from '../../firebase/config';
 import { UIContext } from '../Context/UIContext'
+import { FavContext } from '../Context/FavContext';
 
 export const ItemListContainer = () => {
 
     const [products, setProducts] = useState([])
     const { loader, setLoader } = useContext(UIContext)
+    const { favorites } = useContext(FavContext)
 
-    //product filtra los productos por 'category' y 'gender'
+    //product filtra los productos por 'category' y 'gender' o por favoritos
     const { product } = useParams()
 
 
     useEffect(() => {
         setLoader(true);
+
+        if (product === 'favoritos') {
+            setProducts(favorites)
+            setLoader(false)
+            return
+        }
 
         const db = getFirestore();
         const itemCollection = db.collection('productos');
@@ -44,7 +52,14 @@ export const ItemListContainer = () => {
             {
                 loader 
                     ? <Spin size="large" className="spin"/>
-                    : <ItemList products={products} title={product ? product : 'Nuestros productos'} />
+                    : <ItemList 
+                        products={products} 
+                        title={
+                            product 
+                                ? product 
+                                : 'Nuestros productos'
+                        } 
+                    />
             }
             
         </>

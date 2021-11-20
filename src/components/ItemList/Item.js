@@ -1,29 +1,66 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Card, Button } from 'antd';
-import { MdFavoriteBorder } from "react-icons/md";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Link } from 'react-router-dom';
+import { FavContext } from '../Context/FavContext';
 import 'antd/dist/antd.css';
 
 
 const { Meta } = Card;
 
 const Item = ({id, name, img, description, category, price, stock}) => {
-    
+    const { addFavorites, removeFavorites, itemAddedToFavorites } = useContext(FavContext)
 
+    const newFav = {
+        id,
+        name,
+        img,
+        description,
+        category,
+        price
+    }
+
+    const handleAddFavorites = () => {
+        addFavorites(newFav)
+    }
+
+    const handleRemoveFavorites = (id) => {
+        removeFavorites(id)
+    }
 
     return (
         <div key={id}>
-            <Link exact to={`/product/${id}`}>
                 <Card
                     hoverable
                     style={{ width: 240 }}
                     cover={<img alt={description} src={img} />}
                 >
-                    <Meta title={name}/>
-                    <p className="category">Categoría: <span><Link exact to={`/products/${category}`}>{category}</Link></span></p>
+                    <Link  exact to={`/product/${id}`}>
+                        <Meta title={name}/>
+                    </Link>
+
+                    <p className="category">Categoría: 
+                        <span>
+                            <Link exact to={`/products/${category}`}>{category}</Link>
+                        </span>
+                    </p>
+
                     <p className="price">Precio: <span>${price}</span></p>
+
                     <div className="item-button">
-                        <MdFavoriteBorder className="favorite-icon"/>
+                        {
+                            itemAddedToFavorites(id)
+                                ? <AiFillHeart 
+                                    onClick={()=> handleRemoveFavorites(id)}
+                                    className="favorite-icon"
+                                />
+                                : <AiOutlineHeart 
+                                    onClick={()=> handleAddFavorites()}
+                                    className="favorite-icon"
+                                />
+                        }
+                        
+                        <Link exact to={`/product/${id}`}>  
                             <Button 
                                 type="primary" 
                                 shape="round" 
@@ -32,11 +69,12 @@ const Item = ({id, name, img, description, category, price, stock}) => {
                             >
                                 Ver detalle
                             </Button> 
+                        </Link>
                     </div>
                     
                 </Card>
-            </Link>
 
+           
            
         </div>
     )

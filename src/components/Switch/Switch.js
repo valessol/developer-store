@@ -12,7 +12,7 @@ export const Switch = ({className, title}) => {
 return (
     <div className={className}>
         {
-            title && <span className="nav-link" style={{display: 'inline', marginRight: '1rem'}}>{title}</span>
+            title && <span className="log-collapsed" style={{display: 'inline', marginRight: '1rem'}}>{title}</span>
         }
         <AntSwitch
             className={darkMode ? 'switch--checked' : 'switch--unchecked'}

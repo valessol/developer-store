@@ -31,4 +31,3 @@ const Log = ({className}) => {
 }
 
 export default Log
-//{darMode ? `${className} dark-hover` : className}

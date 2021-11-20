@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { AiOutlineMenu} from 'react-icons/ai'
-import Log from './Log';
 import { Link } from 'react-router-dom';
 import { Switch } from '../Switch/Switch';
 import { UIContext } from '../Context/UIContext';
+import Log from './Log';
 
 
 export const Toggler = ({ collapsed, setCollapsed }) => {
@@ -12,6 +12,38 @@ export const Toggler = ({ collapsed, setCollapsed }) => {
     const toggleCollapsed = () => {
         setCollapsed(!collapsed)
     }
+
+
+    const menuItems = [
+        {
+            to: '/products/favoritos',
+            title: 'Mis favoritos',
+            separator: true
+        },
+        {
+            to: '/cart',
+            title: 'Carrito',
+            separator: true
+        },
+        {
+            to: '/',
+            title: 'Todos los productos',
+            separator: true
+        },
+        {
+            to: '/products/hombre',
+            title: 'Hombre'
+        },
+        {
+            to: '/products/mujer',
+            title: 'Mujer'
+        },
+        {
+            to: '/products/accesorios',
+            title: 'Accesorios'
+        }
+    ]
+
 
     return (
         <nav className='nav-container-toggler'>
@@ -29,54 +61,37 @@ export const Toggler = ({ collapsed, setCollapsed }) => {
                     className='log-collapsed' 
                     onClick={toggleCollapsed}
                 />
+
+                {
+                    menuItems.map((item, index)=>{
+                        return (
+                            <>
+                                {
+                                    item.separator && <div className="line"></div>
+                                }
+                                
+                                <Link 
+                                    key={index}
+                                    exact 
+                                    to={item.to}
+                                    className='log-collapsed'
+                                    onClick={toggleCollapsed}
+                                >
+                                    {item.title}
+                                </Link>
+                            </>
+                        )
+                    })
+                }
+
                 <div className="line"></div>
-                <Link 
-                    exact 
-                    to="/cart" 
-                    className="nav-link"
-                    onClick={toggleCollapsed}
-                >
-                    Carrito
-                </Link>
-                <div className="line"></div>
-                <Link 
-                    exact 
-                    to="/" 
-                    className="nav-link"
-                    onClick={toggleCollapsed}
-                >
-                    Todos los productos
-                </Link>
-                <Link 
-                    exact 
-                    to="/hombre" 
-                    className="nav-link"
-                    onClick={toggleCollapsed}
-                >
-                    Hombre
-                </Link>
-                <Link 
-                    exact 
-                    to="/mujer" 
-                    className="nav-link"
-                    onClick={toggleCollapsed}
-                >
-                    Mujer
-                </Link>
-                <Link 
-                    exact 
-                    to="/accesorios" 
-                    className="nav-link"
-                    onClick={toggleCollapsed}
-                >
-                    Accesorios
-                </Link>
-                <div className="line"></div>
+
                 <Switch 
                     className="switch-btn-collapsed"
                     title={darkMode ? 'Tema Claro' : 'Tema Oscuro'}
                     onClick={toggleCollapsed}
                 />
+
             </div>
         </nav>
     );

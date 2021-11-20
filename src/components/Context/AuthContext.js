@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { getAuth, provider } from '../../firebase/config'
 import firebase from 'firebase/app'
-import { useHistory } from 'react-router';
 
 export const AuthContext = createContext();
 
@@ -35,7 +34,6 @@ export const AuthProvider = ({children}) => {
     const currentClient = () => {
         const user = firebase.auth().currentUser;
         if (user !==null) {
-            //console.log('currentClient', user)
             return {email: user.email, uid: user.uid}//ok
         }
     }
@@ -49,7 +47,6 @@ export const AuthProvider = ({children}) => {
     useEffect(()=>{
         const unsuscribe = auth.onAuthStateChanged((user) => {
             setCurrentUser(user);
-            console.log('unsuscribe', user);
         })
         return () => {
             unsuscribe();

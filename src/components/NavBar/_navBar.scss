@@ -40,6 +40,12 @@ nav {
   }
 }
 
+.cartWidget-container {
+  color: $primary-color;
+  &:hover {
+     color: $secondary-color;
+  }
+}
 .cartWidget {
   display: flex;
   align-items: center;
@@ -87,6 +93,31 @@ nav {
         display: block;
       }
     }
+    .favs {
+      width: 8rem;
+      a {
+        text-decoration: none;
+        color: $primary-color;
+      }
+      &-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    
+    .fav {
+      @media (min-width: 768px) {
+        color: $primary-color;
+        margin: 0 0.5rem;
+        font-weight: 700;
+        font-size: 2.4rem;
+        cursor: pointer;
+      }
+      &:hover {
+        color: $secondary-color;
+      }
+    }
 }
 
 /*------- Responsive Nav*/
@@ -98,6 +129,7 @@ nav {
   padding: 0.5rem;
   text-transform: uppercase;
   cursor: pointer;
+  width: auto;
   &:hover {
     color: $secondary-color;
   }
@@ -123,7 +155,7 @@ header {
   }
   .nav-toggler {
     padding: 1rem;
-
+    cursor: pointer;
     .toggler {
       color: $primary-color;
       font-size: 3rem;

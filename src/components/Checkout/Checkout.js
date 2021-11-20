@@ -6,11 +6,11 @@ import { Button, Spin } from 'antd';
 import { AuthContext } from '../Context/AuthContext';
 import { Login } from '../Login/Login';
 import { createOrders } from '../../firebase/createOrders';
+import { NewClientForm } from '../Login/NewClientForm';
+import { getFirestore } from '../../firebase/config';
 import Swal from 'sweetalert2';
 import OrderResume from './OrderResume';
 import ClientResume from './ClientResume';
-import { NewClientForm } from '../Login/NewClientForm';
-import { getFirestore } from '../../firebase/config';
 
 
 
@@ -36,8 +36,6 @@ const Checkout = () => {
                     icon: 'success',
                     title: '¡Su orden se ha registrado con éxito!',
                     text: `El código de orden es ${res}`,
-        
-                    //Vaciar carrito al cerrar el modal
                     willClose: () => {
                         cleanCart();
                         push('/')
@@ -71,12 +69,10 @@ const Checkout = () => {
             const newClient = userCollection.where('email', '==', client.email)
             newClient.get()
                 .then(res=> {
-                    console.log('newClient', res.docs)
                     const clientData = res.docs.map((doc)=> {
                         return {...doc.data()}
                     })
                     setActualClient(clientData[0])
-                    console.log('actualClient', clientData[0])
                 })
                 .catch(err=> console.log(err))
                 .finally(()=> setLoader(false))
@@ -92,6 +88,7 @@ const Checkout = () => {
   return (
       <>
         { cart.length === 0 && <Redirect to="/" />}
+
         { loader 
             ? <Spin />
             : !isAuth
@@ -113,6 +110,7 @@ const Checkout = () => {
                                                 actualClient={actualClient} 
                                             />
                                         </div>
+                                        
                                         <div className="card-buttons">
                                             <Button 
                                                 type="primary" 

@@ -22,22 +22,6 @@ const createUser = (email, name, phone) => {
                             resolve(response.id)
                         })
                         .catch((err)=> console.log(err))
-    //                 //Validacion de existencia de usuario en la DB de usuarios
-    //     const existUser = users.where('email', '==', email)
-    //     existUser.get()
-    //         .then(res=>{
-    //             resolve(res.docs) 
-    //                 //  users.add(user)
-    //                 //     .then((response)=>{
-    //                 //         console.log('usuario añadido con exito')
-    //                 //         resolve(response.id)
-    //                 //     })
-    //                 //     .catch((err)=> console.log(err))
-    //                 // : resolve(()=>console.log('el usuario ya existe'))
-    //         })
-    //         .catch((err) => (console.log(err)))
-    // })
-           
     })
 }
 

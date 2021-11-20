@@ -15,6 +15,16 @@ const ItemList = ({products, title}) => {
                 {title}
             </h2>
 
+            {
+                products.length === 0 && 
+                    <h3 
+                        className={darkMode ? 'dark-text' : ''}
+                        style={{textAlign: 'center'}} 
+                    >
+                        No hay productos para mostrar
+                    </h3>
+            }
+
             <Row gutter={[16, 24]}>
                 {[
                     products.map((item, index) => {

@@ -2,8 +2,8 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from 'antd'
 import { CartContext } from '../Context/CartContext'
-import Cart from './Cart'
 import { UIContext } from '../Context/UIContext'
+import Cart from './Cart'
 
 const CartContainer = () => {
    

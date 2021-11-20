@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router'
 import { Spin } from 'antd'
-import ItemDetail from './ItemDetail'
 import { getFirestore } from '../../firebase/config'
 import { UIContext } from '../Context/UIContext'
-//NOTE: realizar respuesta de la vista cuando la url del item no exista, porque por defecto no va a entrar al catch sino que va a renderizar el componente vacio
+import ItemDetail from './ItemDetail'
 
 const ItemDetailContainer = () => {
     const [product, setProduct] = useState([])

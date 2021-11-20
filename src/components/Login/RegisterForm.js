@@ -1,10 +1,5 @@
 import React, { useContext } from 'react';
-import {
-  Form,
-  Input,
-  Checkbox,
-  Button
-} from 'antd';
+import { Form, Input, Checkbox, Button } from 'antd';
 import { formItemLayout, tailFormItemLayout } from './Form.Style';
 import { AuthContext } from '../Context/AuthContext';
 import { UIContext } from '../Context/UIContext';
@@ -17,7 +12,7 @@ import Swal from 'sweetalert2';
 export const RegisterForm = ({handleRedirect, handleRegister}) => {
     const { loader, setLoader, darkMode } = useContext(UIContext)
     const [form] = Form.useForm();
-    const { register, currentClient } = useContext(AuthContext)
+    const { register } = useContext(AuthContext)
     const initialValues = {
         email: '',
         password: '',
@@ -29,7 +24,6 @@ export const RegisterForm = ({handleRedirect, handleRegister}) => {
 
     //handleSubmit adaptada para Ant Design
     const onFinish = async (formValues) => {
-        console.log('Received values of form: ', formValues);
         const {email, name, phone, password} = formValues;
         
         setLoader(true)

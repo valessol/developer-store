@@ -4,7 +4,6 @@ import React from 'react'
 
 const Color = ({color, setSelectedColor}) => {
 
-    //Elegir color
     const handleSelectedColor = (colorCode, index) => {
 
         setSelectedColor(colorCode)

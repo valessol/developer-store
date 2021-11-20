@@ -5,6 +5,13 @@ footer {
   .copyright {
     text-align: center;
     padding-bottom: 1rem;
+    a {
+      color: $white;
+      margin-left: 1rem;
+      &:hover {
+        color: $secondary-color;
+      }
+    }
   }
 }
 

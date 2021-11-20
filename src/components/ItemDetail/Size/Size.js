@@ -1,5 +1,5 @@
-import { Spin } from 'antd'
 import React, { useContext } from 'react'
+import { Spin } from 'antd'
 import { UIContext } from '../../Context/UIContext'
 
 const Size = ({gender, size, setSelectedSize}) => {

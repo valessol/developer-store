@@ -1,10 +1,5 @@
 import React, { useContext } from 'react';
-import {
-  Form,
-  Input,
-  Checkbox,
-  Button
-} from 'antd';
+import { Form, Input, Checkbox, Button } from 'antd';
 import { formItemLayout, tailFormItemLayout } from './Form.Style';
 import { UIContext } from '../Context/UIContext';
 import createUser from '../../firebase/createUser';
@@ -27,7 +22,6 @@ export const NewClientForm = ({email, handleUser}) => {
         setLoader(true)
         createUser(email, name, phone)
                 .then((res)=>{
-                    console.log('datos de registro completados con éxito', res)
                     handleUser()
                 })
                 .catch((err)=>{

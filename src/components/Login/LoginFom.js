@@ -2,8 +2,8 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useContext } from 'react';
 import { AuthContext } from '../Context/AuthContext';
-import Swal from 'sweetalert2';
 import { UIContext } from '../Context/UIContext';
+import Swal from 'sweetalert2';
 
 export const LoginForm = ({ handleRedirect, handleRegister }) => {
   const { login, googleLogin } = useContext(AuthContext)
@@ -16,7 +16,6 @@ export const LoginForm = ({ handleRedirect, handleRegister }) => {
   }
   
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
 
     const { email, password } = values;
 

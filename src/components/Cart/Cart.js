@@ -14,6 +14,9 @@ const Cart = () => {
     return (
         <>
             <table className="first-table">
+
+                {/* Encabezado */}
+
                 <thead>
                     <tr>
                         <th className="left">Producto</th>
@@ -21,6 +24,9 @@ const Cart = () => {
                         <th className="center"></th>
                     </tr>
                 </thead>
+
+                {/* Productos en el carrito */}
+
                 <tbody className={darkMode ? 'borderTable dark-tbody' : 'borderTable '}>
                 {
                     cart.map((item) => {
@@ -28,15 +34,23 @@ const Cart = () => {
                             
                             <tr key={item.id}>
                                 <td>
+
                                     <table className="second-table">
+
                                         <tbody>
+
                                             <tr>
+
+                                                {/* Imagen de producto */}
                                                 <td>
                                                     <img 
                                                         className="cart__image" 
                                                         src={item.img} 
                                                         alt={item.name}/>
                                                 </td>
+
+                                                {/* Descripción y detalles de prosucto */}
+
                                                 <td>
                                                     <div className="cart__text">
                                                         <h4 className={darkMode ? 'dark-text' : ''}>{item.name}</h4>
@@ -65,9 +79,14 @@ const Cart = () => {
                                                     </div>
                                                 </td>
                                             </tr>
+
                                         </tbody>
+
                                     </table>
+
                                 </td>
+
+                                {/* Precio y eliminar item */}
 
                                 <td className="center">
                                     ${item.price * item.selectedQuantity}
@@ -83,6 +102,8 @@ const Cart = () => {
                 }
                 </tbody>
             </table>
+
+            {/* Resumen del carrito */}
 
             <div className="cart__resume">
 
