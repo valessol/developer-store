@@ -19,14 +19,14 @@ Tienda online realizada con React Js, como parte del proyecto final del curso "R
 
 ### Dependencias utilizadas
 
-"antd": Ant Design (framework para react),
-"react",
-"react-dom",
-"react-icons",
-"react-router-dom": manejo de rutas,
-"firebase": uso de los módulos de Firestore Database y Authentication,
-"react-lottie": animación de la página 404,
-"sweetalert2": comunicación de errores o estados de éxito al usuario,
-"sass"
+- "antd": Ant Design (framework para react),
+- "react",
+- "react-dom",
+- "react-icons",
+- "react-router-dom": manejo de rutas,
+- "firebase": uso de los módulos de Firestore Database y Authentication,
+- "react-lottie": animación de la página 404,
+- "sweetalert2": comunicación de errores o estados de éxito al usuario,
+- "sass"
 
 #### Autor: Valeria Silveira
