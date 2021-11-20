@@ -17,6 +17,10 @@ Tienda online realizada con React Js, como parte del proyecto final del curso "R
 - Dark Mode
 - Sitio responsive
 
+Usuario registado: 
+- Email: test@test.com
+- Password: 123456
+
 ### Dependencias utilizadas
 
 - "antd": Ant Design (framework para react),

@@ -11,12 +11,12 @@ const Footer = () => {
                     <h4>Categorias</h4>
                     <ul>
                         <li><Link exact to="/">Todos los productos</Link></li>
-                        <li><Link exact to="/hombre">Hombre</Link></li>
-                        <li><Link exact to="/mujer">Mujer</Link></li>
-                        <li><Link exact to="/accesorios">Accesorios</Link></li>
-                        <li><Link exact to="/design">Design</Link></li>
-                        <li><Link exact to="/frontend">Frontend</Link></li>
-                        <li><Link exact to="/backend">Backend</Link></li>
+                        <li><Link exact to="/products/hombre">Hombre</Link></li>
+                        <li><Link exact to="/products/mujer">Mujer</Link></li>
+                        <li><Link exact to="/products/accesorios">Accesorios</Link></li>
+                        <li><Link exact to="/products/design">Design</Link></li>
+                        <li><Link exact to="/products/frontend">Frontend</Link></li>
+                        <li><Link exact to="/products/backend">Backend</Link></li>
                     </ul>
                 </div>
                 <div>
