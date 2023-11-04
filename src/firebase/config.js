@@ -1,6 +1,8 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/auth'
+import { initializeApp } from "firebase/app";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import "firebase/firestore";
+import "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -9,20 +11,28 @@ const firebaseConfig = {
   projectId: process.env.REACT_APP_PROJECT_ID,
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID
+  appId: process.env.REACT_APP_APP_ID,
 };
 
-const app = firebase.initializeApp(firebaseConfig)
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 //Base de datos
-export const getFirestore = () => {
-    return firebase.firestore(app)
-}
+export const getFirestoreDB = () => {
+  return getFirestore(app);
+};
+
+// Colecciones
+export const getCollection = async (col) => {
+  const dbCollection = collection(db, col);
+  const snapshot = await getDocs(dbCollection);
+  return snapshot.docs.map((doc) => doc.data());
+};
 
 //Login con email y contraseña
-export const getAuth = () => { 
-  return firebase.auth(app)
-}
+export const getAuthentication = () => {
+  return getAuth(app);
+};
 
 //Login con Google
-export const provider = new firebase.auth.GoogleAuthProvider();
+export const provider = new GoogleAuthProvider();
