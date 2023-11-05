@@ -1,72 +1,44 @@
-import firebase from 'firebase';
-import 'firebase/firestore';
-import { getFirestore } from './config';
-import Swal from 'sweetalert2';
+import { addDoc, collection } from "firebase/firestore";
+import { getCollection, getFirestoreDB } from "./config";
+import "firebase/firestore";
+import Swal from "sweetalert2";
+import { checkStock } from "./helpers";
+import { updateStock } from "./updateStock";
 
 export const createOrders = (client, cart, total) => {
-
-  return new Promise (async ( resolve, reject ) => {
-
-    //Generar orden
+  return new Promise(async (resolve, reject) => {
     const order = {
-        buyer: client,
-        items: cart.map((item)=>({
-            id: item.id,
-            name: item.name,
-            quantity: item.selectedQuantity,
-            color: item.selectedColor,
-            size: item.selectedSize ? item.selectedSize : '',
-            price: item.price
-        })), 
-        total: total*1.21,
-        date: firebase.firestore.Timestamp.fromDate(new Date())
+      buyer: client,
+      items: cart.map((item) => ({
+        id: item.id,
+        name: item.name,
+        quantity: item.selectedQuantity,
+        color: item.selectedColor,
+        size: item.selectedSize ? item.selectedSize : "",
+        price: item.price,
+      })),
+      total: total * 1.21,
+      date: new Date(),
+    };
+
+    try {
+      const products = await getCollection("productos");
+      const outOfStock = checkStock(products, cart);
+
+      if (outOfStock.length) reject(outOfStock);
+
+      const db = getFirestoreDB();
+      const docRef = await addDoc(collection(db, "orders"), order);
+      console.log("Document written with ID: ", docRef.id);
+      updateStock(products, cart);
+      resolve(docRef.id);
+    } catch (e) {
+      Swal.fire({
+        icon: "error",
+        title: "Lo sentimos, ha ocurrido un error inesperado",
+        text: `Por favor, intente nuevamente.(Cód. de error: ${e})`,
+      });
+      console.error("Error adding document: ", e);
     }
-
-    //Batch de actualización
-    const db = getFirestore()
-    const orders = db.collection('orders')
-  
-    const itemsToUpdate = db.collection('productos')
-      .where(firebase.firestore.FieldPath.documentId(), 'in', cart.map(e => e.id))
-    
-    const query = await itemsToUpdate.get()
-    const batch = db.batch()
-    const outOfStock = [];
-
-    query.docs.forEach((doc)=>{
-      const itemInCart = cart.find(e=>e.id === doc.id)
-      if (doc.data().stock >= itemInCart.selectedQuantity) {
-        batch.update(doc.ref, {
-          stock: doc.data().stock - itemInCart.selectedQuantity
-        })
-      }else {
-        outOfStock.push({
-          ...doc.data(), 
-          id: doc.id
-        })
-      }
-    })
-  
-    if (outOfStock.length === 0) {
-  
-      //Enviar orden a firestore
-      orders.add(order)
-        .then((res)=>{
-          batch.commit()
-          resolve(res.id)
-        })
-        .catch((err) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Lo sentimos, ha ocurrido un error inesperado',
-            text: `Por favor, intente nuevamente.(Cód. de error: ${err})`
-          })
-        })
-    } else {
-        reject(outOfStock)
-    }
-  })
-    
-
-}
-
+  });
+};

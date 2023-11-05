@@ -26,7 +26,8 @@ export const getFirestoreDB = () => {
 export const getCollection = async (col) => {
   const dbCollection = collection(db, col);
   const snapshot = await getDocs(dbCollection);
-  return snapshot.docs.map((doc) => doc.data());
+  const items = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  return items;
 };
 
 //Login con email y contraseña
