@@ -4,73 +4,67 @@ import { CartProvider } from "./components/Context/CartContext";
 import { AuthProvider } from "./components/Context/AuthContext";
 import { Login } from "./components/Login/Login";
 import { ItemListContainer } from "./components/ItemList/ItemListContainer";
-import Layout from './components/Layout/Layout';
+import Layout from "./components/Layout/Layout";
 import Checkout from "./components/Checkout/Checkout";
 import CartContainer from "./components/Cart/CartContainer";
 import ItemDetailContainer from "./components/ItemDetail/ItemDetailContainer";
 import Footer from "./components/Footer/Footer";
 import Error404 from "./components/Error/Error404";
 import { FavProvider } from "./components/Context/FavContext";
-import './app.scss'
+import "./app.scss";
 import { UIProvider } from "./components/Context/UIContext";
+import { ProductsProvider } from "./components/Context/ProductsContext";
 
 function App() {
+  return (
+    <AuthProvider>
+      <UIProvider>
+        <ProductsProvider>
+          <FavProvider>
+            <CartProvider>
+              <Layout>
+                <BrowserRouter>
+                  <NavBar brand="DeveloperStore" />
 
-    return (
-        <AuthProvider>
-            <UIProvider>
-                <FavProvider>
-                    <CartProvider>
+                  <Switch>
+                    <Route exact path="/">
+                      <ItemListContainer />
+                    </Route>
 
-                        <Layout>
+                    <Route exact path="/cart">
+                      <CartContainer />
+                    </Route>
 
-                            <BrowserRouter>
+                    <Route exact path="/checkout">
+                      <Checkout />
+                    </Route>
 
-                                <NavBar brand="DeveloperStore" />
+                    <Route exact path="/login">
+                      <Login />
+                    </Route>
 
-                                <Switch>
+                    <Route exact path="/products/:product">
+                      <ItemListContainer />
+                    </Route>
 
-                                    <Route exact path="/">
-                                        <ItemListContainer />
-                                    </Route>
+                    <Route exact path="/product/:itemId">
+                      <ItemDetailContainer />
+                    </Route>
 
-                                    <Route exact path="/cart">
-                                        <CartContainer />
-                                    </Route>
+                    <Route path="*">
+                      <Error404 />
+                    </Route>
+                  </Switch>
 
-                                    <Route exact path="/checkout">
-                                        <Checkout />
-                                    </Route>
-
-                                    <Route exact path="/login"> 
-                                        <Login />
-                                    </Route>                                                   
-
-                                    <Route exact path="/products/:product">
-                                        <ItemListContainer />
-                                    </Route>
-
-                                    <Route exact path="/product/:itemId">
-                                        <ItemDetailContainer />
-                                    </Route>
-
-                                    <Route path="*">
-                                        <Error404 />
-                                    </Route>
-
-                                </Switch>
-
-                                <Footer/>
-
-                            </BrowserRouter>
-
-                        </Layout>
-
-                    </CartProvider>
-                </FavProvider>
-            </UIProvider>
-        </AuthProvider>
-    );
+                  <Footer />
+                </BrowserRouter>
+              </Layout>
+            </CartProvider>
+          </FavProvider>
+        </ProductsProvider>
+      </UIProvider>
+    </AuthProvider>
+  );
 }
 
 export default App;
