@@ -1,67 +1,56 @@
-import React, {useState, useEffect, useContext} from 'react'
-import ItemList from './ItemList'
-import { Spin } from 'antd';
-import { useParams } from 'react-router';
-import { getFirestore } from '../../firebase/config';
-import { UIContext } from '../Context/UIContext'
-import { FavContext } from '../Context/FavContext';
-
+import React, { useState, useEffect, useContext } from "react";
+import ItemList from "./ItemList";
+import { Spin } from "antd";
+import { useParams } from "react-router";
+import { UIContext } from "../Context/UIContext";
+import { FavContext } from "../Context/FavContext";
+import { ProductsContext } from "../Context/ProductsContext";
 export const ItemListContainer = () => {
+  const [products, setProducts] = useState([]);
+  const { loader, setLoader } = useContext(UIContext);
+  const { favorites } = useContext(FavContext);
+  const { products: dbProducts } = useContext(ProductsContext);
 
-    const [products, setProducts] = useState([])
-    const { loader, setLoader } = useContext(UIContext)
-    const { favorites } = useContext(FavContext)
+  //product filtra los productos por 'category' y 'gender' o por favoritos
+  const { product } = useParams();
 
-    //product filtra los productos por 'category' y 'gender' o por favoritos
-    const { product } = useParams()
+  useEffect(() => {
+    setLoader(true);
 
+    if (product === "favoritos") {
+      setProducts(favorites);
+      setLoader(false);
+      return;
+    }
 
-    useEffect(() => {
-        setLoader(true);
+    const productsForCategory = dbProducts.filter(
+      (item) => item.category === product
+    );
+    const productsForGender = dbProducts.filter(
+      (item) => item.gender === product
+    );
 
-        if (product === 'favoritos') {
-            setProducts(favorites)
-            setLoader(false)
-            return
-        }
+    if (productsForCategory.length) {
+      setProducts(productsForCategory);
+    } else if (productsForGender.length) {
+      setProducts(productsForGender);
+    } else {
+      setProducts(dbProducts);
+    }
 
-        const db = getFirestore();
-        const itemCollection = db.collection('productos');
+    setLoader(false);
+  }, [product, dbProducts, favorites, setLoader]);
 
-             itemCollection.get()
-                .then(res => {
-                    const newItems = res.docs.map((doc)=>{
-                        return {id: doc.id, ...doc.data()};
-                    })
-                    
-                    const productsForCategory = newItems.filter((item)=>item.category === product)
-                    const productsForGender = newItems.filter((item) => item.gender === product)
-                    
-                    if (productsForCategory.length !== 0){
-                        setProducts(productsForCategory)
-                    } else if (productsForGender.length !== 0) {
-                        setProducts(productsForGender)
-                    } else { setProducts(newItems)}
-                })
-                .finally(()=> setLoader(false))
-
-    }, [product]) 
-
-    return (
-        <>
-            {
-                loader 
-                    ? <Spin size="large" className="spin"/>
-                    : <ItemList 
-                        products={products} 
-                        title={
-                            product 
-                                ? product 
-                                : 'Nuestros productos'
-                        } 
-                    />
-            }
-            
-        </>
-    )
-}
+  return (
+    <>
+      {loader ? (
+        <Spin size="large" className="spin" />
+      ) : (
+        <ItemList
+          products={products}
+          title={product ? product : "Nuestros productos"}
+        />
+      )}
+    </>
+  );
+};
