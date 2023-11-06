@@ -4,43 +4,12 @@ import { Link } from "react-router-dom";
 import { UIContext } from "../Context/UIContext";
 import Log from "./Log";
 import Switch from "../Switch/Switch";
+import { menuItems } from "./constants/togglerItems";
 
 export const Toggler = ({ collapsed, setCollapsed }) => {
   const { darkMode } = useContext(UIContext);
 
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
-
-  const menuItems = [
-    {
-      to: "/products/favoritos",
-      title: "Mis favoritos",
-      separator: true,
-    },
-    {
-      to: "/cart",
-      title: "Carrito",
-      separator: true,
-    },
-    {
-      to: "/",
-      title: "Todos los productos",
-      separator: true,
-    },
-    {
-      to: "/products/hombre",
-      title: "Hombre",
-    },
-    {
-      to: "/products/mujer",
-      title: "Mujer",
-    },
-    {
-      to: "/products/accesorios",
-      title: "Accesorios",
-    },
-  ];
+  const toggleCollapsed = () => setCollapsed(!collapsed);
 
   return (
     <nav className="nav-container-toggler">

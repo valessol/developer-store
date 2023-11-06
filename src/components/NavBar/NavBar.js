@@ -1,12 +1,13 @@
 import React, { useState, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { UIContext } from "../Context/UIContext";
+import { FavContext } from "../Context/FavContext";
 import CartWidget from "./CartWidget";
 import Log from "./Log";
 import { Toggler } from "./Toggler";
-import { UIContext } from "../Context/UIContext";
-import { FavContext } from "../Context/FavContext";
 import Switch from "../Switch/Switch";
+import { navBarConfig } from "./constants/navBarConfig";
 
 const NavBar = ({ brand }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -27,7 +28,7 @@ const NavBar = ({ brand }) => {
             <div className="favs">
               <Link exact to="products/favoritos">
                 <div className="favs-link">
-                  {favorites.length !== 0 ? (
+                  {favorites.length ? (
                     <>
                       <span className={darkMode ? "fav dark-hover" : "fav"}>
                         {favorites.length}
@@ -52,41 +53,13 @@ const NavBar = ({ brand }) => {
 
         <div className="nav-container">
           <nav>
-            <NavLink
-              exact
-              to="/"
-              className={darkMode ? "dark-link" : ""}
-              activeClassName="active"
-            >
-              Todos
-            </NavLink>
-
-            <NavLink
-              exact
-              to="/products/hombre"
-              className={darkMode ? "dark-link" : ""}
-              activeClassName="active"
-            >
-              Hombre
-            </NavLink>
-
-            <NavLink
-              exact
-              to="/products/mujer"
-              className={darkMode ? "dark-link" : ""}
-              activeClassName="active"
-            >
-              Mujer
-            </NavLink>
-
-            <NavLink
-              exact
-              to="/products/accesorios"
-              className={darkMode ? "dark-link" : ""}
-              activeClassName="active"
-            >
-              Accesorios
-            </NavLink>
+            {navBarConfig.map((config) => (
+              <NavLink
+                className={darkMode ? "dark-link" : ""}
+                activeClassName="active"
+                {...config}
+              />
+            ))}
           </nav>
 
           <Link
