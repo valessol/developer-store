@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
+import { useHistory } from "react-router";
 import { RegisterForm } from "./RegisterForm";
 import { LoginForm } from "./LoginFom";
-import { useHistory } from "react-router";
 import { UIContext } from "../Context/UIContext";
 
 const Login = ({ fromCheckout }) => {
@@ -9,16 +9,11 @@ const Login = ({ fromCheckout }) => {
   const { darkMode } = useContext(UIContext);
   const { goBack, push } = useHistory();
 
-  const handleRegister = () => {
-    return setIsRegister(!isRegister);
-  };
+  const handleRegister = () => setIsRegister(!isRegister);
 
   const handleRedirect = () => {
-    if (fromCheckout) {
-      push("/checkout");
-    } else {
-      goBack();
-    }
+    if (fromCheckout) push("/checkout");
+    else goBack();
   };
 
   return (

@@ -1,9 +1,9 @@
-import { Form, Input, Button, Checkbox } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useContext } from "react";
+import { Form, Button } from "antd";
+import Swal from "sweetalert2";
 import { AuthContext } from "../Context/AuthContext";
 import { UIContext } from "../Context/UIContext";
-import Swal from "sweetalert2";
+import { getLoginFormButtonsConfig, getLoginFormConfig } from "./formConfig";
 
 export const LoginForm = ({ handleRedirect, handleRegister }) => {
   const { login, googleLogin } = useContext(AuthContext);
@@ -47,70 +47,21 @@ export const LoginForm = ({ handleRedirect, handleRegister }) => {
       initialValues={initialValues}
       onFinish={onFinish}
     >
-      <Form.Item
-        name="email"
-        className="login__input"
-        rules={[
-          {
-            required: true,
-            message: "Ingresa tu correo electrónico",
-          },
-        ]}
-      >
-        <Input
-          prefix={<UserOutlined className="site-form-item-icon" />}
-          placeholder="Email"
-        />
-      </Form.Item>
-
-      <Form.Item
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: "Ingresa tu contraseña",
-          },
-        ]}
-      >
-        <Input
-          prefix={<LockOutlined className="site-form-item-icon" />}
-          type="password"
-          placeholder="Password"
-        />
-      </Form.Item>
-
-      <Form.Item>
-        <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox className={darkMode ? "dark-text" : ""}>
-            Recordarme
-          </Checkbox>
-        </Form.Item>
-      </Form.Item>
+      {getLoginFormConfig(darkMode).map((field) => (
+        <Form.Item key={field.name} {...field} />
+      ))}
 
       <Form.Item className="login__buttons">
         <div className="card-buttons">
-          <Button
-            type="primary"
-            htmlType="submit"
-            shape="round"
-            className={
-              darkMode ? "button login__btn dark-button" : "button login__btn"
-            }
-          >
-            LogIn
-          </Button>
-
-          <Button
-            shape="round"
-            className={
-              darkMode
-                ? "button button--secondary dark-button--secondary login__btn"
-                : "button button--secondary login__btn"
-            }
-            onClick={handleGoogle}
-          >
-            LogIn with Google
-          </Button>
+          {getLoginFormButtonsConfig(darkMode).map((config, index) => (
+            <Button
+              key={index}
+              {...config}
+              onClick={config.onClick && handleGoogle}
+            >
+              {config.text}
+            </Button>
+          ))}
         </div>
 
         <span
