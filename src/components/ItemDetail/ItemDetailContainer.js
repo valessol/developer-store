@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router";
 import { Spin } from "antd";
 import { UIContext } from "../Context/UIContext";
-import ItemDetail from "./ItemDetail";
 import { ProductsContext } from "../Context/ProductsContext";
+import ItemDetail from "./ItemDetail";
 
 const ItemDetailContainer = () => {
   const [product, setProduct] = useState([]);
@@ -19,7 +19,7 @@ const ItemDetailContainer = () => {
 
   return (
     <>
-      {product.length === 0 ? (
+      {!product.length ? (
         <Spin size="large" className="spin" />
       ) : (
         <ItemDetail {...product} />
