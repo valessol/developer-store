@@ -1,6 +1,17 @@
+<div align="center">
+
 # DeveloperStore
 
 Tienda online realizada con React Js, como parte del proyecto final del curso "React JS" de Coderhouse.
+
+</div>
+
+**Tabla de contenidos**
+
+- [Funcionalidades](#funcionalidades)
+- [Dependencias utilizadas](#dependencias-utilizadas)
+- [Refactor](#refactor)
+- [Instalación](#instalación)
 
 ## Funcionalidades
 
@@ -17,7 +28,8 @@ Tienda online realizada con React Js, como parte del proyecto final del curso "R
 - Dark Mode
 - Sitio responsive
 
-Usuario registado: 
+Usuario registado:
+
 - Email: test@test.com
 - Password: 123456
 
@@ -32,5 +44,20 @@ Usuario registado:
 - "react-lottie": animación de la página 404,
 - "sweetalert2": comunicación de errores o estados de éxito al usuario,
 - "sass"
+
+## Refactor
+
+El refactor del proyecto se realizó en base a la actualización de la librería Firebase a su última versión (10.5.2 actualmente), así como de componentes, utilizando funciones helpers y archivos de configuración.
+
+## Instalación
+
+```
+git clone https://github.com/valessol/developer-store.git
+cd developer-store
+npm install
+npm run start
+```
+
+Node version: 16.17.0
 
 #### Autor: Valeria Silveira
