@@ -18,11 +18,8 @@ const Checkout = () => {
   const { isAuth, currentClient } = useContext(AuthContext);
   const [actualClient, setActualClient] = useState(null);
   const { push } = useHistory();
-
-  //Obtener datos de usaurio
   const client = currentClient();
 
-  //Manejo de la inf. del usuario segun se haya logueado con google o haya llenado todos sus datos en el registro
   const handleUser = useCallback(() => {
     if (isAuth) {
       setLoader(true);
@@ -35,7 +32,6 @@ const Checkout = () => {
     }
   }, [isAuth, client, setLoader]);
 
-  //Obtener información del cliente
   useEffect(() => {
     handleUser();
   }, [isAuth, handleUser]);
@@ -44,7 +40,6 @@ const Checkout = () => {
     e.preventDefault();
     setLoader(true);
 
-    //Generar orden de compra
     createOrders(client, cart, totalPrice())
       .then((res) => {
         Swal.fire({
@@ -75,7 +70,7 @@ const Checkout = () => {
 
   return (
     <>
-      {cart.length === 0 && <Redirect to="/" />}
+      {!cart.length && <Redirect to="/" />}
 
       {loader ? (
         <Spin />
