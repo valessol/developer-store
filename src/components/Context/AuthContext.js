@@ -1,6 +1,11 @@
 import React, { createContext, useEffect, useState } from "react";
 import { getAuthentication, provider } from "../../firebase/config";
-import { getAuth, signInWithPopup } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router";
 
@@ -13,10 +18,8 @@ export const AuthProvider = ({ children }) => {
 
   const auth = getAuthentication();
 
-  //Iniciar sesión
-  //TODO:
-  const login = (email, password) => {
-    return auth.signInWithEmailAndPassword(email, password);
+  const login = async (email, password) => {
+    return await signInWithEmailAndPassword(auth, email, password);
   };
   // TODO:
   const logout = () => {
@@ -44,13 +47,11 @@ export const AuthProvider = ({ children }) => {
         });
       });
   };
-  //TODO:
-  //Registrarse
-  const register = (email, password) => {
-    return auth.createUserWithEmailAndPassword(email, password);
+
+  const register = async (email, password) => {
+    return await createUserWithEmailAndPassword(auth, email, password);
   };
-  //TODO:
-  //Obtener los datos del usuario
+
   const currentClient = () => {
     const user = getAuth().currentUser;
     if (user !== null) {
@@ -69,7 +70,7 @@ export const AuthProvider = ({ children }) => {
     return () => {
       unsuscribe();
     };
-  }, []);
+  }, [auth]);
 
   return (
     <AuthContext.Provider

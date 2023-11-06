@@ -5,7 +5,7 @@ import { useParams } from "react-router";
 import { UIContext } from "../Context/UIContext";
 import { FavContext } from "../Context/FavContext";
 import { ProductsContext } from "../Context/ProductsContext";
-export const ItemListContainer = () => {
+const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
   const { loader, setLoader } = useContext(UIContext);
   const { favorites } = useContext(FavContext);
@@ -54,3 +54,5 @@ export const ItemListContainer = () => {
     </>
   );
 };
+
+export default ItemListContainer;

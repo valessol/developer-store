@@ -1,44 +1,44 @@
-import { Form, Input, Button, Checkbox } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { useContext } from 'react';
-import { AuthContext } from '../Context/AuthContext';
-import { UIContext } from '../Context/UIContext';
-import Swal from 'sweetalert2';
+import { Form, Input, Button, Checkbox } from "antd";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
+import { UIContext } from "../Context/UIContext";
+import Swal from "sweetalert2";
 
 export const LoginForm = ({ handleRedirect, handleRegister }) => {
-  const { login, googleLogin } = useContext(AuthContext)
-  const { darkMode } = useContext(UIContext)
+  const { login, googleLogin } = useContext(AuthContext);
+  const { darkMode } = useContext(UIContext);
 
   const initialValues = {
-    email: '',
-    password:'', 
-    remember: true
-  }
-  
-  const onFinish = (values) => {
+    email: "",
+    password: "",
+    remember: true,
+  };
 
+  const onFinish = (values) => {
     const { email, password } = values;
 
     login(email, password)
-      .then((res)=>handleRedirect())
-      .catch((err)=> {
-        console.log(err)
+      .then((res) => handleRedirect())
+      .catch((err) => {
+        console.log(err);
         Swal.fire({
-          icon: 'error',
-          title: 'Ha ocurrido un error',
-          text: err.code.includes('password') ? 'La contraseña es incorrecta' : 'El email ingresado es incorrecto o no existe',
-        })
-      })
+          icon: "error",
+          title: "Ha ocurrido un error",
+          text: err.code.includes("password")
+            ? "La contraseña es incorrecta"
+            : "El email ingresado es incorrecto o no existe",
+        });
+      });
   };
 
   const handleGoogle = (e) => {
     e.preventDefault();
 
-    googleLogin()
-        .then(()=>{
-            handleRedirect()
-        })
-  }
+    googleLogin().then(() => {
+      handleRedirect();
+    });
+  };
 
   return (
     <Form
@@ -53,11 +53,14 @@ export const LoginForm = ({ handleRedirect, handleRegister }) => {
         rules={[
           {
             required: true,
-            message: 'Ingresa tu correo electrónico',
+            message: "Ingresa tu correo electrónico",
           },
         ]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
+        <Input
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          placeholder="Email"
+        />
       </Form.Item>
 
       <Form.Item
@@ -65,7 +68,7 @@ export const LoginForm = ({ handleRedirect, handleRegister }) => {
         rules={[
           {
             required: true,
-            message: 'Ingresa tu contraseña',
+            message: "Ingresa tu contraseña",
           },
         ]}
       >
@@ -78,31 +81,45 @@ export const LoginForm = ({ handleRedirect, handleRegister }) => {
 
       <Form.Item>
         <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox className={darkMode ? 'dark-text' : ''}>Recordarme</Checkbox>
+          <Checkbox className={darkMode ? "dark-text" : ""}>
+            Recordarme
+          </Checkbox>
         </Form.Item>
       </Form.Item>
 
       <Form.Item className="login__buttons">
-      <div className="card-buttons">
-        <Button 
-            type="primary" 
-            htmlType="submit" 
+        <div className="card-buttons">
+          <Button
+            type="primary"
+            htmlType="submit"
             shape="round"
-            className={darkMode ? 'button login__btn dark-button' : 'button login__btn'}
-        >
+            className={
+              darkMode ? "button login__btn dark-button" : "button login__btn"
+            }
+          >
             LogIn
-        </Button>
+          </Button>
 
-        <Button 
+          <Button
             shape="round"
-            className={darkMode ? 'button button--secondary dark-button--secondary login__btn' : 'button button--secondary login__btn'}
+            className={
+              darkMode
+                ? "button button--secondary dark-button--secondary login__btn"
+                : "button button--secondary login__btn"
+            }
             onClick={handleGoogle}
-        >
+          >
             LogIn with Google
-        </Button>
-      </div>
+          </Button>
+        </div>
 
-        <span className={darkMode ? 'login__link dark-hover' : 'login__link'} onClick={handleRegister}> No tengo cuenta</span>
+        <span
+          className={darkMode ? "login__link dark-hover" : "login__link"}
+          onClick={handleRegister}
+        >
+          {" "}
+          No tengo cuenta
+        </span>
       </Form.Item>
     </Form>
   );

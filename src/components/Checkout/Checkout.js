@@ -1,16 +1,16 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Redirect, useHistory } from "react-router";
+import { Button, Spin } from "antd";
+import Swal from "sweetalert2";
+import { getCollection } from "../../firebase/config";
+import { createOrders } from "../../firebase/createOrders";
 import { CartContext } from "../Context/CartContext";
 import { UIContext } from "../Context/UIContext";
-import { Button, Spin } from "antd";
 import { AuthContext } from "../Context/AuthContext";
-import { Login } from "../Login/Login";
-import { createOrders } from "../../firebase/createOrders";
 import { NewClientForm } from "../Login/NewClientForm";
-import { getCollection, getFirestoreDB } from "../../firebase/config";
-import Swal from "sweetalert2";
 import OrderResume from "./OrderResume";
 import ClientResume from "./ClientResume";
+import Login from "../Login/Login";
 
 const Checkout = () => {
   const { cart, totalPrice, cleanCart } = useContext(CartContext);
