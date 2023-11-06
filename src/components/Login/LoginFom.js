@@ -1,44 +1,44 @@
-import { Form, Input, Button, Checkbox } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { useContext } from 'react';
-import { AuthContext } from '../Context/AuthContext';
-import { UIContext } from '../Context/UIContext';
-import Swal from 'sweetalert2';
+import { useContext } from "react";
+import { Form, Button } from "antd";
+import Swal from "sweetalert2";
+import { AuthContext } from "../Context/AuthContext";
+import { UIContext } from "../Context/UIContext";
+import { getLoginFormButtonsConfig, getLoginFormConfig } from "./formConfig";
 
 export const LoginForm = ({ handleRedirect, handleRegister }) => {
-  const { login, googleLogin } = useContext(AuthContext)
-  const { darkMode } = useContext(UIContext)
+  const { login, googleLogin } = useContext(AuthContext);
+  const { darkMode } = useContext(UIContext);
 
   const initialValues = {
-    email: '',
-    password:'', 
-    remember: true
-  }
-  
-  const onFinish = (values) => {
+    email: "",
+    password: "",
+    remember: true,
+  };
 
+  const onFinish = (values) => {
     const { email, password } = values;
 
     login(email, password)
-      .then((res)=>handleRedirect())
-      .catch((err)=> {
-        console.log(err)
+      .then((res) => handleRedirect())
+      .catch((err) => {
+        console.log(err);
         Swal.fire({
-          icon: 'error',
-          title: 'Ha ocurrido un error',
-          text: err.code.includes('password') ? 'La contraseña es incorrecta' : 'El email ingresado es incorrecto o no existe',
-        })
-      })
+          icon: "error",
+          title: "Ha ocurrido un error",
+          text: err.code.includes("password")
+            ? "La contraseña es incorrecta"
+            : "El email ingresado es incorrecto o no existe",
+        });
+      });
   };
 
   const handleGoogle = (e) => {
     e.preventDefault();
 
-    googleLogin()
-        .then(()=>{
-            handleRedirect()
-        })
-  }
+    googleLogin().then(() => {
+      handleRedirect();
+    });
+  };
 
   return (
     <Form
@@ -47,62 +47,30 @@ export const LoginForm = ({ handleRedirect, handleRegister }) => {
       initialValues={initialValues}
       onFinish={onFinish}
     >
-      <Form.Item
-        name="email"
-        className="login__input"
-        rules={[
-          {
-            required: true,
-            message: 'Ingresa tu correo electrónico',
-          },
-        ]}
-      >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
-      </Form.Item>
-
-      <Form.Item
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: 'Ingresa tu contraseña',
-          },
-        ]}
-      >
-        <Input
-          prefix={<LockOutlined className="site-form-item-icon" />}
-          type="password"
-          placeholder="Password"
-        />
-      </Form.Item>
-
-      <Form.Item>
-        <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox className={darkMode ? 'dark-text' : ''}>Recordarme</Checkbox>
-        </Form.Item>
-      </Form.Item>
+      {getLoginFormConfig(darkMode).map((field) => (
+        <Form.Item key={field.name} {...field} />
+      ))}
 
       <Form.Item className="login__buttons">
-      <div className="card-buttons">
-        <Button 
-            type="primary" 
-            htmlType="submit" 
-            shape="round"
-            className={darkMode ? 'button login__btn dark-button' : 'button login__btn'}
-        >
-            LogIn
-        </Button>
+        <div className="card-buttons">
+          {getLoginFormButtonsConfig(darkMode).map((config, index) => (
+            <Button
+              key={index}
+              {...config}
+              onClick={config.onClick && handleGoogle}
+            >
+              {config.text}
+            </Button>
+          ))}
+        </div>
 
-        <Button 
-            shape="round"
-            className={darkMode ? 'button button--secondary dark-button--secondary login__btn' : 'button button--secondary login__btn'}
-            onClick={handleGoogle}
+        <span
+          className={darkMode ? "login__link dark-hover" : "login__link"}
+          onClick={handleRegister}
         >
-            LogIn with Google
-        </Button>
-      </div>
-
-        <span className={darkMode ? 'login__link dark-hover' : 'login__link'} onClick={handleRegister}> No tengo cuenta</span>
+          {" "}
+          No tengo cuenta
+        </span>
       </Form.Item>
     </Form>
   );

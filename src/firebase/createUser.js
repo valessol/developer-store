@@ -1,28 +1,29 @@
-import firebase from 'firebase';
-import 'firebase/firestore';
-import { getFirestore } from './config';
+import "firebase/firestore";
+import { getFirestoreDB } from "./config";
+import { addDoc, collection } from "firebase/firestore";
+import Swal from "sweetalert2";
 
 const createUser = (email, name, phone) => {
-    return new Promise (async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
+    const user = {
+      email: email.toLowerCase(),
+      displayName: name,
+      phoneNumber: phone,
+      date: new Date(),
+    };
 
-        const user = {
-            email: email.toLowerCase(),
-            displayName: name,
-            phoneNumber: phone,
-            date: firebase.firestore.Timestamp.fromDate(new Date())
-        }
+    try {
+      const db = getFirestoreDB();
+      const docRef = await addDoc(collection(db, "users"), user);
+      resolve(docRef.id);
+    } catch (e) {
+      Swal.fire({
+        icon: "error",
+        title: "Lo sentimos, ha ocurrido un error inesperado",
+        text: `Por favor, intente nuevamente.(Cód. de error: ${e})`,
+      });
+    }
+  });
+};
 
-        const db = getFirestore();
-        const users = db.collection('users');
-
-        
-                     users.add(user)
-                        .then((response)=>{
-                            console.log('usuario añadido con exito')
-                            resolve(response.id)
-                        })
-                        .catch((err)=> console.log(err))
-    })
-}
-
-export default createUser
+export default createUser;
