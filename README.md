@@ -41,7 +41,6 @@ Usuario registado:
 - "react-icons",
 - "react-router-dom": manejo de rutas,
 - "firebase": uso de los módulos de Firestore Database y Authentication,
-- "react-lottie": animación de la página 404,
 - "sweetalert2": comunicación de errores o estados de éxito al usuario,
 - "sass"
 
